@@ -1,0 +1,268 @@
+.h_menu{
+  font-size:95% !important;
+  font-weight: 550;
+  /* color: #eeeeee; */
+  /* text-shadow: 1px 1px rgb(27, 27, 27); */
+  /* color: red; */
+  color: #5d5d5d;
+}
+
+.h_menu1{
+  font-size:90% !important;
+  font-weight: 500;
+  /* color: #e0e0e0; */
+  color: #747474;
+  /* color: red; */
+}
+
+.h_iconMenu{
+  color: white !important;
+  text-shadow: 1px 1px rgb(27, 27, 27);
+}
+
+
+.h_judul{
+  /* font-family: Australia; */
+  font-size: 120%;
+  /* font-weight: 600; */
+  color: #ffffff;
+  /* color: #f7c531; */
+  /* text-shadow: 1px 1px rgb(27, 27, 27); */
+  text-transform: uppercase;
+}
+
+.h_Sub_judul{
+  /* font-family: QualeyFree-Regular; */
+  color: #ffffff;
+  font-size: 80%;
+  /* font-weight: 700; */
+  /* text-shadow: 0.5px 0.5px rgb(27, 27, 27); */
+  /* text-transform: uppercase; */
+}
+
+
+.h_modal_title{
+  color: white;
+}
+
+
+.judulPimpinan{
+  font-size: 18pt;
+  font-weight: bold;
+}
+
+
+.h_abu_tua{
+  color: #434929;
+}
+
+.h_putih_kuning{
+  color: #fffeee;
+}
+
+.f_pengantar{
+  font-size: 12pt;
+  position: absolute;
+  top: 50%;
+  transform: translateY(45%);
+  margin-left: 5px;
+  margin-right: 10px;
+
+
+}
+.tengahVert{
+
+  position: relative;
+  /* padding-left: 5px !important;
+  padding-right: 5px !important; */
+
+
+
+
+}
+
+.h_pemisah{
+  font-family: 'Dancing Script', cursive;
+  color: #ff99cc;
+  font-size: 50px;
+}
+
+
+.h_pemisah_2{
+  font-family: 'Dancing Script', cursive;
+  color: #ff9260;
+  font-size: 50px;
+}
+
+
+.judulProduct{
+  font-size: 17px;
+  color: #a0a0a0 !important;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.h_price_list{
+  color: #747474;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.h_stock_list{
+  color: #747474;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+
+.centered-input >>> input {
+  text-align: center
+}
+
+
+.h_detilNamaProduk{
+  font-size: 16px;
+  color: #4b4b4b;
+}
+
+.h_detilHargaProduk{
+  font-size: 23px;
+  color: #a36a90;
+  font-weight: 550;
+}
+
+.h_detilStockProduk{
+  font-size: 12px;
+  color: #a5a4a4;
+  font-weight: 500;
+}
+
+.h_detilKuantitas{
+  font-size: 13px;
+  color: #a5a4a4;
+  font-weight: 500;
+}
+
+.h_detilSubKuantitas{
+  font-size: 12px;
+  color: #c5c4c4;
+  font-style: italic;
+}
+.h_detilLokasi{
+  text-decoration: none !important;
+  color: #c27e64 !important;
+  font-weight: 550;
+  font-size: 12px;
+}
+
+.h_detilKurir{
+  text-decoration: none !important;
+  color: #7a7a7a !important;
+  font-weight: 550;
+  font-size: 12px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ============================================================== 1375px ================================================================= */
+
+
+@media only screen and (max-width: 1375px) {
+  .judulPimpinan{
+    font-size: 13pt;
+    /* font-weight: bold; */
+  }
+
+  .f_pengantar{
+    font-size: 10pt;
+    display: inline-block; vertical-align: middle;
+  }
+
+  .h_pemisah{
+    font-size: 45px;
+  }
+
+  .h_pemisah_2{
+    font-size: 45px;
+  }
+
+
+}
+
+/* ============================================================== 1375px ================================================================= */
+
+
+
+
+/* ============================================================== 1310px ================================================================= */
+
+@media only screen and (max-width: 1310px) {
+  .judulPimpinan{
+    font-size: 12pt;
+    /* font-weight: bold; */
+  }
+
+  .f_pengantar{
+    font-size: 8pt;
+  }
+
+  .h_pemisah{
+    font-size: 40px;
+  }
+
+  .h_pemisah_2{
+    font-size: 40px;
+  }
+
+
+}
+/* ============================================================== 1310px ================================================================= */
+
+
+
+
+/* ============================================================== 1024px ================================================================= */
+@media only screen and (max-width: 1024px) {
+  .judulPimpinan{
+    font-size: 12pt;
+    /* font-weight: bold; */
+  }
+
+  .f_pengantar{
+    font-size: 8pt;
+  }
+
+  .h_pemisah{
+    font-size: 35px;
+  }
+
+  .h_pemisah_2{
+    font-size: 35px;
+  }
+
+}
+/* ============================================================== 1024px ================================================================= */
+

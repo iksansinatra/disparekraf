@@ -1,0 +1,114 @@
+.ImgResponsive{
+  width: 100%;
+  height: auto;
+}
+
+
+
+
+
+.logo_tengah{
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    width: 115px;
+
+
+
+  }
+
+.diverTengah{
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    place-self: center;
+    left: 50%;
+    transform: translate(-50%, -0%);
+    border: 1rem solid white;
+    border-radius: 50%;
+    background-color: gray;
+    /* padding: 10%; */
+
+}
+
+
+.bdiver{
+  /* position: relative; */
+  padding: 0% 0% 0% 0%;
+}
+
+.gbr_pimpinan{
+  border: 10px solid white;
+  background-color: #b1b1b1;
+  width: 250px;
+  height: auto;
+}
+
+
+.bg_image_pimpinan{
+  background:#f9ca00;
+  background-image: url("../../static/img/bannerBup.jpg");
+  /* background-image: url("https://png.pngtree.com/thumb_back/fw800/background/20190223/ourmid/pngtree-simple-yellow-business-background-material-backgroundwhitetwo-tone-backgroundcolor-backgroundadvertising-image_67347.jpg"); */
+  /* background-image: url("https://image.freepik.com/free-vector/trendy-flat-white-yellow-squares-abstract-background-brochure-flyer-presentations-design_1302-5311.jpg"); */
+  /* background-image: url("https://png.pngtree.com/thumb_back/fh260/background/20190819/pngtree-diwali-yellow-background-image_300384.jpg"); */
+  /* background-image: url("https://img.freepik.com/free-vector/coming-soon-construction-yellow-background-design_1017-25509.jpg?size=626&ext=jpg&ga=GA1.2.1575275053.1607731200"); */
+  /* background-image: url("https://image.freepik.com/free-vector/black-friday-sale-yellow-banner_1017-28866.jpg"); */
+  /* background-image: url("https://image.freepik.com/free-vector/black-friday-sale-yellow-banner-with-text-space_1017-28046.jpg"); */
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+
+}
+
+
+
+
+.paddingContent{
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+
+
+.bg_repeat{
+
+    /* background-image: url("https://image.freepik.com/free-vector/cat-paw-footprint-heart-seamless-background-repeating-pattern-wallpaper-background-cute-seamless-pattern-background_42349-851.jpg"); */
+    background-image: url("img/bg-repeat2.png");
+    background-repeat: repeat;
+    /* opacity: 0.5; */
+}
+
+
+hr.hrku {
+  border: 6px solid #f7f7f7;
+  /* border-radius: 5px; */
+}
+
+
+
+
+
+@media only screen and (max-width: 1024px) {
+  .gbr_pimpinan{
+    width: 50%;
+    height: auto;
+  }
+
+
+  .diverTengah{
+    display: none;
+  }
+
+  .paddingContent{
+    padding-left: 0%;
+    padding-right: 0%;
+  }
+
+
+
+}
+
+
+
