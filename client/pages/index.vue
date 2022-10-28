@@ -11,7 +11,7 @@
                 <v-icon style="color:white; font-size:45px">mdi-chart-bar</v-icon>
               </v-col>
               <v-col cols="9" class="roundRight" style="background:#5289E7">
-                <span class="HomeBarTitle">Jumlah Kontent</span>
+                <span class="HomeBarTitle">Jumlah Kelompok</span>
                 <br />
                 <span class="HomeBarSubTitle">54</span>
               </v-col>
@@ -26,7 +26,7 @@
                 <v-icon style="color:white; font-size:45px">mdi-account</v-icon>
               </v-col>
               <v-col cols="9" class="roundRight" style="background:#E752D3">
-                <span class="HomeBarTitle">Jumlah Kontent</span>
+                <span class="HomeBarTitle">Jumlah Pelaku</span>
                 <br />
                 <span class="HomeBarSubTitle">54</span>
               </v-col>
@@ -41,7 +41,7 @@
                 <v-icon style="color:white; font-size:45px">mdi-alert-circle</v-icon>
               </v-col>
               <v-col cols="9" class="roundRight" style="background:#E7B052">
-                <span class="HomeBarTitle">Jumlah Kontent</span>
+                <span class="HomeBarTitle">Jumlah Produk</span>
                 <br />
                 <span class="HomeBarSubTitle">54</span>
               </v-col>
@@ -56,7 +56,7 @@
                 <v-icon style="color:white; font-size:45px">mdi-clipboard-alert</v-icon>
               </v-col>
               <v-col cols="9" class="roundRight" style="background:#7FCD65">
-                <span class="HomeBarTitle">Jumlah Kontent</span>
+                <span class="HomeBarTitle">Jenis Ekokraf</span>
                 <br />
                 <span class="HomeBarSubTitle">54</span>
               </v-col>
@@ -162,18 +162,18 @@ export default {
               borderWidth: 2,
           },
           title: {
-              text: 'Ini title Data 1'
+              text: 'Pelaku Ekokraf Kabupaten / Kota'
           },
           subtitle: {
-              text: 'dan ini subtitlenya'
+              text: ''
           },
           xAxis: {
-              categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+              categories: ['Kendari', 'Bau-Bau', 'Buton', 'Buton Utara', 'Buton Tengah', 'Buton Selatan', 'Konawe', 'Konawe Kepulauan', 'Konawe Selatan', 'Konawe Utara', 'Kolaka', 'Kolaka Utara', 'Kolaka Timur', 'Bombana', 'Muna', 'Muna Barat', 'Wakatobi' ]
           },
           series: [{
               type: 'column',
               colorByPoint: true,
-              data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4],
+              data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4, 148.5, 216.4, 194.1, 95.6, 54.4],
               showInLegend: false
           }]
       });
@@ -194,7 +194,7 @@ export default {
               type: 'pie'
           },
           title: {
-              text: 'Browser market shares in January, 2018'
+              text: 'Persentase Berdasarkan Jenis Ekokraf'
           },
           tooltip: {
               pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
