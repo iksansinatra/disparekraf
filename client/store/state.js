@@ -24,6 +24,7 @@ const lolow = {
       URL_DM_JENIS_TATA_KELOLA : URL + 'api/v1/m_jenisTataKelola/',
 
       URL_EKO_KELOMPOK : URL + 'api/v1/ekokrafKelompok/',
+      URL_EKO_ANGGOTA : URL + 'api/v1/ekokrafAnggota/',
       URL_EKO_PELAKU : URL + 'api/v1/ekokrafPelaku/',
       URL_EKO_PELAKU_PRODUK : URL + 'api/v1/ekokrafPelakuProduk/',
 

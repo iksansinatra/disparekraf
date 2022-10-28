@@ -21,7 +21,7 @@
               <v-col cols="1">
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on, attrs }">
-                    <v-btn tile height="37.5px" elevation="2" color="primary" v-bind="attrs" v-on="on" @click="mdl_add = true">
+                    <v-btn tile height="37.5px" elevation="2" color="primary" v-bind="attrs" v-on="on" @click="mdl_add = true, Quilll('editor')">
                       <v-icon color="white">mdi-plus</v-icon>
                     </v-btn>
                   </template>
@@ -62,7 +62,7 @@
                 <td class="text-center">{{indexing(index+1)}}.</td>
                 <td class="text-left">
                   {{data.hp}} <br>
-                  <span class="h_subtitle">Klp.{{data.email}}</span>
+                  <span class="h_subtitle">{{data.email}}</span>
                 </td>
                 <td>
                   {{data.pelaku}} <br>
@@ -80,9 +80,19 @@
                 </td>
                 <td class="text-center">
                   <v-btn-toggle mandatory>
+
                     <v-tooltip bottom>
                       <template v-slot:activator="{ on, attrs }">
-                        <v-btn color="orange darken-1" fab small v-bind="attrs" v-on="on" @click="selectData(data), mdl_edit = true">
+                        <v-btn color="blue darken-1" fab small v-bind="attrs" v-on="on" @click="selectData(data), mdl_lihat = true">
+                          <v-icon color="white">mdi-eye</v-icon>
+                        </v-btn>
+                      </template>
+                      <span>Lihat Profil</span>
+                    </v-tooltip>
+
+                    <v-tooltip bottom>
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-btn color="orange darken-1" fab small v-bind="attrs" v-on="on" @click="selectData(data), mdl_edit = true, editQuill(data.profil, 'editor_edit')">
                           <v-icon color="white">mdi-pencil</v-icon>
                         </v-btn>
                       </template>
@@ -139,7 +149,7 @@
                 Messages
               </v-toolbar-title>
               <v-spacer></v-spacer>
-              <v-btn color="white" icon  @click="mdl_add = false, close()">
+              <v-btn color="white" icon  @click="mdl_add = false, editor = false, close()">
                 <v-icon>mdi-close</v-icon>
               </v-btn>
             </v-app-bar>
@@ -161,7 +171,8 @@
                      <template v-slot:item="data">
                         <div style="margin-top:5px; margin-bottom:5px">
                           <span style="">{{ data.item.nama_des_kel }}</span> <br>
-                          <span class="h_subtitle">Kec. {{ data.item.nama_kecamatan }}</span> <br>
+                          <span class="h_subtitle">KECAMATAN {{ data.item.nama_kecamatan }}</span> <br>
+                          <span class="h_subtitle">{{ data.item.nama_kabupaten }}</span> <br>
                         </div>
                     </template>
 
@@ -215,12 +226,18 @@
                   <small>Alamat</small>
                   <v-text-field v-model="form.alamat" class="placeholerku" outlined dense required/>
                 </div>
+                <div class="divInput">
+                  <small>Profil</small>
+                  <div v-if="editor">
+                    <div id="editor" style="height:550px"></div>
+                  </div>
+                </div>
 
 
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="red darken-1" text @click="mdl_add = false, close()">Close</v-btn>
+              <v-btn color="red darken-1" text @click="mdl_add = false, editor = false, close()">Close</v-btn>
               <v-btn color="blue darken-1" @click="addData()" text >Simpan</v-btn>
             </v-card-actions>
           </v-card>
@@ -236,7 +253,7 @@
                 Edit Data
               </v-toolbar-title>
               <v-spacer></v-spacer>
-              <v-btn color="white" icon  @click="mdl_edit = false, close()">
+              <v-btn color="white" icon  @click="mdl_edit = false, editorEdit = false, close()">
                 <v-icon>mdi-close</v-icon>
               </v-btn>
             </v-app-bar>
@@ -312,17 +329,68 @@
                   <small>Alamat</small>
                   <v-text-field v-model="form.alamat" class="placeholerku" outlined dense required/>
                 </div>
+                <div class="divInput">
+                  <small>Profil</small>
+                  <div v-if="editorEdit">
+                    <div id="editor_edit" style="height:550px"></div>
+                  </div>
+                </div>
 
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="red darken-1" text @click="mdl_edit = false, close()">Close</v-btn>
+              <v-btn color="red darken-1" text @click="mdl_edit = false, editorEdit = false, close()">Close</v-btn>
               <v-btn color="blue darken-1" text @click="editData()" >Simpan</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
       <!-- =========================== EDIT DATA ============================== -->
 
+      <!-- =========================== LIHAT DATA ============================== -->
+        <v-dialog v-model="mdl_lihat" persistent max-width="780px">
+
+          <v-card>
+            <v-app-bar flat class="blue darken-1">
+              <v-toolbar-title class="title white--text pl-0">
+                Profil Ekokraf
+              </v-toolbar-title>
+              <v-spacer></v-spacer>
+              <v-btn color="white" icon  @click="mdl_lihat = false">
+                <v-icon>mdi-close</v-icon>
+              </v-btn>
+            </v-app-bar>
+            <v-card-text>
+
+                <br>
+                <br>
+                <!-- <img :src="$store.state.URLX+'uploads/'+fileOld" style="width:100%; height:auto" alt=""> -->
+                <!-- <v-img :src="$store.state.URLX+'uploads/'+fileOld"></v-img> -->
+                <!-- <v-img :src="'https://www.celebes.co/wp-content/uploads/2019/10/Keunikan-Air-Terjun-Moramo.jpg'"></v-img> -->
+                <!-- <br>
+                <hr class="batasAbu">
+                <br> -->
+                <span class="h_judulProduk">{{form.pelaku}}</span> <br>
+                <hr class="batasAbu2">
+                <div style="padding-top:8px">
+                  <span class="h_hargaProduk">Badan Usaha : {{form.badan_usaha}}</span> <br>
+                  <span class="h_hargaProduk">Kontak : {{form.email}} || {{form.hp}}</span> <br>
+                  <span class="h_subtitle">Alamat : {{form.alamat}} || DES/KEL. {{form.nama_des_kel}}</span> <br>
+                </div>
+                <hr class="batasAbu1">
+                <br>
+                <div class="ql-editor" v-html="UMUM.replaceEscapeString(form.profil)"></div>
+
+
+
+
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="red darken-1" text @click="mdl_lihat = false">Close</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      <!-- =========================== LIHAT DATA ============================== -->
 
       <!-- =========================== VIEW LIST PRODUK ============================== -->
       <!-- transition="none" -->
@@ -585,6 +653,10 @@
 
 <script>
 
+  import Quill from 'quill';
+  import ImageResize from 'quill-image-resize-module'
+  Quill.register('modules/imageResize', ImageResize);
+
   import UMUM from "../../library/umum";
   import FETCHING from "../../library/fetching";
 
@@ -602,7 +674,10 @@
           alamat : '',
           email : '',
           hp : '',
+          profil : '',
           des_kel_id  : '',
+
+          nama_des_kel  : '',
         },
 
         produk : {
@@ -625,6 +700,9 @@
 
         fileOld : '',
 
+        editor : false,
+        editorEdit : false,
+
         searchDeskel : '',
         searchKlpEko : '',
         searchDeskelEdit : '',
@@ -640,7 +718,7 @@
         page_limit : 8,
         cari_value: "",
 
-
+        mdl_lihat : false,
         mdl_add : false,
         mdl_edit : false,
 
@@ -692,6 +770,9 @@
 
 
       addData : function() {
+
+        this.form.profil = document.querySelector('#editor').children[0].innerHTML
+
         fetch(this.$store.state.url.URL_EKO_PELAKU + "addData", {
             method: "POST",
             headers: {
@@ -706,6 +787,7 @@
       },
 
       editData : function(){
+        this.form.profil = document.querySelector('#editor_edit').children[0].innerHTML
         fetch(this.$store.state.url.URL_EKO_PELAKU + "editData", {
             method: "POST",
             headers: {
@@ -748,7 +830,9 @@
           this.form.alamat = data.alamat;
           this.form.email = data.email;
           this.form.hp = data.hp;
+          this.form.profil = data.profil;
           this.form.des_kel_id = data.des_kel_id;
+          this.form.nama_des_kel = data.nama_des_kel;
 
           this.searchDeskelEdit = data.nama_des_kel;
           this.searchKlpEkoEdit = data.ekokrafkelompok_uraian;
@@ -883,6 +967,35 @@
         cari_data : function(){
             this.page_first = 1;
             this.getData();
+        },
+
+        Quilll : function(editor){
+          this.editor = true
+          setTimeout(() => {
+            new Quill('#'+editor, {
+                  modules: {
+                      toolbar: this.$store.state.toolbarOptions,
+                      imageResize: true,
+                  },
+                  theme: 'snow'
+            });
+          }, 100);
+
+        },
+
+        editQuill(text, id){
+          this.editorEdit = true
+          var htmlToInsert = UMUM.replaceEscapeString(text)
+          setTimeout(() => {
+            let quill = new Quill('#'+id, {
+                  modules: {
+                      toolbar: this.$store.state.toolbarOptions,
+                      imageResize: true,
+                  },
+                  theme: 'snow'
+            });
+            quill.container.firstChild.innerHTML = htmlToInsert
+          }, 100);
         },
 
         fetching : async function(){

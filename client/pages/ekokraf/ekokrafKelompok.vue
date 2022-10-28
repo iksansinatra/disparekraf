@@ -52,6 +52,7 @@
                 <th class="text-center" style="width:5%">No</th>
                 <th class="text-center" style="width:20%">Kelompok</th>
                 <th class="text-center" style="width:25%">Jenis</th>
+                <th class="text-center" style="width:25%">Anggota</th>
                 <th class="text-center" style="width:25%">Alamat</th>
                 <th class="text-center" style="width:15%">Act</th>
               </tr>
@@ -62,6 +63,12 @@
                 <td>{{data.uraian}}</td>
                 <td>
                   <v-chip v-for="data1 in data.subData" :key="data1.id" color="yellow darken-3" small style="color:white; margin-left:2px; margin-top:2px">{{data1.m_jenisPariwisata_uraian}}</v-chip>
+                </td>
+                <td class="text-center">
+                  <v-btn :color="UMUM.checkZero(data.jmlAnggota)" small rounded @click="openMember(data), mdl_list_anggota = true">
+                    <v-icon left>mdi-account</v-icon>
+                    {{data.jmlAnggota}}
+                  </v-btn>
                 </td>
                 <td>{{data.alamat}}</td>
                 <td class="text-center">
@@ -214,6 +221,234 @@
         </v-dialog>
       <!-- =========================== EDIT DATA ============================== -->
 
+      <!-- =========================== VIEW LIST ANGGOTA ============================== -->
+      <!-- transition="none" -->
+        <v-dialog v-model="mdl_list_anggota" persistent max-width="1200px" no-click-animation transition="none">
+
+          <v-card>
+            <v-app-bar flat class="bg-blue">
+              <v-toolbar-title class="title white--text pl-0">
+                Anggota
+              </v-toolbar-title>
+              <v-spacer></v-spacer>
+              <v-btn color="white" icon  @click="mdl_list_anggota = false">
+                <v-icon>mdi-close</v-icon>
+              </v-btn>
+            </v-app-bar>
+            <v-card-text>
+
+                <br><br>
+                <v-btn color="blue" elevation="2" @click="mdl_add_anggota= true">
+                  <span style="color:white">TAMBAH ANGGOTA</span>
+                </v-btn> <br> <br>
+                <hr class="batasAbu" /> <br>
+                <v-row>
+
+                    <v-col cols="12" md="4" v-for="data in list_anggota" :key="data.id">
+                      <v-card class="mediaCard" color="#5289e7" dark>
+                        <v-row>
+                          <v-col cols="12" md="8">
+                            <span class="mediaTitle">{{data.nama}}</span> <br>
+                            <div style="line-height: 90%; text-align: justify;">
+                              <span class="mediaSubTitle text-justify two_line">{{data.jabatan}}</span>
+                              <br>
+                              <span>{{UMUM.replaceEscapeString(data.alamat)}}</span>
+                            </div>
+                          </v-col>
+
+                          <v-col cols="12" md="4">
+                            <v-img width="85px" height="100px" :src="$store.state.URLX+'uploads/'+data.file"></v-img>
+                          </v-col>
+                        </v-row>
+                        <br>
+                              <v-btn outlined rounded small @click="selectDataAnggota(data), mdl_lihat_anggota=true">Lihat</v-btn>
+                              <v-btn outlined rounded small @click="selectDataAnggota(data), mdl_edit_anggota=true">Edit</v-btn>
+                              <v-btn outlined rounded small @click="removeDataAnggota(data)">Hapus</v-btn>
+                      </v-card>
+                    </v-col>
+                  </v-row>
+
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="red darken-1" text @click="mdl_list_anggota = false">Close</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      <!-- =========================== VIEW LIST ANGGOTA ============================== -->
+
+            <!-- =========================== ADD ANGGOTA ============================== -->
+        <v-dialog v-model="mdl_add_anggota" persistent max-width="600px" transition="none">
+
+          <v-card>
+            <v-app-bar flat class="blue">
+              <v-toolbar-title class="title white--text pl-0">
+                Edit Data
+              </v-toolbar-title>
+              <v-spacer></v-spacer>
+              <v-btn color="white" icon  @click="mdl_add_anggota = false">
+                <v-icon>mdi-close</v-icon>
+              </v-btn>
+            </v-app-bar>
+            <v-card-text>
+
+                <br><br>
+
+
+                <div class="divInput">
+                  <small>Nama</small>
+                  <v-text-field v-model="anggota.nama" class="placeholerku" outlined dense required/>
+                </div>
+
+                <div class="divInput">
+                  <small>Jabatan</small>
+                  <v-text-field v-model="anggota.jabatan" class="placeholerku" outlined dense required/>
+                </div>
+
+                <div class="divInput">
+                  <small>Email</small>
+                  <v-text-field v-model="anggota.email" class="placeholerku" outlined dense required/>
+                </div>
+
+                <div class="divInput">
+                  <small>HP</small>
+                  <v-text-field v-model="anggota.hp" class="placeholerku" outlined dense required/>
+                </div>
+
+                <div class="divInput">
+                  <small>Alamat</small>
+                  <v-textarea v-model="anggota.alamat" outlined name="input-7-4"></v-textarea>
+                </div>
+
+
+                <div class="divInput">
+                  <small>Foto</small>
+                  <v-file-input v-model="anggota.file" truncate-length="15" outlined dense ></v-file-input>
+                </div>
+
+
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="red darken-1" text @click="mdl_add_anggota = false">Close</v-btn>
+              <v-btn color="blue darken-1" text @click="addDataAnggota()" >Simpan</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      <!-- =========================== ADD ANGGOTA ============================== -->
+
+      <!-- =========================== EDIT ANGGOTA ============================== -->
+        <v-dialog v-model="mdl_edit_anggota" persistent max-width="600px" transition="none">
+
+          <v-card>
+            <v-app-bar flat class="orange darken-1">
+              <v-toolbar-title class="title white--text pl-0">
+                Edit Data
+              </v-toolbar-title>
+              <v-spacer></v-spacer>
+              <v-btn color="white" icon  @click="mdl_edit_anggota = false">
+                <v-icon>mdi-close</v-icon>
+              </v-btn>
+            </v-app-bar>
+            <v-card-text>
+
+                <br><br>
+
+                <div class="divInput">
+                  <small>Nama</small>
+                  <v-text-field v-model="anggota.nama" class="placeholerku" outlined dense required/>
+                </div>
+
+               <div class="divInput">
+                  <small>Jabatan</small>
+                  <v-text-field v-model="anggota.jabatan" class="placeholerku" outlined dense required/>
+                </div>
+
+                <div class="divInput">
+                  <small>Email</small>
+                  <v-text-field v-model="anggota.email" class="placeholerku" outlined dense required/>
+                </div>
+
+                <div class="divInput">
+                  <small>HP</small>
+                  <v-text-field v-model="anggota.hp" class="placeholerku" outlined dense required/>
+                </div>
+
+                <div class="divInput">
+                  <small>Alamat</small>
+                  <v-textarea v-model="anggota.alamat" outlined name="input-7-4"></v-textarea>
+                </div>
+
+
+                <div class="divInput">
+                  <small>Foto</small>
+                  <v-file-input v-model="anggota.file" truncate-length="15" outlined dense ></v-file-input>
+                </div>
+
+
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="red darken-1" text @click="mdl_edit_anggota = false">Close</v-btn>
+              <v-btn color="blue darken-1" text @click="editDataAnggota()" >Simpan</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      <!-- =========================== EDIT ANGGOTA ============================== -->
+
+      <!-- =========================== LIHAT ANGGOTA ============================== -->
+        <v-dialog v-model="mdl_lihat_anggota" persistent max-width="600px" transition="none">
+
+          <v-card>
+            <v-app-bar flat class="light-blue accent-4">
+              <v-toolbar-title class="title white--text pl-0">
+                Detail Anggota
+              </v-toolbar-title>
+              <v-spacer></v-spacer>
+              <v-btn color="white" icon  @click="mdl_lihat_anggota = false">
+                <v-icon>mdi-close</v-icon>
+              </v-btn>
+            </v-app-bar>
+            <v-card-text>
+
+                <br><br>
+                <v-img :src="$store.state.URLX+'uploads/'+fileOld"></v-img>
+                <hr class="batasAbu" /> <br>
+
+                <span class="h_judulProduk">{{anggota.nama}}</span> <br>
+
+                <div style="padding-top:4px">{{anggota.jabatan}}</div>
+                <hr class="batasAbu2">
+                <div style="padding-top:8px">
+                  <span class="h_hargaProduk">{{anggota.alamat}}</span>
+                </div>
+                <!-- <div style="padding-top:12px">
+                  <v-chip small outlined color="light-green">
+                    <v-icon left style="font-size:16px">mdi-account</v-icon>
+                    {{produk.ekokrafpelaku_pelaku}}
+                  </v-chip>
+
+                  <v-chip small outlined color="red lighten-2">
+                    <v-icon left style="font-size:16px">mdi-phone</v-icon>
+                   {{produk.ekokrafpelaku_hp}}
+                  </v-chip>
+
+                  <v-chip small outlined color="blue lighten-2">
+                    <v-icon left style="font-size:16px">mdi-email</v-icon>
+                    {{produk.ekokrafpelaku_email}}
+                  </v-chip>
+                </div> -->
+                <hr class="batasAbu" />
+            </v-card-text>
+
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="red darken-1" text @click="mdl_lihat_anggota = false">Close</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      <!-- =========================== LIHAT ANGGOTA ============================== -->
+
 
     <!-- ++++++++++++++++++++++++++++++++++++++ MODAL ++++++++++++++++++++++++++++++++++++++++++ -->
   </div>
@@ -243,6 +478,21 @@
           ekokrafKelompok : 'xxx',
         },
 
+        anggota : {
+          id : '',
+          ekokrafKelompok  : '',
+          nama : '',
+          jabatan : '',
+          email : '',
+          hp : '',
+          alamat : '',
+          file : null,
+
+          ekokrafuraian : '',
+        },
+
+        fileOld : '',
+
         list_data : [],
         list_jenis : [],
 
@@ -254,6 +504,17 @@
 
         mdl_add : false,
         mdl_edit : false,
+        mdl_list_anggota : false,
+        mdl_add_anggota : false,
+        mdl_edit_anggota : false,
+        mdl_lihat_anggota : false,
+
+        list_anggota : [],
+
+        page_first1: 1,
+        page_last1: 0,
+        page_limit1 : 8,
+        cari_value1: "",
 
         UMUM : UMUM,
         FETCHING : FETCHING,
@@ -357,6 +618,119 @@
           });
 
       },
+
+            // ====================================== PRODUK ====================================
+      openMember(data){
+        this.anggota.ekokrafKelompok = data.id;
+        this.getViewAnggota();
+      },
+      getViewAnggota : function(){
+        fetch(this.$store.state.url.URL_EKO_ANGGOTA + "view", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+              authorization: "kikensbatara " + localStorage.token
+            },
+            body: JSON.stringify({
+                ekokrafKelompok : this.anggota.ekokrafKelompok,
+                data_ke: this.page_first1,
+                cari_value: this.cari_value1,
+                page_limit : this.page_limit1,
+            })
+        })
+            .then(res => res.json())
+            .then(res_data => {
+              console.log(res_data)
+              this.list_anggota = res_data.data;
+              this.page_last1 = res_data.jml_data;
+        });
+      },
+
+
+      addDataAnggota : function() {
+
+        var formData = new FormData();
+        formData.append('ekokrafKelompok', this.anggota.ekokrafKelompok);
+        formData.append('nama', this.anggota.nama);
+        formData.append('jabatan', this.anggota.jabatan);
+        formData.append('email', this.anggota.email);
+        formData.append('hp', this.anggota.hp);
+        formData.append('alamat', this.anggota.alamat);
+        formData.append('file', this.anggota.file);
+
+        fetch(this.$store.state.url.URL_EKO_ANGGOTA + "addData", {
+            method: "POST",
+            headers: {
+              authorization: "kikensbatara " + localStorage.token
+            },
+            body: formData
+        }).then(res_data => {
+            this.getViewAnggota();
+            this.getView();
+            this.$store.commit('notifAdd', 'Menambah')
+        });
+        // console.log(this.produk.file)
+      },
+
+      editDataAnggota : function(){
+        var formData = new FormData();
+        formData.append('id', this.anggota.id);
+        formData.append('ekokrafKelompok', this.anggota.ekokrafKelompok);
+        formData.append('nama', this.anggota.nama);
+        formData.append('jabatan', this.anggota.jabatan);
+        formData.append('email', this.anggota.email);
+        formData.append('hp', this.anggota.hp);
+        formData.append('alamat', this.anggota.alamat);
+        formData.append('file', this.anggota.file);
+        formData.append('fileOld', this.fileOld);
+
+        fetch(this.$store.state.url.URL_EKO_ANGGOTA + "editData", {
+            method: "POST",
+            headers: {
+              authorization: "kikensbatara " + localStorage.token
+            },
+            body: formData
+        }).then(res_data => {
+            // this.getView();
+            this.getViewAnggota();
+            this.$store.commit('notifAdd', 'Menambah')
+        });
+      },
+
+      removeDataAnggota : async function(data){
+
+        await UMUM.notifDelete();
+        fetch(this.$store.state.url.URL_EKO_ANGGOTA + "removeData", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+              authorization: "kikensbatara " + localStorage.token
+            },
+            body: JSON.stringify(data)
+        }).then(res_data => {
+            this.getViewAnggota();
+            this.getView();
+            this.$store.commit('notifAdd', 'Menghapus')
+        });
+      },
+
+      selectDataAnggota : async function(data){
+          this.anggota.id = data.id;
+          this.anggota.ekokrafKelompok = data.ekokrafKelompok;
+          this.anggota.nama = data.nama;
+          this.anggota.jabatan = data.jabatan;
+          this.anggota.email = data.email;
+          this.anggota.hp = data.hp;
+          this.anggota.alamat = UMUM.replaceEscapeString(data.alamat);
+          this.fileOld = data.file;
+
+          this.anggota.ekokrafuraian = data.ekokrafuraian;
+          this.getViewAnggota();
+          this.getView();
+
+      },
+
+      // ====================================== ANGGOTA ====================================
 
       // ====================================== PAGINATE ====================================
         indexing : function(index){

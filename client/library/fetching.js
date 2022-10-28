@@ -159,7 +159,7 @@ const getJenisPariwisata = async ()=>{
 
 const postDesKel = async (data)=>{
   return new Promise(resolve=>{
-    fetch(storex.url.URL_DM_DES_KEL + "list", {
+    fetch(storex.url.URL_DM_DES_KEL + "provinsi", {
         method: "POST",
         headers: {
           "content-type": "application/json",

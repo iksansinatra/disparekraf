@@ -14,7 +14,7 @@ export default {
 
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
-    titleTemplate: '%s - SISFO',
+    titleTemplate: '%s - PROVINSI SULAWESI TENGGARA',
     title: 'DISPAREKRAF',
     meta: [
       { charset: 'utf-8' },
@@ -22,7 +22,7 @@ export default {
       { hid: 'description', name: 'description', content: '' }
     ],
     link: [
-      { rel: 'icon', type: 'image/png', href: '/icon3.png' },
+      { rel: 'icon', type: 'image/png', href: '/icon.png' },
       { rel: 'stylesheet', href: '//cdn.quilljs.com/1.3.6/quill.snow.css' }
 
     ],

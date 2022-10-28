@@ -7,7 +7,7 @@
 <!-- <pre>{{$store.state.list_menu}}</pre> -->
 
       <v-list>
-      <v-img lazy-src="https://picsum.photos/id/11/10/6" style="margin-top:-3%" max-height="100%" max-width="100%" src="/img/card.png"></v-img>
+      <v-img lazy-src="https://picsum.photos/id/11/10/6" style="margin-top:-3%" max-height="100%" max-width="100%" src="/img/wonderful.png"></v-img>
 
          <v-list-item to="/" router exact>
           <v-list-item-action>

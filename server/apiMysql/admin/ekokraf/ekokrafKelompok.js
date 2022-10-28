@@ -213,7 +213,14 @@ const getMain1 = async (req, res) =>{
         `;
 
         var view = `
-            SELECT * FROM ekokrafkelompok
+            SELECT
+            ekokrafkelompok.*,
+
+            (SELECT COUNT(ekokrafanggota.id) FROM ekokrafanggota
+            WHERE ekokrafanggota.ekokrafKelompok = ekokrafkelompok.id) AS jmlAnggota
+
+            FROM ekokrafkelompok
+            
             WHERE
             ekokrafkelompok.uraian LIKE '%`+cari+`%'
             ORDER BY ekokrafkelompok.createdAt DESC

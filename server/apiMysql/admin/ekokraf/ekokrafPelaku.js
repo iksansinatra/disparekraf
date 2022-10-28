@@ -43,7 +43,7 @@ router.post('/view', (req, res) => {
         LEFT JOIN ekokraf.ekokrafkelompok ekokrafkelompok
         ON ekokrafkelompok.id = ekokrafpelaku.ekokrafKelompok
 
-        LEFT JOIN egov.master_des_kel master_des_kel
+        LEFT JOIN ekokraf.master_des_kel master_des_kel
         ON master_des_kel.des_kel_id  = ekokrafpelaku.des_kel_id
 
 
@@ -81,7 +81,7 @@ router.post('/view', (req, res) => {
 
 router.post('/addData', (req,res)=>{
     let insert = `
-        INSERT INTO ekokrafpelaku (ekokrafKelompok, des_kel_id, pelaku, nik, badan_usaha, alamat, email, hp, createdBy, createdAt) VALUES (
+        INSERT INTO ekokrafpelaku (ekokrafKelompok, des_kel_id, pelaku, nik, badan_usaha, alamat, email, hp, profil, createdBy, createdAt) VALUES (
             `+req.body.ekokrafKelompok+`,
             `+req.body.des_kel_id+`,
             '`+req.body.pelaku+`',
@@ -90,6 +90,7 @@ router.post('/addData', (req,res)=>{
             '`+req.body.alamat+`',
             '`+req.body.email+`',
             '`+req.body.hp+`',
+            '`+req.body.profil+`',
             '`+req.user._id+`', 
             NOW()
         )
@@ -120,6 +121,7 @@ router.post('/editData', (req,res)=>{
         alamat = '`+req.body.alamat+`',
         email = '`+req.body.email+`',
         hp = '`+req.body.hp+`',
+        profil = '`+req.body.profil+`',
         editedBy = '`+req.user._id+`',
         editedAt = NOW()
 
@@ -174,7 +176,7 @@ router.post('/list', (req, res)=> {
 
         FROM ekokraf.ekokrafpelaku ekokrafpelaku
 
-        LEFT JOIN egov.master_des_kel master_des_kel
+        LEFT JOIN ekokraf.master_des_kel master_des_kel
         ON ekokrafpelaku.des_kel_id = master_des_kel.des_kel_id 
 
 

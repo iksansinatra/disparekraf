@@ -71,6 +71,8 @@ app.use('/checkAuth', middleware.isLoggedIn, checkAuth);
 
     const ekokrafKelompok = require('./apiMysql/admin/ekokraf/ekokrafKelompok');
     app.use('/api/v1/ekokrafKelompok', middleware.isLoggedIn, ekokrafKelompok);
+    const ekokrafAnggota = require('./apiMysql/admin/ekokraf/ekokrafAnggota');
+    app.use('/api/v1/ekokrafAnggota', middleware.isLoggedIn, ekokrafAnggota);
     const ekokrafPelaku = require('./apiMysql/admin/ekokraf/ekokrafPelaku');
     app.use('/api/v1/ekokrafPelaku', middleware.isLoggedIn, ekokrafPelaku);
     const ekokrafPelakuProduk = require('./apiMysql/admin/ekokraf/ekokrafPelakuProduk');
