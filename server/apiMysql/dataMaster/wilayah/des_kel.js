@@ -1,5 +1,5 @@
 const express = require('express');
-var db = require('../../../db/MySql/egov');
+var db = require('../../../db/MySql/dbutama');
 
 var uniqid = require('uniqid');
 const router = express.Router();

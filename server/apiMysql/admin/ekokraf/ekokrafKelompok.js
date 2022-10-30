@@ -262,8 +262,8 @@ const getMain1 = async (req, res) =>{
 
 router.post('/addData', (req,res)=>{
     let insert = `
-        INSERT INTO ekokrafkelompok (uraian, alamat, createdBy, createdAt) VALUES (
-            '`+req.body.uraian+`', '`+req.body.alamat+`','`+req.user._id+`', NOW()
+        INSERT INTO ekokrafkelompok (uniq, uraian, alamat, createdBy, createdAt) VALUES (
+            '`+uniqid()+ `', '`+req.body.uraian+`', '`+req.body.alamat+`','`+req.user._id+`', NOW()
         )
     `
 

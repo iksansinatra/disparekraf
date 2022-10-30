@@ -102,7 +102,8 @@ router.post('/addData',upload.single("file"), (req,res)=>{
 
 
     let insert = `
-        INSERT INTO ekokrafpelakuproduk (m_jenisPariwisata , ekokrafPelaku , brand, harga, stock, keterangan, file, createdBy, createdAt) VALUES (
+        INSERT INTO ekokrafpelakuproduk (uniq, m_jenisPariwisata , ekokrafPelaku , brand, harga, stock, keterangan, file, createdBy, createdAt) VALUES (
+            '`+uniqid()+ `',
             `+req.body.m_jenisPariwisata +`,
             `+req.body.ekokrafPelaku +`,
             '`+req.body.brand+`',

@@ -81,7 +81,8 @@ router.post('/view', (req, res) => {
 
 router.post('/addData', (req,res)=>{
     let insert = `
-        INSERT INTO ekokrafpelaku (ekokrafKelompok, des_kel_id, pelaku, nik, badan_usaha, alamat, email, hp, profil, createdBy, createdAt) VALUES (
+        INSERT INTO ekokrafpelaku (uniq, ekokrafKelompok, des_kel_id, pelaku, nik, badan_usaha, alamat, email, hp, profil, createdBy, createdAt) VALUES (
+            '`+uniqid()+ `',
             `+req.body.ekokrafKelompok+`,
             `+req.body.des_kel_id+`,
             '`+req.body.pelaku+`',

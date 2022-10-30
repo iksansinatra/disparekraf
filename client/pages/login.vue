@@ -11,7 +11,7 @@
         <v-card  class="bg-form-login">
           <div style="padding-top:5%; padding-left:10%; padding-right:10%; padding-bottom:5%">
 
-            <img src="img/kreatif.png" style="width:100%">
+            <img src="img/ekraf.png" style="width:100%">
             <br>
             <div  v-if="errorMessage" >
               <v-alert border="left" color="red lighten-2" style="color:white">
