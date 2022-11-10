@@ -9,4 +9,5 @@ ALTER TABLE `ekokrafpelaku` ADD `tahun` VARCHAR(11) NOT NULL AFTER `hp`, ADD `te
 1. Tambah Menu Data Master "Nama Menu : Master Kuisioner", "Type : Multy Menu", "No Urut : 2"
 2. Tambah Menu Master Kuisioner "Nama Menu : Indikator", "Route : /dataMaster/kuisioner/indikator", "Type : Single Menu", "No Urut : 1"
 3. Tambah Menu Master Kuisioner "Nama Menu : Kuisioner", "Route : /dataMaster/kuisioner/kuisioner", "Type : Single Menu", "No Urut : 2"
+ALTER TABLE `ekokrafpelaku` CHANGE `ekokrafKelompok` `ekokrafJenis` INT(11) NULL DEFAULT NULL;
 

@@ -50,11 +50,12 @@
             <thead style="background:#5289E7">
               <tr class="h_table_head">
                 <th class="text-center" style="width:5%">No</th>
-                <th class="text-center" style="width:15%">Alamat</th>
-                <th class="text-center" style="width:25%">Brand</th>
+                <th class="text-center" style="width:20%">Alamat</th>
+                <th class="text-center" style="width:20%">Brand</th>
                 <th class="text-center" style="width:20%">Nama Pemilik</th>
-                <th class="text-center" style="width:25%">Kontak</th>
+                <th class="text-center" style="width:15%">Kontak</th>
                 <th class="text-center" style="width:10%">Produk</th>
+                <!-- <th class="text-center" style="width:10%">Kuisioner</th> -->
                 <th class="text-center" style="width:10%">Act</th>
               </tr>
             </thead>
@@ -62,12 +63,12 @@
               <tr class="h_table_body" v-for="(data, index) in list_data" :key="data.id">
                 <td class="text-center">{{indexing(index+1)}}.</td>
                 <td class="text-left">
-                </td>
                   {{data.alamat}} <br>
                   <span class="h_subtitle">DES/KEL.{{data.nama_des_kel}}</span>
+                </td>
                   <td>
                   {{data.brand}} <br>
-                  <span class="h_subtitle">Klp.{{data.ekokrafkelompok_uraian}}</span>
+                  <span class="h_subtitle">{{data.ekokrafjenis_uraian}}</span>
                 </td>
                 <td>
                   {{data.pelaku}}<br>
@@ -185,26 +186,16 @@
                 </div>
 
                 <div class="divInput">
-                  <small>Jenis Sub Sektor Ekokraf</small>
+                  <small>Jenis Sub Sektor</small>
                   <v-autocomplete
-                    v-model="form.ekokrafKelompok"
-                    :items="list_klpEko"
-                    :search-input.sync ="searchKlpEko"
-                    @keyup="eventKlpEko()"
+                    v-model="form.ekokrafJenis"
+                    :items="list_jenis"
                     :item-text="'uraian'"
                     :item-value="'id'"
                     outlined
                     clearable
                     dense
-                  >
-                     <template v-slot:item="data">
-                        <div style="margin-top:5px; margin-bottom:5px">
-                          <span style="">{{ data.item.uraian }}</span> <br>
-                          <span class="h_subtitle">Kec. {{ data.item.alamat }}</span> <br>
-                        </div>
-                    </template>
-
-                  </v-autocomplete>
+                  />
                 </div>
                 <div class="divInput">
                   <small>Nama Brand</small>
@@ -303,26 +294,16 @@
                 </div>
 
                 <div class="divInput">
-                  <small>Jenis Sub Sektor Ekokraf</small>
+                  <small>Jenis Sub Sektor</small>
                   <v-autocomplete
-                    v-model="form.ekokrafKelompok"
-                    :items="list_klpEko"
-                    :search-input.sync ="searchKlpEkoEdit"
-                    @keyup="eventKlpEkoEdit()"
+                    v-model="produk.m_jenisPariwisata"
+                    :items="list_jenis"
                     :item-text="'uraian'"
                     :item-value="'id'"
                     outlined
                     clearable
                     dense
-                  >
-                     <template v-slot:item="data">
-                        <div style="margin-top:5px; margin-bottom:5px">
-                          <span style="">{{ data.item.uraian }}</span> <br>
-                          <span class="h_subtitle">Kec. {{ data.item.alamat }}</span> <br>
-                        </div>
-                    </template>
-
-                  </v-autocomplete>
+                  />
                 </div>
 
                 <div class="divInput">
@@ -405,7 +386,7 @@
                 <!-- <br>
                 <hr class="batasAbu">
                 <br> -->
-                <span class="h_judulProduk">{{form.pelaku}}</span> <br>
+                <span class="h_judulProduk">{{form.pelaku}} || {{form.brand}}</span> <br>
                 <hr class="batasAbu2">
                 <div style="padding-top:8px">
                   <span class="h_hargaProduk">Badan Usaha : {{form.badan_usaha}}</span> <br>
@@ -704,7 +685,7 @@
 
         form : {
           id : '',
-          ekokrafKelompok   : '',
+          ekokrafJenis   : '',
           brand : '',
           pelaku : '',
           nik : '',
@@ -717,6 +698,8 @@
           omset : '',
           profil : '',
           des_kel_id  : '',
+
+          m_jenispariwisata_uraian : '',
 
           nama_des_kel  : '',
         },
@@ -745,13 +728,13 @@
         editorEdit : false,
 
         searchDeskel : '',
-        searchKlpEko : '',
+        searchJenisEko : '',
         searchDeskelEdit : '',
-        searchKlpEkoEdit : '',
+        searchJenisEkoEdit : '',
 
         list_data : [],
         list_desKel : [],
-        list_klpEko : [],
+        list_jenisEko : [],
         list_jenis : [],
 
         page_first: 1,
@@ -863,7 +846,8 @@
       selectData : async function(data){
         // console.log(data)
           this.form.id = data.id;
-          this.form.ekokrafKelompok = data.ekokrafKelompok;
+          this.form.ekokrafJenis = data.ekokrafJenis;
+          this.form.brand = data.brand;
           this.form.pelaku = data.pelaku;
           this.form.nik = data.nik;
           this.form.badan_usaha = data.badan_usaha;
@@ -879,7 +863,7 @@
           this.form.nama_des_kel = data.nama_des_kel;
 
           this.searchDeskelEdit = data.nama_des_kel;
-          this.searchKlpEkoEdit = data.ekokrafkelompok_uraian;
+          this.searchJenisEkoEdit = data.ekokrafjenis_uraian;
           this.list_desKel =  await FETCHING.postDesKel(this.searchDeskelEdit);
           this.list_klpEko =  await FETCHING.postKlpEko(this.searchKlpEkoEdit);
 

@@ -32,7 +32,7 @@ router.post('/view', (req, res) => {
     let view = `
         SELECT 
         ekokrafpelaku.*,
-        ekokrafkelompok.uraian as ekokrafkelompok_uraian,
+        m_jenispariwisata.uraian as ekokrafjenis_uraian,
         master_des_kel.nama_des_kel as nama_des_kel,
 
         (SELECT COUNT(ekokrafpelakuproduk.id) FROM ekokrafpelakuproduk
@@ -40,8 +40,8 @@ router.post('/view', (req, res) => {
 
         FROM ekokraf.ekokrafpelaku ekokrafpelaku
 
-        LEFT JOIN ekokraf.ekokrafkelompok ekokrafkelompok
-        ON ekokrafkelompok.id = ekokrafpelaku.ekokrafKelompok
+        LEFT JOIN ekokraf.m_jenispariwisata m_jenispariwisata
+        ON m_jenispariwisata.id = ekokrafpelaku.ekokrafJenis
 
         LEFT JOIN ekokraf.master_des_kel master_des_kel
         ON master_des_kel.des_kel_id  = ekokrafpelaku.des_kel_id
@@ -81,9 +81,9 @@ router.post('/view', (req, res) => {
 
 router.post('/addData', (req,res)=>{
     let insert = `
-        INSERT INTO ekokrafpelaku (uniq, ekokrafKelompok, des_kel_id, brand, pelaku, nik, badan_usaha, alamat, email, hp, tahun, tenaga, omset, profil, createdBy, createdAt) VALUES (
+        INSERT INTO ekokrafpelaku (uniq, ekokrafJenis, des_kel_id, brand, pelaku, nik, badan_usaha, alamat, email, hp, tahun, tenaga, omset, profil, createdBy, createdAt) VALUES (
             '`+uniqid()+ `',
-            `+req.body.ekokrafKelompok+`,
+            `+req.body.ekokrafJenis+`,
             `+req.body.des_kel_id+`,
             '`+req.body.brand+`',
             '`+req.body.pelaku+`',
@@ -118,7 +118,7 @@ router.post('/editData', (req,res)=>{
     console.log(req.body)
     query = `
         UPDATE ekokrafpelaku SET
-        ekokrafKelompok = `+req.body.ekokrafKelompok+`,
+        ekokrafJenis = `+req.body.ekokrafJenis+`,
         des_kel_id = `+req.body.des_kel_id+`,
         brand = '`+req.body.brand+`',
         pelaku = '`+req.body.pelaku+`',
