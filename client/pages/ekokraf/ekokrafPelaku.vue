@@ -50,10 +50,11 @@
             <thead style="background:#5289E7">
               <tr class="h_table_head">
                 <th class="text-center" style="width:5%">No</th>
-                <th class="text-center" style="width:15%">Kontak</th>
-                <th class="text-center" style="width:25%">Pelaku</th>
+                <th class="text-center" style="width:15%">Alamat</th>
+                <th class="text-center" style="width:25%">Brand</th>
+                <th class="text-center" style="width:20%">Nama Pemilik</th>
+                <th class="text-center" style="width:25%">Kontak</th>
                 <th class="text-center" style="width:10%">Produk</th>
-                <th class="text-center" style="width:25%">Alamat</th>
                 <th class="text-center" style="width:10%">Act</th>
               </tr>
             </thead>
@@ -61,22 +62,26 @@
               <tr class="h_table_body" v-for="(data, index) in list_data" :key="data.id">
                 <td class="text-center">{{indexing(index+1)}}.</td>
                 <td class="text-left">
-                  {{data.hp}} <br>
-                  <span class="h_subtitle">{{data.email}}</span>
+                </td>
+                  {{data.alamat}} <br>
+                  <span class="h_subtitle">DES/KEL.{{data.nama_des_kel}}</span>
+                  <td>
+                  {{data.brand}} <br>
+                  <span class="h_subtitle">Klp.{{data.ekokrafkelompok_uraian}}</span>
                 </td>
                 <td>
-                  {{data.pelaku}} <br>
-                  <span class="h_subtitle">Klp.{{data.ekokrafkelompok_uraian}}</span>
+                  {{data.pelaku}}<br>
+                  <span class="h_subtitle">{{data.nik}}</span>
+                </td>
+                <td>
+                  {{data.hp}} <br>
+                  <span class="h_subtitle">{{data.email}}</span>
                 </td>
                 <td class="text-center">
                   <v-btn :color="UMUM.checkZero(data.jmlProduk)" small rounded @click="openProduct(data), mdl_list_produk = true">
                     <v-icon left>mdi-cart</v-icon>
                     {{data.jmlProduk}}
                   </v-btn>
-                </td>
-                <td>
-                  {{data.alamat}} <br>
-                  <span class="h_subtitle">DES/KEL.{{data.nama_des_kel}}</span>
                 </td>
                 <td class="text-center">
                   <v-btn-toggle mandatory>
@@ -146,7 +151,7 @@
           <v-card>
             <v-app-bar flat class="bg-primaryku">
               <v-toolbar-title class="title white--text pl-0">
-                Messages
+                Tambah Data
               </v-toolbar-title>
               <v-spacer></v-spacer>
               <v-btn color="white" icon  @click="mdl_add = false, editor = false, close()">
@@ -180,7 +185,7 @@
                 </div>
 
                 <div class="divInput">
-                  <small>Kelompok Ekokraf</small>
+                  <small>Jenis Sub Sektor Ekokraf</small>
                   <v-autocomplete
                     v-model="form.ekokrafKelompok"
                     :items="list_klpEko"
@@ -201,9 +206,12 @@
 
                   </v-autocomplete>
                 </div>
-
                 <div class="divInput">
-                  <small>Pelaku / Nama</small>
+                  <small>Nama Brand</small>
+                  <v-text-field v-model="form.brand" class="placeholerku" outlined dense required/>
+                </div>
+                <div class="divInput">
+                  <small>Nama Pemilik</small>
                   <v-text-field v-model="form.pelaku" class="placeholerku" outlined dense required/>
                 </div>
                 <div class="divInput">
@@ -211,16 +219,28 @@
                   <v-text-field v-model="form.nik" class="placeholerku" outlined dense required/>
                 </div>
                 <div class="divInput">
-                  <small>Badan Usaha</small>
-                  <v-text-field v-model="form.badan_usaha" class="placeholerku" outlined dense required/>
+                  <small>Telepon</small>
+                  <v-text-field v-model="form.hp" class="placeholerku" outlined dense required/>
                 </div>
                 <div class="divInput">
-                  <small>email</small>
+                  <small>Email</small>
                   <v-text-field v-model="form.email" class="placeholerku" outlined dense required/>
                 </div>
                 <div class="divInput">
-                  <small>hp</small>
-                  <v-text-field v-model="form.hp" class="placeholerku" outlined dense required/>
+                  <small>Tahun</small>
+                  <v-text-field v-model="form.tahun" class="placeholerku" outlined dense required/>
+                </div>
+                <div class="divInput">
+                  <small>Tenaga Kerja</small>
+                  <v-text-field v-model="form.tenaga" class="placeholerku" outlined dense required/>
+                </div>
+                <div class="divInput">
+                  <small>Omset</small>
+                  <v-text-field v-model="form.omset" class="placeholerku" outlined dense required/>
+                </div>
+                <div class="divInput">
+                  <small>Badan Usaha</small>
+                  <v-text-field v-model="form.badan_usaha" class="placeholerku" outlined dense required/>
                 </div>
                 <div class="divInput">
                   <small>Alamat</small>
@@ -283,7 +303,7 @@
                 </div>
 
                 <div class="divInput">
-                  <small>Kelompok Ekokraf</small>
+                  <small>Jenis Sub Sektor Ekokraf</small>
                   <v-autocomplete
                     v-model="form.ekokrafKelompok"
                     :items="list_klpEko"
@@ -306,7 +326,11 @@
                 </div>
 
                 <div class="divInput">
-                  <small>Pelaku / Nama</small>
+                  <small>Nama Brand</small>
+                  <v-text-field v-model="form.brand" class="placeholerku" outlined dense required/>
+                </div>
+                <div class="divInput">
+                  <small>Nama Pemilik</small>
                   <v-text-field v-model="form.pelaku" class="placeholerku" outlined dense required/>
                 </div>
                 <div class="divInput">
@@ -314,16 +338,28 @@
                   <v-text-field v-model="form.nik" class="placeholerku" outlined dense required/>
                 </div>
                 <div class="divInput">
-                  <small>Badan Usaha</small>
-                  <v-text-field v-model="form.badan_usaha" class="placeholerku" outlined dense required/>
+                  <small>Telepon</small>
+                  <v-text-field v-model="form.hp" class="placeholerku" outlined dense required/>
                 </div>
                 <div class="divInput">
-                  <small>email</small>
+                  <small>Email</small>
                   <v-text-field v-model="form.email" class="placeholerku" outlined dense required/>
                 </div>
                 <div class="divInput">
-                  <small>hp</small>
-                  <v-text-field v-model="form.hp" class="placeholerku" outlined dense required/>
+                  <small>Tahun</small>
+                  <v-text-field v-model="form.tahun" class="placeholerku" outlined dense required/>
+                </div>
+                <div class="divInput">
+                  <small>Tenaga Kerja</small>
+                  <v-text-field v-model="form.tenaga" class="placeholerku" outlined dense required/>
+                </div>
+                <div class="divInput">
+                  <small>Omset</small>
+                  <v-text-field v-model="form.omset" class="placeholerku" outlined dense required/>
+                </div>
+                <div class="divInput">
+                  <small>Badan Usaha</small>
+                  <v-text-field v-model="form.badan_usaha" class="placeholerku" outlined dense required/>
                 </div>
                 <div class="divInput">
                   <small>Alamat</small>
@@ -373,8 +409,9 @@
                 <hr class="batasAbu2">
                 <div style="padding-top:8px">
                   <span class="h_hargaProduk">Badan Usaha : {{form.badan_usaha}}</span> <br>
-                  <span class="h_hargaProduk">Kontak : {{form.email}} || {{form.hp}}</span> <br>
-                  <span class="h_subtitle">Alamat : {{form.alamat}} || DES/KEL. {{form.nama_des_kel}}</span> <br>
+                  <span class="h_hargaProduk">Tahun Mulai Usaha : {{form.tahun}}</span> <br>
+                  <span class="h_subtitle">Jumlah Tenaga Kerja : {{form.tenaga}}</span> <br>
+                  <span class="h_subtitle">Jumlah Omset : {{form.omset}}</span> <br>
                 </div>
                 <hr class="batasAbu1">
                 <br>
@@ -454,7 +491,7 @@
           <v-card>
             <v-app-bar flat class="blue">
               <v-toolbar-title class="title white--text pl-0">
-                Edit Data
+                Tambah Data
               </v-toolbar-title>
               <v-spacer></v-spacer>
               <v-btn color="white" icon  @click="mdl_add_produk = false, close()">
@@ -668,12 +705,16 @@
         form : {
           id : '',
           ekokrafKelompok   : '',
+          brand : '',
           pelaku : '',
           nik : '',
           badan_usaha : '',
           alamat : '',
           email : '',
           hp : '',
+          tahun : '',
+          tenaga : '',
+          omset : '',
           profil : '',
           des_kel_id  : '',
 
@@ -830,6 +871,9 @@
           this.form.alamat = data.alamat;
           this.form.email = data.email;
           this.form.hp = data.hp;
+          this.form.tahun = data.tahun;
+          this.form.tenaga = data.tenaga;
+          this.form.omset = data.omset;
           this.form.profil = data.profil;
           this.form.des_kel_id = data.des_kel_id;
           this.form.nama_des_kel = data.nama_des_kel;

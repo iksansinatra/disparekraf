@@ -26,7 +26,10 @@ const lolow = {
       URL_EKO_KELOMPOK : URL + 'api/v1/ekokrafKelompok/',
       URL_EKO_ANGGOTA : URL + 'api/v1/ekokrafAnggota/',
       URL_EKO_PELAKU : URL + 'api/v1/ekokrafPelaku/',
+      URL_EKO_KUISIONER : URL + 'api/v1/ekokrafKuisioner/',
       URL_EKO_PELAKU_PRODUK : URL + 'api/v1/ekokrafPelakuProduk/',
+      URL_EKO_INDIKATOR : URL + 'api/v1/ekokrafIndikator/',
+      URL_EKO_KUISIONER_BOBOT : URL + 'api/v1/ekokrafKuisionerBobot/',
 
       URL_WISATA_OBJEK : URL + 'api/v1/wisataobjek/',
       URL_WISATA_OBJEK_FASILITAS : URL + 'api/v1/wisataobjekfasilitas/',

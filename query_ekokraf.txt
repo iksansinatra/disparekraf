@@ -1,0 +1,12 @@
+CREATE TABLE `ekokraf`.`ekokrafkuisioner` (`id` INT(11) NOT NULL AUTO_INCREMENT , `uniq` VARCHAR(25) NULL DEFAULT NULL , `indikator` VARCHAR(225) NOT NULL , `keterangan` TEXT NOT NULL , `createdBy` VARCHAR(25) NOT NULL , `editedBy` VARCHAR(25) NOT NULL , `createdAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , `editedAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+CREATE TABLE `ekokraf`.`ekokrafkuisionerbobot` (`id` INT NOT NULL AUTO_INCREMENT , `uniq` VARCHAR(25) NULL DEFAULT NULL , `ekokrafIndikator` INT(11) NOT NULL , `pertanyaan` VARCHAR(225) NOT NULL , `bobot` INT(11) NOT NULL , `createdBy` VARCHAR(25) NOT NULL , `editedBy` VARCHAR(25) NOT NULL , `createdAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , `editedAt` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+CREATE TABLE `ekokraf`.`ekokrafkuisionerindikator` (`id` INT(11) NOT NULL AUTO_INCREMENT , `uniq` VARCHAR(25) NULL DEFAULT NULL , `uraian` VARCHAR(225) NOT NULL , `keterangan` TEXT NOT NULL , `createdAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , `editedAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , `createdBy` VARCHAR(25) NOT NULL , `editedBy` VARCHAR(25) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;
+ALTER TABLE `ekokrafkuisioner` CHANGE `indikator` `uraian` VARCHAR(225) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL;
+ALTER TABLE `ekokrafkuisioner` ADD `ekokrafIndikator` VARCHAR(25) NOT NULL AFTER `uniq`;
+ALTER TABLE `ekokrafkuisionerbobot` CHANGE `ekokrafIndikator` `ekokrafKuisioner` INT(11) NOT NULL;
+ALTER TABLE `ekokrafpelaku` ADD `brand` VARCHAR(225) NOT NULL AFTER `des_kel_id`;
+ALTER TABLE `ekokrafpelaku` ADD `tahun` VARCHAR(11) NOT NULL AFTER `hp`, ADD `tenaga` INT(11) NOT NULL AFTER `tahun`, ADD `omset` VARCHAR(225) NOT NULL AFTER `tenaga`;
+1. Tambah Menu Data Master "Nama Menu : Master Kuisioner", "Type : Multy Menu", "No Urut : 2"
+2. Tambah Menu Master Kuisioner "Nama Menu : Indikator", "Route : /dataMaster/kuisioner/indikator", "Type : Single Menu", "No Urut : 1"
+3. Tambah Menu Master Kuisioner "Nama Menu : Kuisioner", "Route : /dataMaster/kuisioner/kuisioner", "Type : Single Menu", "No Urut : 2"
+

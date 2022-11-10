@@ -140,7 +140,7 @@
 
                 <br>
                 <div class="divInput">
-                  <small>Jenis Pariwisata</small>
+                  <small>Jenis Ekonomi Kreatif</small>
                   <v-autocomplete
                     v-model="form.jenisPariwisata"
                     :items="list_jenis"
@@ -468,7 +468,6 @@
           id : '',
           uraian : '',
           alamat : '',
-          kode : '',
           jenisPariwisata : [],
         },
 
@@ -560,6 +559,7 @@
         })
         // .then(res => res.json())
         .then(res_data => {
+          console.log(res_data);
             this.getView();
             this.$store.commit('notifAdd', 'Menambah')
         });

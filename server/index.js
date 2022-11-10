@@ -75,8 +75,15 @@ app.use('/checkAuth', middleware.isLoggedIn, checkAuth);
     app.use('/api/v1/ekokrafAnggota', middleware.isLoggedIn, ekokrafAnggota);
     const ekokrafPelaku = require('./apiMysql/admin/ekokraf/ekokrafPelaku');
     app.use('/api/v1/ekokrafPelaku', middleware.isLoggedIn, ekokrafPelaku);
+    const ekokrafKuisioner = require('./apiMysql/dataMaster/kuisioner/ekokrafKuisioner');
+    app.use('/api/v1/ekokrafKuisioner', middleware.isLoggedIn, ekokrafKuisioner);
     const ekokrafPelakuProduk = require('./apiMysql/admin/ekokraf/ekokrafPelakuProduk');
     app.use('/api/v1/ekokrafPelakuProduk', middleware.isLoggedIn, ekokrafPelakuProduk);
+    const ekokrafIndikator = require('./apiMysql/dataMaster/kuisioner/ekokrafIndikator');
+    app.use('/api/v1/ekokrafIndikator', middleware.isLoggedIn, ekokrafIndikator);
+    const ekokrafKuisionerBobot = require('./apiMysql/dataMaster/kuisioner/ekokrafKuisionerBobot');
+    app.use('/api/v1/ekokrafKuisionerBobot', middleware.isLoggedIn, ekokrafKuisionerBobot);
+  
 
     const wisataobjek = require('./apiMysql/admin/pariwisata/wisataobjek');
     app.use('/api/v1/wisataobjek', middleware.isLoggedIn, wisataobjek);

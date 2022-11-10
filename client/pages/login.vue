@@ -88,19 +88,35 @@
                   </v-alert>
                                   
                 <v-row>
+
                   <v-col cols="12" md="12"  class="">
-                    <small>*Nama Lengkap</small>
+                    <small>*Nama</small>
                     <v-text-field v-model="dataku.nama" class="placeholerku" outlined dense required/>
                   </v-col>
 
                   <v-col cols="12" md="12"  class="divInput1">
-                    <small>*Nomor Kontak</small>
+                    <small>*NIK</small>
+                    <v-text-field v-model="dataku.nik" class="placeholerku" outlined dense required/>
+                  </v-col>
+
+                  <v-col cols="12" md="12"  class="divInput1">
+                    <small>*Brand</small>
+                    <v-text-field v-model="dataku.brand" class="placeholerku" outlined dense required/>
+                  </v-col>
+
+                  <v-col cols="12" md="12"  class="divInput1">
+                    <small>*Telepon</small>
                     <v-text-field v-model="dataku.hp" class="placeholerku" outlined dense required/>
                   </v-col>
 
                   <v-col cols="12" md="12"  class="divInput1">
                     <small>*Email</small>
                     <v-text-field v-model="dataku.email" class="placeholerku" outlined dense required/>
+                  </v-col>
+
+                  <v-col cols="12" md="12"  class="divInput1">
+                    <small>*Badan Usaha</small>
+                    <v-text-field v-model="dataku.badan_usaha" class="placeholerku" outlined dense required/>
                   </v-col>
 
                   <v-col cols="12" md="12"  class="divInput1">
@@ -166,6 +182,9 @@ import FETCHING from "../library/fetching";
             id : '',
             username : "",
             nama : '',
+            nik : '',
+            brand : '',
+            badan_usaha : '',
             hp: "",
             email: "",
             password : "",

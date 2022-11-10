@@ -23,33 +23,29 @@ router.post('/view', (req, res) => {
 
     let jml_data = `
         SELECT 
-        ekokrafpelaku.*
-        FROM ekokrafpelaku 
+        ekokrafkuisioner.*
+        FROM ekokrafkuisioner 
         WHERE 
-        ekokrafpelaku.pelaku LIKE '%`+cari+`%'
+        ekokrafkuisioner.uraian LIKE '%`+cari+`%'
     `
 
     let view = `
         SELECT 
-        ekokrafpelaku.*,
-        ekokrafkelompok.uraian as ekokrafkelompok_uraian,
-        master_des_kel.nama_des_kel as nama_des_kel,
+        ekokrafkuisioner.*,
+        ekokrafkuisionerindikator.uraian as ekokrafindikator_uraian,
 
-        (SELECT COUNT(ekokrafpelakuproduk.id) FROM ekokrafpelakuproduk
-        WHERE ekokrafpelakuproduk.ekokrafPelaku = ekokrafpelaku.id) AS jmlProduk
+        (SELECT COUNT(ekokrafkuisionerbobot.id) FROM ekokrafkuisionerbobot
+        WHERE ekokrafkuisionerbobot.ekokrafKuisioner = ekokrafkuisioner.id) AS jmlPertanyaan
 
-        FROM ekokraf.ekokrafpelaku ekokrafpelaku
+        FROM ekokraf.ekokrafkuisioner ekokrafkuisioner
 
-        LEFT JOIN ekokraf.ekokrafkelompok ekokrafkelompok
-        ON ekokrafkelompok.id = ekokrafpelaku.ekokrafKelompok
-
-        LEFT JOIN ekokraf.master_des_kel master_des_kel
-        ON master_des_kel.des_kel_id  = ekokrafpelaku.des_kel_id
+        LEFT JOIN ekokraf.ekokrafkuisionerindikator ekokrafkuisionerindikator
+        ON ekokrafkuisionerindikator.id = ekokrafkuisioner.ekokrafIndikator
 
 
         WHERE 
-        ekokrafpelaku.pelaku LIKE '%`+cari+`%'
-        ORDER BY ekokrafpelaku.createdAt DESC
+        ekokrafkuisioner.uraian LIKE '%`+cari+`%'
+        ORDER BY ekokrafkuisioner.createdAt DESC
         LIMIT `+data_star+`,`+data_batas+`
     `
     db.query(jml_data, (err, row)=>{
@@ -81,21 +77,11 @@ router.post('/view', (req, res) => {
 
 router.post('/addData', (req,res)=>{
     let insert = `
-        INSERT INTO ekokrafpelaku (uniq, ekokrafKelompok, des_kel_id, brand, pelaku, nik, badan_usaha, alamat, email, hp, tahun, tenaga, omset, profil, createdBy, createdAt) VALUES (
+        INSERT INTO ekokrafkuisioner (uniq, ekokrafIndikator, uraian, keterangan, createdBy, createdAt) VALUES (
             '`+uniqid()+ `',
-            `+req.body.ekokrafKelompok+`,
-            `+req.body.des_kel_id+`,
-            '`+req.body.brand+`',
-            '`+req.body.pelaku+`',
-            '`+req.body.nik+`',
-            '`+req.body.badan_usaha+`',
-            '`+req.body.alamat+`',
-            '`+req.body.email+`',
-            '`+req.body.hp+`',
-            '`+req.body.tahun+`',
-            '`+req.body.tenaga+`',
-            '`+req.body.omset+`',
-            '`+req.body.profil+`',
+            `+req.body.ekokrafIndikator+`,
+            '`+req.body.uraian+`',
+            '`+req.body.keterangan+`',
             '`+req.user._id+`', 
             NOW()
         )
@@ -117,20 +103,10 @@ router.post('/addData', (req,res)=>{
 router.post('/editData', (req,res)=>{
     console.log(req.body)
     query = `
-        UPDATE ekokrafpelaku SET
-        ekokrafKelompok = `+req.body.ekokrafKelompok+`,
-        des_kel_id = `+req.body.des_kel_id+`,
-        brand = '`+req.body.brand+`',
-        pelaku = '`+req.body.pelaku+`',
-        nik = '`+req.body.nik+`',
-        badan_usaha = '`+req.body.badan_usaha+`',
-        alamat = '`+req.body.alamat+`',
-        email = '`+req.body.email+`',
-        hp = '`+req.body.hp+`',
-        tahun = '`+req.body.tahun+`',
-        tenaga = '`+req.body.tenaga+`',
-        omset = '`+req.body.omset+`',
-        profil = '`+req.body.profil+`',
+        UPDATE ekokrafkuisioner SET
+        ekokrafIndikator = `+req.body.ekokrafIndikator+`,
+        uraian = '`+req.body.uraian+`',
+        keterangan = '`+req.body.keterangan+`',
         editedBy = '`+req.user._id+`',
         editedAt = NOW()
 
@@ -157,7 +133,7 @@ router.post('/editData', (req,res)=>{
 router.post('/removeData', (req, res)=> {
 
     var query = `
-        DELETE FROM ekokrafpelaku WHERE id = `+req.body.id+`; 
+        DELETE FROM ekokrafkuisioner WHERE id = `+req.body.id+`; 
     `;
     db.query(query, (err, row)=>{
         if(err){

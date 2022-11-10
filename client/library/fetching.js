@@ -199,6 +199,27 @@ const postKlpEko = async (data)=>{
 }
 
 
+const postIndikator = async (data)=>{
+  return new Promise(resolve=>{
+    fetch(storex.url.URL_EKO_INDIKATOR + "list", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          authorization: "kikensbatara " + localStorage.token
+        },
+        body: JSON.stringify({
+          data: data,
+        })
+      })
+        .then(res => res.json())
+        .then(res_data => {
+          resolve(res_data)
+
+    });
+  })
+}
+
+
 
 const postPelakuEko = async (data)=>{
   return new Promise(resolve=>{
@@ -263,6 +284,7 @@ module.exports = {
 
     postDesKel: postDesKel,
     postKlpEko : postKlpEko,
+    postIndikator : postIndikator,
     postPelakuEko : postPelakuEko,
 
 }
