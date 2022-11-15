@@ -83,7 +83,11 @@ app.use('/checkAuth', middleware.isLoggedIn, checkAuth);
     app.use('/api/v1/ekokrafIndikator', middleware.isLoggedIn, ekokrafIndikator);
     const ekokrafKuisionerBobot = require('./apiMysql/dataMaster/kuisioner/ekokrafKuisionerBobot');
     app.use('/api/v1/ekokrafKuisionerBobot', middleware.isLoggedIn, ekokrafKuisionerBobot);
-  
+
+    const ekokrafPotensi = require('./apiMysql/dataMaster/observasi/ekokrafPotensi');
+    app.use('/api/v1/ekokrafPotensi', middleware.isLoggedIn, ekokrafPotensi);
+    const ekokrafPotensiBobot = require('./apiMysql/dataMaster/observasi/ekokrafPotensiBobot');
+    app.use('/api/v1/ekokrafPotensiBobot', middleware.isLoggedIn, ekokrafPotensiBobot);
 
     const wisataobjek = require('./apiMysql/admin/pariwisata/wisataobjek');
     app.use('/api/v1/wisataobjek', middleware.isLoggedIn, wisataobjek);

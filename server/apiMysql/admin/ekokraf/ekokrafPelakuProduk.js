@@ -96,7 +96,7 @@ router.post('/view', (req, res) => {
 // router.post('/addData', (req,res)=>{
 
 router.post('/addData',upload.single("file"), (req,res)=>{
-    // console.log(req.body)
+    console.log(req.body)
     var file = req.file.filename
 
 
