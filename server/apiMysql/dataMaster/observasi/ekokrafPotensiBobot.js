@@ -152,11 +152,25 @@ router.post('/removeData', (req, res)=> {
         if(err){
             res.send(err);
         }else{
-            hapus_file(req.body.file)
             res.send(row);
         }
     });
 
+})
+
+router.post('/list', (req, res)=> {
+    
+
+    var query = `
+        SELECT * FROM ekokrafpotensi
+    `;
+    db.query(query, (err, row)=>{
+        if(err){
+            res.send(err);
+        }else{
+            res.send(row);
+        }
+    });
 })
 
 

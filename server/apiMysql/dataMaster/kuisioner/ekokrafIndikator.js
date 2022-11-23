@@ -136,25 +136,11 @@ router.post('/removeData', (req, res)=> {
 
 router.post('/list', (req, res)=> {
 
-    var cari = ''
-    if (req.body.data == undefined || req.body.data == null || req.body.data == '') {
-        cari = ''
-    } else {
-        cari = req.body.data
-    }
-
     var query = `
-        SELECT 
-        ekokrafkuisionerindikator.*
-
-        FROM ekokraf.ekokrafkuisionerindikator ekokrafkuisionerindikator
-
-        WHERE ekokrafkuisionerindikator.uraian LIKE '%`+cari+`%'
-        LIMIT 8
+        SELECT * FROM ekokrafkuisionerindikator
     `;
     db.query(query, (err, row)=>{
         if(err){
-            console.log(err)
             res.send(err);
         }else{
             res.send(row);

@@ -69,7 +69,7 @@
                 </v-row>
                 <br>
                       <v-btn outlined rounded small @click="selectData(data), mdl_lihat_produk=true">Lihat</v-btn>
-                      <v-btn outlined rounded small @click="selectData(data), mdl_edit_produk=true">Edit</v-btn>
+                      <v-btn outlined rounded small @click="selectData(data), mdl_edit=true">Edit</v-btn>
                       <v-btn outlined rounded small @click="selectData(data)">Hapus</v-btn>
               </v-card>
             </v-col>

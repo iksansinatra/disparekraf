@@ -149,13 +149,12 @@ router.post('/editData', (req,res)=>{
 router.post('/removeData', (req, res)=> {
 
     var query = `
-        DELETE FROM ekokrafpelakuproduk WHERE id = `+req.body.id+`; 
+        DELETE FROM ekokrafkuisionerbobot WHERE id = `+req.body.id+`; 
     `;
     db.query(query, (err, row)=>{
         if(err){
             res.send(err);
         }else{
-            hapus_file(req.body.file)
             res.send(row);
         }
     });
@@ -163,17 +162,19 @@ router.post('/removeData', (req, res)=> {
 })
 
 
-function hapus_file(file){
-    const path = './uploads/'+file;
+router.post('/list', (req, res)=> {
 
-    fs.unlink(path, (err) => {
-        if (err) {
-          console.error(err)
-          return
+    var query = `
+        SELECT * FROM ekokrafkuisionerbobot
+    `;
+    db.query(query, (err, row)=>{
+        if(err){
+            res.send(err);
+        }else{
+            res.send(row);
         }
-    })
-
-}
+    });
+})
 
 
 

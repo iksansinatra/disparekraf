@@ -34,6 +34,8 @@ const lolow = {
       URL_EKO_POTENSI : URL + 'api/v1/ekokrafPotensi/',
       URL_EKO_POTENSI_BOBOT : URL + 'api/v1/ekokrafPotensiBobot/',
 
+      URL_OBSERVASI : URL + 'api/v1/ekokrafObservasi/',
+
       URL_WISATA_OBJEK : URL + 'api/v1/wisataobjek/',
       URL_WISATA_OBJEK_FASILITAS : URL + 'api/v1/wisataobjekfasilitas/',
 

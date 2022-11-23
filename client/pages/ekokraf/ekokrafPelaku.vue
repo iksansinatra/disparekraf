@@ -54,7 +54,6 @@
                 <th class="text-center" style="width:20%">Brand</th>
                 <th class="text-center" style="width:20%">Nama Pemilik</th>
                 <th class="text-center" style="width:15%">Kontak</th>
-                <th class="text-center" style="width:10%">Kuisioner</th>
                 <th class="text-center" style="width:10%">Produk</th>
                 <th class="text-center" style="width:10%">Act</th>
               </tr>
@@ -77,12 +76,6 @@
                 <td>
                   {{data.hp}} <br>
                   <span class="h_subtitle">{{data.email}}</span>
-                </td>
-                <td class="text-center">
-                  <v-btn :color="UMUM.checkZero(data.jmlProduk)" small rounded @click="openProduct(data), mdl_list_produk = true">
-                    <v-icon left>mdi-file-document-edit</v-icon>
-                    {{data.jmlProduk}}
-                  </v-btn>
                 </td>
                 <td class="text-center">
                   <v-btn :color="UMUM.checkZero(data.jmlProduk)" small rounded @click="openProduct(data), mdl_list_produk = true">

@@ -155,11 +155,49 @@ const getJenisPariwisata = async ()=>{
   })
 }
 
+const getIndikator = async ()=>{
+  return new Promise(resolve=>{
+    fetch(storex.url.URL_EKO_KUISIONER + "list", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          authorization: "kikensbatara " + localStorage.token
+        },
+        body: JSON.stringify({
+          data: '',
+        })
+      })
+        .then(res => res.json())
+        .then(res_data => {
+          resolve(res_data)
 
+    });
+  })
+}
 
 const postDesKel = async (data)=>{
   return new Promise(resolve=>{
     fetch(storex.url.URL_DM_DES_KEL + "provinsi", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          authorization: "kikensbatara " + localStorage.token
+        },
+        body: JSON.stringify({
+          data: data,
+        })
+      })
+        .then(res => res.json())
+        .then(res_data => {
+          resolve(res_data)
+
+    });
+  })
+}
+
+const postKab = async (data)=>{
+  return new Promise(resolve=>{
+    fetch(storex.url.URL_DM_DES_KEL + "kabupaten", {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -199,7 +237,7 @@ const postKlpEko = async (data)=>{
 }
 
 
-const postIndikator = async (data)=>{
+const getKuisioner = async ()=>{
   return new Promise(resolve=>{
     fetch(storex.url.URL_EKO_INDIKATOR + "list", {
         method: "POST",
@@ -208,7 +246,27 @@ const postIndikator = async (data)=>{
           authorization: "kikensbatara " + localStorage.token
         },
         body: JSON.stringify({
-          data: data,
+          data: '',
+        })
+      })
+        .then(res => res.json())
+        .then(res_data => {
+          resolve(res_data)
+
+    });
+  })
+}
+
+const getKuisionerBobot = async ()=>{
+  return new Promise(resolve=>{
+    fetch(storex.url.URL_EKO_KUISIONER_BOBOT + "list", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          authorization: "kikensbatara " + localStorage.token
+        },
+        body: JSON.stringify({
+          data: '',
         })
       })
         .then(res => res.json())
@@ -280,11 +338,14 @@ module.exports = {
     getBidangPariwisata : getBidangPariwisata,
     getKategoriPariwisata : getKategoriPariwisata,
     getJenisPariwisata : getJenisPariwisata,
+    getKuisioner : getKuisioner,
+    getIndikator : getIndikator,
+    getKuisionerBobot : getKuisionerBobot,
     postJenisTataKelola : postJenisTataKelola,
 
     postDesKel: postDesKel,
+    postKab: postKab,
     postKlpEko : postKlpEko,
-    postIndikator : postIndikator,
     postPelakuEko : postPelakuEko,
 
 }

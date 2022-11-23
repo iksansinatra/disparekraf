@@ -171,30 +171,11 @@ router.post('/removeData', (req, res)=> {
 
 router.post('/list', (req, res)=> {
 
-    var cari = ''
-    if (req.body.data == undefined || req.body.data == null || req.body.data == '') {
-        cari = ''
-    } else {
-        cari = req.body.data
-    }
-
     var query = `
-        SELECT 
-        ekokrafpelaku.*,
-        master_des_kel.nama_des_kel
-
-        FROM ekokraf.ekokrafpelaku ekokrafpelaku
-
-        LEFT JOIN ekokraf.master_des_kel master_des_kel
-        ON ekokrafpelaku.des_kel_id = master_des_kel.des_kel_id 
-
-
-        WHERE ekokrafpelaku.pelaku LIKE '%`+cari+`%'
-        LIMIT 8 
+        SELECT * FROM ekokrafpelaku
     `;
     db.query(query, (err, row)=>{
         if(err){
-            console.log(err)
             res.send(err);
         }else{
             res.send(row);

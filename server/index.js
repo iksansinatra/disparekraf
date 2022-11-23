@@ -69,6 +69,12 @@ app.use('/checkAuth', middleware.isLoggedIn, checkAuth);
     const m_des_kel = require('./apiMysql/dataMaster/wilayah/des_kel');
     app.use('/api/v1/m_des_kel', middleware.isLoggedIn, m_des_kel);
 
+    const ekokrafObservasi = require('./apiMysql/admin/ekokraf/ekokrafObservasi');
+    app.use('/api/v1/ekokrafObservasi', middleware.isLoggedIn, ekokrafObservasi);
+
+    const ekokrafObservasiBobot = require('./apiMysql/admin/ekokraf/ekokrafObservasiBobot');
+    app.use('/api/v1/ekokrafObservasiBobot', middleware.isLoggedIn, ekokrafObservasiBobot);
+
     const ekokrafKelompok = require('./apiMysql/admin/ekokraf/ekokrafKelompok');
     app.use('/api/v1/ekokrafKelompok', middleware.isLoggedIn, ekokrafKelompok);
     const ekokrafAnggota = require('./apiMysql/admin/ekokraf/ekokrafAnggota');

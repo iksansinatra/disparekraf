@@ -519,19 +519,13 @@
 
       addDataPilihan : function() {
 
-        var formData = new FormData();
-        console.log(this.pilihan.ekokrafIndikator);
-        console.log(this.pilihan.tolak_ukur);
-        formData.append('ekokrafIndikator', this.pilihan.ekokrafIndikator);
-        formData.append('tolak_ukur', this.pilihan.tolak_ukur);
-        formData.append('nilai', this.pilihan.nilai);
-
         fetch(this.$store.state.url.URL_EKO_POTENSI_BOBOT + "addData", {
             method: "POST",
             headers: {
+              "content-type": "application/json",
               authorization: "kikensbatara " + localStorage.token
             },
-            body: formData
+            body: JSON.stringify(this.pilihan)
         }).then(res_data => {
             this.getViewPilihan();
             this.getView();
@@ -540,18 +534,19 @@
       },
 
       editDataPilihan : function(){
-        var formData = new FormData();
-        formData.append('id', this.pilihan.id);
-        formData.append('ekokrafIndikator', this.pilihan.ekokrafIndikator);
-        formData.append('tolak_ukur', this.pilihan.tolak_ukur);
-        formData.append('nilai', this.pilihan.nilai);
+        // var formData = new FormData();
+        // formData.append('id', this.pilihan.id);
+        // formData.append('ekokrafIndikator', this.pilihan.ekokrafIndikator);
+        // formData.append('tolak_ukur', this.pilihan.tolak_ukur);
+        // formData.append('nilai', this.pilihan.nilai);
 
         fetch(this.$store.state.url.URL_EKO_POTENSI_BOBOT + "editData", {
             method: "POST",
             headers: {
+              "content-type": "application/json",
               authorization: "kikensbatara " + localStorage.token
             },
-            body: formData
+            body: JSON.stringify(this.pilihan)
         }).then(res_data => {
             this.getViewPilihan();
             this.getView();

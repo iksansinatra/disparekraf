@@ -552,7 +552,7 @@
           this.form.uraian = data.uraian;
           this.form.keterangan = data.keterangan;
           this.searchIndikatorEdit = data.ekokrafindikator_uraian;
-          this.list_indikator =  await FETCHING.postIndikator(this.searchIndikatorEdit);
+          this.list_indikator =  await FETCHING.getKuisioner(this.searchIndikatorEdit);
 
 
       },
@@ -587,17 +587,18 @@
 
       addDataBobot : function() {
 
-        var formData = new FormData();
-        formData.append('ekokrafKuisioner', this.ukur.ekokrafKuisioner);
-        formData.append('pertanyaan', this.ukur.pertanyaan);
-        formData.append('bobot', this.ukur.bobot);
+        // var formData = new FormData();
+        // formData.append('ekokrafKuisioner', this.ukur.ekokrafKuisioner);
+        // formData.append('pertanyaan', this.ukur.pertanyaan);
+        // formData.append('bobot', this.ukur.bobot);
 
         fetch(this.$store.state.url.URL_EKO_KUISIONER_BOBOT + "addData", {
             method: "POST",
             headers: {
+              "content-type": "application/json",
               authorization: "kikensbatara " + localStorage.token
             },
-            body: formData
+            body: JSON.stringify(this.ukur)
         }).then(res_data => {
             this.getViewBobot();
             this.getView();
@@ -606,18 +607,19 @@
       },
 
       editDataBobot : function(){
-        var formData = new FormData();
-        formData.append('id', this.ukur.id);
-        formData.append('ekokrafKuisioner', this.ukur.ekokrafKuisioner);
-        formData.append('pertanyaan', this.ukur.pertanyaan);
-        formData.append('bobot', this.ukur.bobot);
+        // var formData = new FormData();
+        // formData.append('id', this.ukur.id);
+        // formData.append('ekokrafKuisioner', this.ukur.ekokrafKuisioner);
+        // formData.append('pertanyaan', this.ukur.pertanyaan);
+        // formData.append('bobot', this.ukur.bobot);
 
         fetch(this.$store.state.url.URL_EKO_KUISIONER_BOBOT + "editData", {
             method: "POST",
             headers: {
+              "content-type": "application/json",
               authorization: "kikensbatara " + localStorage.token
             },
-            body: formData
+            body: JSON.stringify(this.ukur)
         }).then(res_data => {
             // this.getView();
             this.getViewBobot();
@@ -694,15 +696,15 @@
 
         fetching : async function(){
         //   this.list_desKel =  await FETCHING.postDesKel();
-          this.list_indikator =  await FETCHING.postIndikator();
+          this.list_indikator =  await FETCHING.getKuisioner();
         //   this.list_jenis = await FETCHING.getJenisPariwisata()
           // console.log(this.list_desKel)
         },
         eventIndikator : async function(){
-          this.list_indikator =  await FETCHING.postIndikator(this.searchIndikator);
+          this.list_indikator =  await FETCHING.getKuisioner(this.searchIndikator);
         },
         eventIndikatorEdit : async function(){
-          this.list_indikator =  await FETCHING.postIndikator(this.searchIndikatorEdit);
+          this.list_indikator =  await FETCHING.getKuisioner(this.searchIndikatorEdit);
         },
 
         close : async function(){

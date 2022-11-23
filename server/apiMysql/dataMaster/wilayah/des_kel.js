@@ -126,7 +126,36 @@ router.post('/provinsi', (req, res)=> {
     });
 })
 
+router.post('/kabupaten', (req, res)=> {
 
+    var cari = ''
+    if (req.body.data == undefined || req.body.data == null || req.body.data == '') {
+        cari = ''
+    } else {
+        cari = req.body.data
+    }
+    
+
+    var query = `
+        SELECT 
+        
+        master_kabupaten.nama_kabupaten,
+        master_kabupaten.kabupaten_id
+        
+        FROM master_kabupaten
+
+        WHERE master_kabupaten.provinsi_id = 74 AND
+        master_kabupaten.nama_kabupaten LIKE '%`+cari+`%'
+        limit 8
+    `;
+    db.query(query, (err, row)=>{
+        if(err){
+            res.send(err);
+        }else{
+            res.send(row);
+        }
+    });
+})
 
 
 

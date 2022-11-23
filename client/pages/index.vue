@@ -74,7 +74,16 @@
         </v-col>
 
         <v-col cols="12" md="6">
+          <div id="subSektor"></div>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="12" md="6">
           <div id="pieChart1"></div>
+        </v-col>
+
+        <v-col cols="12" md="6">
+          <div id="kemapanan"></div>
         </v-col>
       </v-row>
 
@@ -82,7 +91,7 @@
        <hr class="batasAbu" />
        <br>
 
-      <div>
+      <!-- <div>
         <v-simple-table style="width:100%">
           <template v-slot:default>
             <thead  style="background:#5289E7">
@@ -132,7 +141,7 @@
             </tbody>
           </template>
         </v-simple-table>
-      </div>
+      </div> -->
 
     </v-card>
   </div>
@@ -170,6 +179,12 @@ export default {
           xAxis: {
               categories: ['Kendari', 'Bau-Bau', 'Buton', 'Buton Utara', 'Buton Tengah', 'Buton Selatan', 'Konawe', 'Konawe Kepulauan', 'Konawe Selatan', 'Konawe Utara', 'Kolaka', 'Kolaka Utara', 'Kolaka Timur', 'Bombana', 'Muna', 'Muna Barat', 'Wakatobi' ]
           },
+          yAxis: {
+        title: {
+            useHTML: true,
+            text: 'Jumlah'
+        }
+    },
           series: [{
               type: 'column',
               colorByPoint: true,
@@ -179,6 +194,101 @@ export default {
       });
 
 
+    },
+
+    subSektor(chartku) {
+      const chart = Highcharts.chart(chartku, {
+          chart: {
+              borderColor: '#efefef',
+              borderWidth: 2,
+          },
+          title: {
+              text: 'Keunggulan Sub Sektor Ekonomi Kreatif'
+          },
+          subtitle: {
+              text: ''
+          },
+          xAxis: {
+              categories: ['Kuliner', 'Fesyen', 'Musik', 'Film, Animasi dan Video', 'Televisi dan Radio', 'Fotografi', 'Arsitektur', 'Kriya', 'Aplikasi dan Game', 'Seni Pertunjukan', 'Seni Rupa', 'Desain Grafis', 'Desain Interior', 'Desain Produk', 'Periklanan', 'Penerbitan', 'Pengembangan Permainan' ]
+          },
+          yAxis: {
+        title: {
+            useHTML: true,
+            text: 'Persentasi'
+        }
+    },
+          series: [{
+              type: 'column',
+              colorByPoint: true,
+              data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4, 148.5, 216.4, 194.1, 95.6, 54.4],
+              showInLegend: false
+          }]
+      });
+
+
+    },
+
+    kemapanan(data){
+      Highcharts.chart(data, {
+    chart: {
+        type: 'column',
+        borderColor: '#efefef',
+              borderWidth: 2,
+    },
+    title: {
+        text: 'Kemapanan Sub Sektor Ekonomi Kreatif'
+    },
+    subtitle: {
+        text: ''
+    },
+    xAxis: {
+        categories: [
+            'Kuliner', 'Fesyen', 'Musik', 'Film, Animasi dan Video', 'Televisi dan Radio', 'Fotografi', 'Arsitektur', 'Kriya', 'Aplikasi dan Game', 'Seni Pertunjukan', 'Seni Rupa', 'Desain Grafis', 'Desain Interior', 'Desain Produk', 'Periklanan', 'Penerbitan', 'Pengembangan Permainan'
+        ],
+        crosshair: true
+    },
+    yAxis: {
+        title: {
+            useHTML: true,
+            text: 'Persentasi'
+        }
+    },
+    tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+    series: [{
+        name: 'SDM',
+        data: [13.93, 13.63, 13.73, 13.67, 14.37, 14.89, 14.56,
+            14.32, 14.13, 13.93, 13.21, 12.16, 13.21, 12.16, 11.96, 13.21, 12.16]
+
+    }, {
+        name: 'Karya',
+        data: [12.24, 12.24, 11.95, 12.02, 11.65, 11.96, 11.59,
+            11.94, 11.96, 11.59, 11.42, 11.76, 13.21, 12.16, 11.96, 13.21, 12.16]
+
+    }, {
+        name: 'Pemasaran',
+        data: [10.00, 9.93, 9.97, 10.01, 10.23, 10.26, 10.00,
+            9.12, 9.36, 8.72, 8.38, 8.69, 13.21, 11.96, 12.16, 13.21, 12.16]
+
+    }, {
+        name: 'R & D',
+        data: [4.35, 4.32, 4.34, 4.39, 4.46, 4.52, 4.58, 4.55,
+            4.53, 4.51, 4.49, 4.57, 13.21, 12.16, 13.21, 11.96, 12.16]
+
+    }]
+});
     },
 
     pieChart1(datax){
@@ -194,7 +304,7 @@ export default {
               type: 'pie'
           },
           title: {
-              text: 'Persentase Berdasarkan Jenis Ekokraf'
+              text: 'Kapasitas Indikator Ekosistem Ekonomi Kreatif'
           },
           tooltip: {
               pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -218,25 +328,19 @@ export default {
               name: 'Brands',
               colorByPoint: true,
               data: [{
-                  name: 'Chrome',
+                  name: 'SDM',
                   y: 61.41,
                   sliced: true,
                   selected: true
               }, {
-                  name: 'Internet Explorer',
+                  name: 'Karya',
                   y: 11.84
               }, {
-                  name: 'Firefox',
+                  name: 'Pemasaran',
                   y: 10.85
               }, {
-                  name: 'Edge',
+                  name: 'R & D',
                   y: 4.67
-              }, {
-                  name: 'Safari',
-                  y: 4.18
-              }, {
-                  name: 'Other',
-                  y: 7.05
               }]
           }]
       });
@@ -249,6 +353,8 @@ export default {
   mounted () {
     this.chart1('chart1');
     this.pieChart1('pieChart1');
+    this.subSektor('subSektor');
+    this.kemapanan('kemapanan');
   },
 }
 </script>

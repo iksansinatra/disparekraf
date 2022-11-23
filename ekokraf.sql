@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 15, 2022 at 06:21 PM
+-- Generation Time: Nov 23, 2022 at 07:18 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -140,7 +140,8 @@ CREATE TABLE `ekokrafkuisioner` (
 --
 
 INSERT INTO `ekokrafkuisioner` (`id`, `uniq`, `ekokrafIndikator`, `uraian`, `keterangan`, `createdBy`, `editedBy`, `createdAt`, `editedAt`) VALUES
-(2, 'fzk69swla9wpyv1', '3', 'Skala Usaha & Produksi', '<p>Keterangan</p>', 'i33wt9dwkkv6gxft', '', '2022-11-09 17:20:24', '2022-11-09 17:20:24');
+(2, 'fzk69swla9wpyv1', '3', 'Skala Usaha & Produksi', '<p>Keterangan</p>', 'i33wt9dwkkv6gxft', '', '2022-11-09 17:20:24', '2022-11-09 17:20:24'),
+(3, '7jwlasbg1wf', '2', 'Inisiatif Usaha', '<p><br></p>', 'i33wt9dwkkv6gxft', '', '2022-11-22 14:32:27', '2022-11-22 14:32:27');
 
 -- --------------------------------------------------------
 
@@ -165,7 +166,8 @@ CREATE TABLE `ekokrafkuisionerbobot` (
 --
 
 INSERT INTO `ekokrafkuisionerbobot` (`id`, `uniq`, `ekokrafKuisioner`, `pertanyaan`, `bobot`, `createdBy`, `editedBy`, `createdAt`, `editedAt`) VALUES
-(1, 'saf34r23', 2, 'Pertanyaan', 3, 'i33wt9dwkkv6gxft', '', '2022-11-10 08:36:53', '2022-11-10 08:36:53');
+(3, '7jwlasbcidf', 2, 'Kegiatan usaha lahir dari program pemerintah ', 5, 'i33wt9dwkkv6gxft', '', '2022-11-22 14:29:41', '2022-11-22 14:29:41'),
+(4, '7jwlasbgjnx', 3, 'Kegiatan Usaha Lahir Dari Pemerintah', 5, 'i33wt9dwkkv6gxft', '', '2022-11-22 14:32:50', '2022-11-22 14:32:50');
 
 -- --------------------------------------------------------
 
@@ -191,6 +193,33 @@ CREATE TABLE `ekokrafkuisionerindikator` (
 INSERT INTO `ekokrafkuisionerindikator` (`id`, `uniq`, `uraian`, `keterangan`, `createdAt`, `editedAt`, `createdBy`, `editedBy`) VALUES
 (2, '8lgla9pq3iq', 'Sumber Daya Manusia', 'Sumber Daya Manusia', '2022-11-09 14:04:32', '2022-11-09 14:05:36', 'i33wt9dwkkv6gxft', 'i33wt9dwkkv6gxft'),
 (3, 'fzk66z0la9tepab', 'Produksi', 'Produksi', '2022-11-09 15:47:39', '2022-11-09 15:47:39', 'i33wt9dwkkv6gxft', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ekokrafobservasi`
+--
+
+CREATE TABLE `ekokrafobservasi` (
+  `id` int(11) NOT NULL,
+  `uniq` varchar(25) DEFAULT NULL,
+  `kabupaten_id` int(11) NOT NULL,
+  `jenisEkokraf` int(11) NOT NULL,
+  `ekokrafIndikator` int(11) NOT NULL,
+  `ekokrafPotensi` int(11) NOT NULL,
+  `createdBy` varchar(25) NOT NULL,
+  `editedBy` varchar(25) NOT NULL,
+  `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
+  `editedAt` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `ekokrafobservasi`
+--
+
+INSERT INTO `ekokrafobservasi` (`id`, `uniq`, `kabupaten_id`, `jenisEkokraf`, `ekokrafIndikator`, `ekokrafPotensi`, `createdBy`, `editedBy`, `createdAt`, `editedAt`) VALUES
+(1, 'fzk66jglajny27h', 7471, 2022, 1, 0, 'i33wt9dwkkv6gxft', 'i33wt9dwkkv6gxft', '2022-11-16 13:12:27', '2022-11-16 14:40:56'),
+(8, '5golajwap7b', 7402, 2022, 2, 0, 'i33wt9dwkkv6gxft', '', '2022-11-16 17:06:13', '2022-11-16 17:06:13');
 
 -- --------------------------------------------------------
 
@@ -225,7 +254,8 @@ CREATE TABLE `ekokrafpelaku` (
 --
 
 INSERT INTO `ekokrafpelaku` (`id`, `uniq`, `ekokrafJenis`, `des_kel_id`, `brand`, `pelaku`, `nik`, `badan_usaha`, `alamat`, `email`, `hp`, `tahun`, `tenaga`, `omset`, `profil`, `createdBy`, `editedBy`, `createdAt`, `editedAt`) VALUES
-(8, '6x0laiclv19', 1, 67940, 'Nama Brand', 'Pemilik', '24242412', 'Badan Usaha', 'kjfsdbfk', 'dsfb#fsfb', '234234', '2012', 0, 'kbsdfjs', '<p>dfgfh</p>', 'i33wt9dwkkv6gxft', '', '2022-11-15 15:07:15', '2022-11-15 15:07:15');
+(8, '6x0laiclv19', 1, 67940, 'Nama Brand', 'Pemilik', '24242412', 'Badan Usaha', 'kjfsdbfk', 'dsfb#fsfb', '234234', '2012', 0, 'kbsdfjs', '<p>dfgfh</p>', 'i33wt9dwkkv6gxft', '', '2022-11-15 15:07:15', '2022-11-15 15:07:15'),
+(9, 'deklas8s68q', 2, 67940, 'sdjbskj', 'nama', '243423', 'sabd', 'cm c', 'dsbfmsb', '343', '2022', 13, '23', '<p><strong><span class=\"ql-cursor\">?</span></strong></p>', 'i33wt9dwkkv6gxft', '', '2022-11-22 13:17:53', '2022-11-22 13:17:53');
 
 -- --------------------------------------------------------
 
@@ -249,6 +279,13 @@ CREATE TABLE `ekokrafpelakuproduk` (
   `editedAt` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `ekokrafpelakuproduk`
+--
+
+INSERT INTO `ekokrafpelakuproduk` (`id`, `uniq`, `m_jenisPariwisata`, `ekokrafPelaku`, `brand`, `harga`, `stock`, `keterangan`, `file`, `createdBy`, `editedBy`, `createdAt`, `editedAt`) VALUES
+(15, '5golajwwnmu', 2, 8, 'dsads', 200000, 233, 'asds', '1668619397703.png', 'i33wt9dwkkv6gxft', 'i33wt9dwkkv6gxft', '2022-11-16 17:27:36', '2022-11-16 17:27:36');
+
 -- --------------------------------------------------------
 
 --
@@ -266,13 +303,6 @@ CREATE TABLE `ekokrafpotensi` (
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
   `editedAt` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `ekokrafpotensi`
---
-
-INSERT INTO `ekokrafpotensi` (`id`, `uniq`, `ekokrafIndikator`, `tolak_ukur`, `nilai`, `createdBy`, `editedBy`, `createdAt`, `editedAt`) VALUES
-(1, '7p4laih9xsi', 1, 'Rank 5 - 17', 1, 'i33wt9dwkkv6gxft', '', '2022-11-15 17:20:35', '2022-11-15 17:20:35');
 
 -- --------------------------------------------------------
 
@@ -88807,7 +88837,7 @@ INSERT INTO `menu` (`id`, `title`, `icon`, `route`, `type`, `jenis`, `parrent`, 
 (1, 'Data Master', 'mdi-folder-plus', '', 1, 1, NULL, 99),
 (3, 'Authorization', '-', '', 1, 2, 1, 5),
 (5, 'Menu List', '-', '/dataMaster/authorization/menuList', 0, 2, 3, 1),
-(12, 'Inspire', 'mdi-chart-bubble', '/inspire', 0, 1, NULL, 2),
+(12, 'Analisis Ekokraf', 'mdi-chart-bubble', '', 1, 1, NULL, 2),
 (14, 'Content', 'mdi-clipboard', '', 1, 1, NULL, 999),
 (15, 'Tabel Standar', '', '/content/tableStandard', 0, 2, 14, 1),
 (16, 'List Media', '', '/content/mediaList', 0, 2, 14, 2),
@@ -88819,9 +88849,9 @@ INSERT INTO `menu` (`id`, `title`, `icon`, `route`, `type`, `jenis`, `parrent`, 
 (23, 'Kategori', '', '/dataMaster/pariwisata/kategoriPariwisata', 0, 2, 21, 2),
 (24, 'Jenis', '', '/dataMaster/pariwisata/jenisPariwisata', 0, 2, 21, 3),
 (25, 'Ekonomi Kreatif', 'mdi-shopping', '', 1, 1, NULL, 3),
-(26, 'Kelompok', '', '/ekokraf/ekokrafKelompok', 0, 2, 25, 1),
-(27, 'Pelaku', '', '/ekokraf/ekokrafPelaku', 0, 2, 25, 2),
-(28, 'Produk', '', '/ekokraf/ekokrafPelakuProduk', 0, 2, 25, 3),
+(26, 'Komunitas', '', '/ekokraf/ekokrafKelompok', 0, 2, 25, 2),
+(27, 'Pelaku', '', '/ekokraf/ekokrafPelaku', 0, 2, 25, 3),
+(28, 'Produk', '', '/ekokraf/ekokrafPelakuProduk', 0, 2, 25, 4),
 (30, 'Objek Wisata', '', '/pariwisata/wisataObjek', 0, 2, 29, 1),
 (31, 'Data Umum', 'mdi-note-multiple', '', 1, 1, NULL, 4),
 (32, 'Kegiatan', '', '/umum/kegiatan', 0, 2, 31, 1),
@@ -88835,7 +88865,10 @@ INSERT INTO `menu` (`id`, `title`, `icon`, `route`, `type`, `jenis`, `parrent`, 
 (40, 'Kuisioner', '', '/dataMaster/kuisioner/kuisioner', 0, 2, 39, 2),
 (42, 'Indikator', '', '/dataMaster/kuisioner/indikator', 0, 2, 39, 1),
 (43, 'Master Observasi', '-', '', 1, 2, 1, 3),
-(45, 'Potensi Ekokraf', '-', '/dataMaster/observasi/potensi', 0, 2, 43, 1);
+(45, 'Potensi Ekokraf', '-', '/dataMaster/observasi/potensi', 0, 2, 43, 1),
+(48, 'Kuisioner', '', '/ekokraf/ekokrafKuisioner', 0, 2, 25, 1),
+(49, 'Observasi Potensi', '', '/analisis/ekokrafObservasi', 0, 2, 12, 1),
+(50, 'Analisis Ekosistem', '', '/analisis/ekokrafEkosistem', 0, 2, 12, 2);
 
 -- --------------------------------------------------------
 
@@ -88878,7 +88911,7 @@ CREATE TABLE `menu_klp_list` (
 
 INSERT INTO `menu_klp_list` (`id`, `menu_id`, `menu_klp_id`, `readx`, `updatex`, `deletex`, `addx`) VALUES
 (82, 11, 17, 1, 1, 1, 1),
-(83, 12, 17, 0, 0, 0, 0),
+(83, 12, 17, 1, 1, 1, 1),
 (84, 13, 17, 1, 1, 1, 1),
 (85, 1, 17, 1, 1, 1, 1),
 (86, 3, 17, 1, 1, 1, 1),
@@ -88911,7 +88944,7 @@ INSERT INTO `menu_klp_list` (`id`, `menu_id`, `menu_klp_id`, `readx`, `updatex`,
 (136, 16, 19, 0, 0, 0, 0),
 (137, 24, 17, 1, 1, 1, 1),
 (138, 25, 17, 0, 0, 0, 0),
-(139, 26, 17, 0, 0, 0, 0),
+(139, 26, 17, 1, 1, 1, 1),
 (140, 27, 17, 1, 1, 1, 1),
 (141, 28, 17, 1, 1, 1, 1),
 (142, 29, 17, 0, 0, 0, 0),
@@ -88942,7 +88975,12 @@ INSERT INTO `menu_klp_list` (`id`, `menu_id`, `menu_klp_id`, `readx`, `updatex`,
 (167, 42, 17, 1, 1, 1, 1),
 (168, 43, 17, 0, 0, 0, 0),
 (169, 45, 17, 1, 1, 1, 1),
-(170, 44, 17, 0, 0, 0, 0);
+(170, 44, 17, 0, 0, 0, 0),
+(171, 46, 17, 1, 1, 1, 1),
+(172, 47, 17, 1, 1, 1, 1),
+(173, 48, 17, 1, 1, 1, 1),
+(174, 49, 17, 1, 1, 1, 1),
+(175, 50, 17, 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -89228,6 +89266,12 @@ ALTER TABLE `ekokrafkuisionerindikator`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `ekokrafobservasi`
+--
+ALTER TABLE `ekokrafobservasi`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `ekokrafpelaku`
 --
 ALTER TABLE `ekokrafpelaku`
@@ -89399,7 +89443,7 @@ ALTER TABLE `ekokrafanggota`
 -- AUTO_INCREMENT for table `ekokrafindikator`
 --
 ALTER TABLE `ekokrafindikator`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `ekokrafkelompok`
@@ -89417,13 +89461,13 @@ ALTER TABLE `ekokrafkelompokjenis`
 -- AUTO_INCREMENT for table `ekokrafkuisioner`
 --
 ALTER TABLE `ekokrafkuisioner`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `ekokrafkuisionerbobot`
 --
 ALTER TABLE `ekokrafkuisionerbobot`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `ekokrafkuisionerindikator`
@@ -89432,22 +89476,28 @@ ALTER TABLE `ekokrafkuisionerindikator`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `ekokrafobservasi`
+--
+ALTER TABLE `ekokrafobservasi`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT for table `ekokrafpelaku`
 --
 ALTER TABLE `ekokrafpelaku`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `ekokrafpelakuproduk`
 --
 ALTER TABLE `ekokrafpelakuproduk`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `ekokrafpotensi`
 --
 ALTER TABLE `ekokrafpotensi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `foto`
@@ -89489,7 +89539,7 @@ ALTER TABLE `master_type`
 -- AUTO_INCREMENT for table `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `menu_klp`
@@ -89501,7 +89551,7 @@ ALTER TABLE `menu_klp`
 -- AUTO_INCREMENT for table `menu_klp_list`
 --
 ALTER TABLE `menu_klp_list`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=171;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=176;
 
 --
 -- AUTO_INCREMENT for table `m_bidangpariwisata`
