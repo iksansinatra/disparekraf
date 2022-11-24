@@ -75,6 +75,8 @@
               <tr class="h_table_head">
                 <th class="text-center" style="width:5%">No</th>
                 <th class="text-center" style="width:20%">Indikator</th>
+                <th class="text-center" style="width:10%">Persentasi</th>
+                <th class="text-center" style="width:10%">Rata-Rata</th>
                 <th class="text-center" style="width:10%" v-for="(pelaku) in list_pelaku" :key="pelaku.id">{{pelaku.pelaku}}</th>
                 <th class="text-center" style="width:10%">Act</th>
               </tr>
