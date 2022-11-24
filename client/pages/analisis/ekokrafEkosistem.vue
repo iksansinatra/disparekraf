@@ -86,6 +86,10 @@
                 <td class="text-center"></td>
                 <td class="text-left">
                 </td>
+                <td class="text-left">
+                </td>
+                <td class="text-left">
+                </td>
                 <td class="text-left" v-for="(pelaku) in list_pelaku" :key="pelaku.id">
                 </td>
                 <td class="text-center">
