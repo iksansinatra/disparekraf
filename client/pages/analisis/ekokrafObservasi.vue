@@ -169,16 +169,38 @@
 
                   </v-autocomplete>
                 </div>
+                <div class="divInput">
+                    <small>Jenis Sub Sektor Ekonomi Kreatif</small>
+                    <v-autocomplete
+                    v-model="form.ekokrafJenis"
+                    :items="list_jenis"
+                    :item-text="'uraian'"
+                    :item-value="'id'"
+                    outlined
+                    dense
+                  >
+                  </v-autocomplete>
+                </div>
                     <v-simple-table style="width:100%">
           <template v-slot:default>
             <thead style="background:#5289E7">
               <tr class="h_table_head">
                 <th class="text-center" style="width:20%">Indikator</th>
-                <th class="text-center" style="width:10%" v-for="(jenis) in list_jenis" :key="jenis.id">{{jenis.uraian}}</th>
+                <th class="text-center" style="width:20%">Tolak Ukur</th>
               </tr>
             </thead>
             <tbody>
-              <tr class="h_table_body">
+              <tr class="h_table_body" v-for="(data) in list_indikator" :key="data.id">
+                <td :item-value="'id'">{{data.indikator}}</td>
+                <td><br><v-autocomplete
+                    v-model="form.ekokrafPotensi"
+                    :items="list_potensi"
+                    :item-text="'tolak_ukur'"
+                    :item-value="'id'"
+                    outlined
+                    dense
+                  >
+                  </v-autocomplete></td>
               </tr>
             </tbody>
           </template>
@@ -201,7 +223,7 @@
           <v-card>
             <v-app-bar flat class="orange darken-1">
               <v-toolbar-title class="title white--text pl-0">
-                Tambah Data
+                Edit Data
               </v-toolbar-title>
               <v-spacer></v-spacer>
               <v-btn color="white" icon  @click="mdl_edit = false, close()">
@@ -289,6 +311,7 @@
         list_data : [],
         list_kab : [],
         list_indikator : [],
+        list_potensi : [],
         list_jenis : [],
 
         page_first: 1,
@@ -402,7 +425,10 @@
 
         fetching : async function(){
           this.list_kab =  await FETCHING.postKab();
-          this.list_jenis = await FETCHING.getJenisPariwisata()
+          this.list_jenis = await FETCHING.getJenisPariwisata();
+          this.list_indikator = await FETCHING.getPotensi()
+          this.list_potensi = await FETCHING.getPotensiBobot()
+          console.log(this.list_potensi);
         },
 
         eventKab : async function(){

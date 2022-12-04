@@ -322,6 +322,46 @@ const postJenisTataKelola = async ()=>{
   })
 }
 
+const getPotensi = async ()=>{
+  return new Promise(resolve=>{
+    fetch(storex.url.URL_EKO_POTENSI + "list", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          authorization: "kikensbatara " + localStorage.token
+        },
+        body: JSON.stringify({
+          data: '',
+        })
+      })
+        .then(res => res.json())
+        .then(res_data => {
+          resolve(res_data)
+
+    });
+  })
+}
+
+const getPotensiBobot = async ()=>{
+  return new Promise(resolve=>{
+    fetch(storex.url.URL_EKO_POTENSI_BOBOT + "list", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          authorization: "kikensbatara " + localStorage.token
+        },
+        body: JSON.stringify({
+          data: '',
+        })
+      })
+        .then(res => res.json())
+        .then(res_data => {
+          resolve(res_data)
+
+    });
+  })
+}
+
 
 const barChart = store
 
@@ -342,6 +382,8 @@ module.exports = {
     getIndikator : getIndikator,
     getKuisionerBobot : getKuisionerBobot,
     postJenisTataKelola : postJenisTataKelola,
+    getPotensi : getPotensi,
+    getPotensiBobot : getPotensiBobot,
 
     postDesKel: postDesKel,
     postKab: postKab,

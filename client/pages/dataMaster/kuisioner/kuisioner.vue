@@ -4,7 +4,7 @@
       <v-card class="mx-auto" outlined>
         <v-row class="subBar" style="padding:10px" no-gutters>
           <v-col cols="12" md="4">
-            <span class="h_judul">Kuisioner</span>
+            <span class="h_judul">Ekosistem</span>
             <br />
             <span class="h_Sub_judul">Ekonomi Kreatif</span>
           </v-col>

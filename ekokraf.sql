@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 23, 2022 at 07:18 PM
+-- Generation Time: Dec 04, 2022 at 02:36 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -303,6 +303,15 @@ CREATE TABLE `ekokrafpotensi` (
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
   `editedAt` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `ekokrafpotensi`
+--
+
+INSERT INTO `ekokrafpotensi` (`id`, `uniq`, `ekokrafIndikator`, `tolak_ukur`, `nilai`, `createdBy`, `editedBy`, `createdAt`, `editedAt`) VALUES
+(5, 'fzk69vslb3iceei', 3, 'Tolak Ukur', 5, 'i33wt9dwkkv6gxft', '', '2022-11-30 10:31:01', '2022-11-30 10:31:01'),
+(6, 'fzk69vslb3id260', 2, 'ahdvsah', 7, 'i33wt9dwkkv6gxft', '', '2022-11-30 10:31:32', '2022-11-30 10:31:32'),
+(7, 'fzk69vslb3k6t75', 1, 'sjadbasj', 3, 'i33wt9dwkkv6gxft', '', '2022-11-30 11:22:40', '2022-11-30 11:22:40');
 
 -- --------------------------------------------------------
 
@@ -88847,7 +88856,7 @@ INSERT INTO `menu` (`id`, `title`, `icon`, `route`, `type`, `jenis`, `parrent`, 
 (21, 'Master Ekokraf', '-', '', 1, 2, 1, 1),
 (22, 'Bidang', '', '/dataMaster/pariwisata/bidangPariwisata', 0, 2, 21, 1),
 (23, 'Kategori', '', '/dataMaster/pariwisata/kategoriPariwisata', 0, 2, 21, 2),
-(24, 'Jenis', '', '/dataMaster/pariwisata/jenisPariwisata', 0, 2, 21, 3),
+(24, 'Sub Sektor', '', '/dataMaster/pariwisata/jenisPariwisata', 0, 2, 21, 3),
 (25, 'Ekonomi Kreatif', 'mdi-shopping', '', 1, 1, NULL, 3),
 (26, 'Komunitas', '', '/ekokraf/ekokrafKelompok', 0, 2, 25, 2),
 (27, 'Pelaku', '', '/ekokraf/ekokrafPelaku', 0, 2, 25, 3),
@@ -88861,12 +88870,12 @@ INSERT INTO `menu` (`id`, `title`, `icon`, `route`, `type`, `jenis`, `parrent`, 
 (36, 'Profil', 'mdi-account-box', '', 1, 1, NULL, 6),
 (37, 'Kontak Pengguna', '', '/profil/contact', 0, 2, 36, 1),
 (38, 'Sambutan', '', '/profil/about', 0, 2, 36, 2),
-(39, 'Master Kuisioner', '', '', 1, 2, 1, 2),
-(40, 'Kuisioner', '', '/dataMaster/kuisioner/kuisioner', 0, 2, 39, 2),
+(39, 'Master Ekosistem', '', '', 1, 2, 1, 2),
+(40, 'Ekosistem', '', '/dataMaster/kuisioner/kuisioner', 0, 2, 39, 2),
 (42, 'Indikator', '', '/dataMaster/kuisioner/indikator', 0, 2, 39, 1),
 (43, 'Master Observasi', '-', '', 1, 2, 1, 3),
 (45, 'Potensi Ekokraf', '-', '/dataMaster/observasi/potensi', 0, 2, 43, 1),
-(48, 'Kuisioner', '', '/ekokraf/ekokrafKuisioner', 0, 2, 25, 1),
+(48, 'Form Ekosistem', '', '/ekokraf/ekokrafKuisioner', 0, 2, 25, 1),
 (49, 'Observasi Potensi', '', '/analisis/ekokrafObservasi', 0, 2, 12, 1),
 (50, 'Analisis Ekosistem', '', '/analisis/ekokrafEkosistem', 0, 2, 12, 2);
 
@@ -89000,8 +89009,7 @@ CREATE TABLE `m_bidangpariwisata` (
 --
 
 INSERT INTO `m_bidangpariwisata` (`id`, `uraian`, `kode`, `keterangan`) VALUES
-(1, 'Ekokraf', '01', '-'),
-(2, 'Pariwisata', '02', '-');
+(1, 'Ekokraf', '01', '-');
 
 -- --------------------------------------------------------
 
@@ -89497,7 +89505,7 @@ ALTER TABLE `ekokrafpelakuproduk`
 -- AUTO_INCREMENT for table `ekokrafpotensi`
 --
 ALTER TABLE `ekokrafpotensi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `foto`

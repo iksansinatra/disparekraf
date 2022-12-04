@@ -4,7 +4,7 @@
       <v-card class="mx-auto" outlined>
         <v-row class="subBar" style="padding:10px" no-gutters>
           <v-col cols="12" md="4">
-            <span class="h_judul">Bidang Pariwisata</span>
+            <span class="h_judul">Bidang</span>
             <br />
             <span class="h_Sub_judul">Data Master</span>
           </v-col>

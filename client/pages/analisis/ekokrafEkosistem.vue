@@ -217,7 +217,7 @@
           <v-card>
             <v-app-bar flat class="orange darken-1">
               <v-toolbar-title class="title white--text pl-0">
-                Tambah Data
+                Edit Data
               </v-toolbar-title>
               <v-spacer></v-spacer>
               <v-btn color="white" icon  @click="mdl_edit = false, close()">
