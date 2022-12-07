@@ -357,6 +357,27 @@ const getPotensiBobot = async ()=>{
         .then(res => res.json())
         .then(res_data => {
           resolve(res_data)
+          console.log(res_data);
+
+    });
+  })
+}
+
+const getPotensiBobot1 = async ()=>{
+  return new Promise(resolve=>{
+    fetch(storex.url.URL_EKO_POTENSI_BOBOT + "list1", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          authorization: "kikensbatara " + localStorage.token
+        },
+        body: JSON.stringify({
+          data: '',
+        })
+      })
+        .then(res => res.json())
+        .then(res_data => {
+          resolve(res_data)
 
     });
   })
@@ -384,6 +405,7 @@ module.exports = {
     postJenisTataKelola : postJenisTataKelola,
     getPotensi : getPotensi,
     getPotensiBobot : getPotensiBobot,
+    getPotensiBobot1 : getPotensiBobot1,
 
     postDesKel: postDesKel,
     postKab: postKab,

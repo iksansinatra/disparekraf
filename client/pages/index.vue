@@ -1,7 +1,48 @@
 <template>
   <div>
-    <br />
-    <hr class="batasAbu" />
+    <v-container>
+      <v-card class="mx-auto" outlined>
+        <v-row class="subBar" style="padding:10px" no-gutters>
+          <v-col cols="12" md="6">
+            <span class="h_judul">Dinas Pariwisata & Ekonomi Kreatif</span>
+            <br />
+            <span class="h_Sub_judul">Provinsi Sulawesi Tenggara</span>
+          </v-col>
+
+          <v-col cols="12" md="3" style="padding-right:2%">
+
+                <v-autocomplete
+                    :items="list_kab"
+                    :search-input.sync ="searchKab"
+                    @keyup="eventKab()"
+                    :item-text="'nama_kabupaten'"
+                    :item-value="'kabupaten_id'"
+                    label="Pilih Kabupaten"
+                    outlined
+                    dense
+                  >
+                     <template v-slot:item="data">
+                        <div style="margin-top:5px; margin-bottom:5px">
+                          <span style="">{{ data.item.nama_kabupaten }}</span> <br>
+                        </div>
+                    </template>
+
+                  </v-autocomplete>
+          </v-col>
+
+          <v-col cols="12" md="3" style="padding-right:2%">
+            <v-autocomplete
+                    :items="list_jenis"
+                    :item-text="'uraian'"
+                    :item-value="'id'"
+                    label="Pilih Jenis Ekokraf"
+                    outlined
+                    dense
+                  >
+                  </v-autocomplete>
+          </v-col>
+        </v-row>
+      </v-card>
     <v-card class="cardContent">
       <v-row>
         <v-col cols="12" md="3">
@@ -144,25 +185,44 @@
       </div> -->
 
     </v-card>
+    </v-container>
   </div>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
-import VuetifyLogo from '~/components/VuetifyLogo.vue'
+// import Logo from '~/components/Logo.vue'
+// import VuetifyLogo from '~/components/VuetifyLogo.vue'
+
+import UMUM from "../library/umum";
+import FETCHING from "../library/fetching";
 
 export default {
-  components: {
-    Logo,
-    VuetifyLogo
-  },
+  // components: {
+  //   Logo,
+  //   VuetifyLogo
+  // },
   data() {
     return {
-      key: ''
+      list_kab : [],
+      list_jenis : [],
+      searchKab : '',
+      UMUM : UMUM,
+      FETCHING : FETCHING,
+
     }
   },
 
   methods: {
+
+    fetching : async function(){
+          this.list_kab =  await FETCHING.postKab();
+          this.list_jenis = await FETCHING.getJenisPariwisata();
+          // this.list_indikator = await FETCHING.getPotensi()
+        },
+
+    eventKab : async function(){
+          this.list_kab =  await FETCHING.postKab(this.searchKab);
+        },
 
     chart1(chartku) {
       const chart = Highcharts.chart(chartku, {
@@ -355,6 +415,7 @@ export default {
     this.pieChart1('pieChart1');
     this.subSektor('subSektor');
     this.kemapanan('kemapanan');
+    this.fetching();
   },
 }
 </script>

@@ -162,13 +162,50 @@ router.post('/list', (req, res)=> {
     
 
     var query = `
-        SELECT * FROM ekokrafpotensi
+        SELECT ekokrafpotensi.*,
+        ekokrafindikator.indikator as ekokraf_indikator,
+        ekokrafindikator.bobot as ekokraf_bobot,
+        ekokrafindikator.id as ekokraf_id
+
+        FROM ekokrafpotensi
+
+        LEFT JOIN ekokrafindikator
+        ON ekokrafindikator.id = ekokrafpotensi.ekokrafIndikator
+
+        WHERE ekokrafindikator.id = ekokrafpotensi.ekokrafIndikator
+        GROUP BY ekokrafpotensi.id
     `;
     db.query(query, (err, row)=>{
         if(err){
             res.send(err);
         }else{
             res.send(row);
+        }
+    });
+})
+
+router.post('/list1', (req, res)=> {
+    console.log(req.body);
+
+    var query = `
+    SELECT ekokrafpotensi.*
+       
+
+    FROM ekokrafpotensi
+
+    LEFT JOIN ekokrafindikator
+    ON ekokrafindikator.id = ekokrafpotensi.ekokrafIndikator
+
+    WHERE ekokrafpotensi.ekokrafIndikator  = `+req.body.id+`
+    `;
+    db.query(query, (err, result)=>{
+        if(err){
+            res.send(err);
+        }else{
+            console.log(result);
+            res.json({
+                data : result
+            });
         }
     });
 })

@@ -190,11 +190,11 @@
               </tr>
             </thead>
             <tbody>
-              <tr class="h_table_body" v-for="(data) in list_indikator" :key="data.id">
-                <td :item-value="'id'">{{data.indikator}}</td>
+              <tr class="h_table_body" v-for="(data1) in list_indikator" :key="data1.id">
+                <td :item-value="data1.id">{{data1.indikator}}</td>
                 <td><br><v-autocomplete
                     v-model="form.ekokrafPotensi"
-                    :items="list_potensi"
+                    :items="getPotensiBobot1(data1.id)"
                     :item-text="'tolak_ukur'"
                     :item-value="'id'"
                     outlined
@@ -352,6 +352,27 @@
         });
       },
 
+      getPotensiBobot1 : function(id){
+        // this.$store.commit("shoWLoading");
+        fetch(this.$store.state.url.URL_EKO_POTENSI_BOBOT + "list1", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+              authorization: "kikensbatara " + localStorage.token
+            },
+            body: JSON.stringify({
+                data : id
+            })
+        })
+            .then(res => res.json())
+            .then(res_data => {
+              // console.log(res_data)
+              this.list_potensi = res_data.data;
+              console.log("babi ngepet "+this.list_potensi);
+              return this.list_potensi;
+        });
+      },
+
 
       addData : function() {
 
@@ -427,7 +448,7 @@
           this.list_kab =  await FETCHING.postKab();
           this.list_jenis = await FETCHING.getJenisPariwisata();
           this.list_indikator = await FETCHING.getPotensi()
-          this.list_potensi = await FETCHING.getPotensiBobot()
+          // this.list_potensi = await FETCHING.getPotensiBobot1()
           console.log(this.list_potensi);
         },
 

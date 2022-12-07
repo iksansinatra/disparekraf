@@ -50,7 +50,7 @@
 
               <br>
 
-              <v-btn @click="mdl_add = true" v-bind="attrs" v-on="on" block color="#ffb400">
+              <v-btn @click="mdl_add = true" block color="#ffb400">
                 <span style="color:white">Register</span>
               </v-btn>
 
@@ -83,55 +83,40 @@
 
               <v-container>
 
-                <v-alert outlined type="warning" prominent border="left"  v-if="pesanErr">
-                    <strong>Warning!</strong> {{ pesanErr }}.
+                <v-alert outlined type="warning" prominent border="left"  v-if="pesanError">
+                    <strong>Warning!</strong> {{ pesanError }}.
                   </v-alert>
                                   
                 <v-row>
 
                   <v-col cols="12" md="12"  class="">
-                    <small>*Nama</small>
-                    <v-text-field v-model="dataku.nama" class="placeholerku" outlined dense required/>
+                    <small>*Nama Lengkap</small>
+                    <v-text-field v-model="data.nama" class="placeholerku" outlined dense required/>
                   </v-col>
 
                   <v-col cols="12" md="12"  class="divInput1">
-                    <small>*NIK</small>
-                    <v-text-field v-model="dataku.nik" class="placeholerku" outlined dense required/>
-                  </v-col>
-
-                  <v-col cols="12" md="12"  class="divInput1">
-                    <small>*Brand</small>
-                    <v-text-field v-model="dataku.brand" class="placeholerku" outlined dense required/>
-                  </v-col>
-
-                  <v-col cols="12" md="12"  class="divInput1">
-                    <small>*Telepon</small>
-                    <v-text-field v-model="dataku.hp" class="placeholerku" outlined dense required/>
+                    <small>*Nomor Kontak</small>
+                    <v-text-field v-model="data.hp" class="placeholerku" outlined dense required/>
                   </v-col>
 
                   <v-col cols="12" md="12"  class="divInput1">
                     <small>*Email</small>
-                    <v-text-field v-model="dataku.email" class="placeholerku" outlined dense required/>
-                  </v-col>
-
-                  <v-col cols="12" md="12"  class="divInput1">
-                    <small>*Badan Usaha</small>
-                    <v-text-field v-model="dataku.badan_usaha" class="placeholerku" outlined dense required/>
+                    <v-text-field v-model="data.email" class="placeholerku" outlined dense required/>
                   </v-col>
 
                   <v-col cols="12" md="12"  class="divInput1">
                     <small>*Username</small>
-                    <v-text-field v-model="dataku.username" class="placeholerku" outlined dense required/>
+                    <v-text-field v-model="data.username" class="placeholerku" outlined dense required/>
                   </v-col>
 
                   <v-col cols="12" md="12"  class="divInput1">
                     <small>*Password</small>
-                    <v-text-field  type="password" v-model="dataku.password" class="placeholerku" outlined dense required/>
+                    <v-text-field  type="password" v-model="data.password" class="placeholerku" outlined dense required/>
                   </v-col>
 
                   <v-col cols="12" md="12"  class="divInput1">
                     <small>*Confirm Password</small>
-                    <v-text-field  type="password" v-model="dataku.confirmPassword" class="placeholerku" outlined dense required/>
+                    <v-text-field  type="password" v-model="data.confirmPassword" class="placeholerku" outlined dense required/>
                   </v-col>
 
 
@@ -161,7 +146,13 @@ import FETCHING from "../library/fetching";
 
   import Joi from "joi";
   const schema = Joi.object().keys({
-    username: Joi.string().regex(/^[a-zA-Z0-9_]*$/).min(3).max(13).required()
+    username: Joi.string().regex(/^[a-zA-Z0-9_]*$/).min(3).max(13).required(),
+    // password: Joi.string().min(6).required(),
+  });
+
+  const schem = Joi.object().keys({
+    username: Joi.string().regex(/^[a-zA-Z0-9_]*$/).min(3).max(13).required(),
+    password: Joi.string().min(6).required(),
   });
 
 
@@ -171,24 +162,22 @@ import FETCHING from "../library/fetching";
 
           errorMessage: '',
           pesanError: '',
-          pesanErr: '',
-          errorMsg: '',
+          // pesanErr: '',
+          // errorMsg: '',
           user : {
             username : "",
             password : ""
           },
 
-          dataku: {
+          data: {
             id : '',
             username : "",
             nama : '',
-            nik : '',
-            brand : '',
-            badan_usaha : '',
             hp: "",
             email: "",
             password : "",
-            confirmPassword: ""
+            confirmPassword : "",
+            menu_klp : 19
         },
 
           url : {
@@ -208,29 +197,29 @@ import FETCHING from "../library/fetching";
           },
           deep: true
       },
-      dataku: {
-          handler() {
-              this.errorMsg = "";
-              this.pesanErr = "";
-          },
-          deep: true
-      }
+      // data: {
+      //     handler() {
+      //         this.errorMsg = "";
+      //         this.pesanErr = "";
+      //     },
+      //     deep: true
+      // }
     },
     methods: {
 
       addData: function() {
-      this.pesanErr = "";
+      this.pesanError = "";
         if (this.validasiUser()) {
             // Jika user sdh valid lakukan pengiriman data ke server
             const body = {
-              username: this.dataku.username,
-              password: this.dataku.password
+              username: this.data.username,
+              password: this.data.password
             };
             this.signingUp = true;
 
-            fetch(this.$store.state.url.URL_APP+'auth/signin', {
+            fetch(this.$store.state.url.URL_APP + 'auth/signin', {
                 method: "POST",
-                body: JSON.stringify(body),
+                body: JSON.stringify(this.data),
                 headers: {
                     "content-type": "application/json",
                 }
@@ -252,7 +241,7 @@ import FETCHING from "../library/fetching";
             .catch((error) => {
               setTimeout(() => {
                 this.signingUp = false;
-                this.pesanErr = error.message;
+                this.pesanError = error.message;
               }, 1000);
             });
         }else{
@@ -331,25 +320,25 @@ import FETCHING from "../library/fetching";
         if (result.error.message.includes("username")) {
           this.errorMessage = "Username tidak valid";
         } else {
-          this.errorMessage = "Username tidak valid2";
+          this.errorMessage = "Password tidak valid";
         }
         return false;
       },
 
       validasiUser : function(){
-      if (this.dataku.password !== this.dataku.confirmPassword) {
+      if (this.data.password !== this.data.confirmPassword) {
           this.pesanError = "Password dan Confirm Password harus sama. !";
           return false;
       }
       // Memulai proses validasi melalui skema Joi yang sebelumnya dibuat
       // req.body merupakan data yang di kirim oleh client dan schema merupakan skema joi yg di buat sebelumnya
       const body = {
-              username: this.dataku.username,
-              password: this.dataku.password
+              username: this.data.username,
+              password: this.data.password
       };
 
 
-      const result = schema.validate(body);
+      const result = schem.validate(body);
 
       console.log(result.error)
 
@@ -359,9 +348,9 @@ import FETCHING from "../library/fetching";
 
       if (result.error.message.includes("username")) {
           // jika pesan error yang dihasilkan mengandung char "username" maka
-          this.pesanErr = "Username tidak valid (Min : 6 dan Max : 14 Karakter)";
+          this.pesanError = "Username tidak valid (Min : 6 dan Max : 14 Karakter)";
       } else {
-          this.pesanErr = "Password tidak valid (Min : 6 Karakter)";
+          this.pesanError = "Password tidak valid (Min : 6 Karakter)";
         //   console.log(result.error);
 
       }

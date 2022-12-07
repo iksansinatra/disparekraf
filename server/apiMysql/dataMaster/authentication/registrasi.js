@@ -125,6 +125,7 @@ router.post('/signup', (req, res, next) => {
                                 res.send(row);
                             }
                         })
+                        console.log("asdvhadvhadvh");
 
                     });
 

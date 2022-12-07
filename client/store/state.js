@@ -16,6 +16,8 @@ const lolow = {
       URL_DM_KLP_USERS : URL + 'api/v1/kelompokUsers/',
       URL_DM_REGISTRASI : URL + 'api/v1/registrasi/',
 
+      URL_DM_REGIS : URL + 'api/v1/regis/',
+
       URL_DM_DES_KEL : URL + 'api/v1/m_des_kel/',
 
       URL_DM_BIDANG_PARIWISATA : URL + 'api/v1/m_bidangPariwisata/',

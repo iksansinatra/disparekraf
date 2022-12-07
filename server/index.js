@@ -57,6 +57,9 @@ app.use('/checkAuth', middleware.isLoggedIn, checkAuth);
     const registrasi = require('./apiMysql/dataMaster/authentication/registrasi');
     app.use('/api/v1/registrasi', middleware.isLoggedIn, registrasi);
 
+    const regis = require('./apiMysql/dataMaster/authentication/registrasi');
+    app.use('/api/v1/regis', regis);
+
     const m_bidangPariwisata = require('./apiMysql/dataMaster/pariwisata/bidangPariwisata');
     app.use('/api/v1/m_bidangPariwisata', middleware.isLoggedIn, m_bidangPariwisata);
     const m_kategoriPariwisata = require('./apiMysql/dataMaster/pariwisata/kategoriPariwisata');

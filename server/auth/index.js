@@ -45,7 +45,7 @@ router.post('/signin', (req, res, next) => {
             users.username = '`+ req.body.username +`' OR users.email = '`+req.body.email +`'
         `
 
-        db.query(view, (err, row) => {
+        dbs.query(view, (err, row) => {
             if (err) {
                 console.log(err);
                 res.send(err);
@@ -62,11 +62,11 @@ router.post('/signin', (req, res, next) => {
                                 '`+req.body.hp+`',
                                 '`+req.body.email+`',
                                 '`+hashedPassword+`',
-                                `+'req.body.menu_klp'+`
+                                `+req.body.menu_klp+`
                             )
                         `
 
-                        db.query(query, (err, row) => {
+                        dbs.query(query, (err, row) => {
                             if (err) {
                                 console.log(err)
                                 res.send('Gagal dalam meregistrasi ');
@@ -130,6 +130,78 @@ router.post('/signin', (req, res, next) => {
         //         }
         //     });
 
+
+    } else {
+        res.status(422);
+        next(result.error);
+    }
+
+});
+
+router.post('/sign', (req, res, next) => {
+
+    console.log(req.body)
+
+    const request = {
+        username: req.body.username,
+        password: req.body.password,
+    }
+
+    const result = Joi.validate(request, schema);
+    console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+
+    if (result.error === null) {
+
+        
+        let view = `
+            SELECT * 
+            FROM users
+            WHERE 
+            users.username = '`+ req.body.username +`' OR users.email = '`+req.body.email +`'
+        `
+
+        dbs.query(view, (err, row) => {
+            if (err) {
+                console.log(err);
+                res.send(err);
+            } else{
+                if (row.length <= 0) {
+                    bcrypt.hash(req.body.password.trim(), 12).then(hashedPassword => {
+
+                        const query = `
+                            INSERT INTO users (id, username, nama, hp, email, password, menu_klp)
+                            VALUES (
+                                '`+uniqid()+`',
+                                '`+req.body.username+`',
+                                '`+req.body.nama+`',
+                                '`+req.body.hp+`',
+                                '`+req.body.email+`',
+                                '`+hashedPassword+`',
+                                `+req.body.menu_klp+`
+                            )
+                        `
+
+                        dbs.query(query, (err, row) => {
+                            if (err) {
+                                console.log(err)
+                                console.log(req.body);
+                                res.send('Gagal dalam meregistrasi ');
+                            }else{
+                                console.log('suksesssssssssssssssss');
+                                res.send(row);
+                            }
+                        })
+                        console.log("asdvhadvhadvh");
+
+                    });
+
+                }else{
+                    const error = new Error('Username atau email sudah digunakan sebelumnya');
+                    res.status(409);
+                    next(error);
+                }
+            }
+        })
 
     } else {
         res.status(422);
