@@ -28,32 +28,32 @@ router.post('/view', (req, res) => {
     } else {
         data_batas = parseInt(req.body.page_limit);
     }
-    
+
     var data_star = (req.body.data_ke - 1)* data_batas;
     var cari = req.body.cari_value;
-    var halaman = 1; 
+    var halaman = 1;
 
 
     let jml_data = `
-        SELECT 
+        SELECT
         ekokrafpotensi.*
-        FROM ekokrafpotensi 
+        FROM ekokrafpotensi
         WHERE
         `+filter_indikator+`
         ekokrafpotensi.tolak_ukur LIKE '%`+cari+`%'
     `
 
     let view = `
-        SELECT 
+        SELECT
         ekokrafpotensi.*,
         ekokrafindikator.indikator as ekokrafindikator_indikator
 
         FROM ekokrafpotensi
-        
+
         LEFT JOIN ekokrafindikator
         ON ekokrafindikator.id = ekokrafpotensi.ekokrafIndikator
 
-        WHERE 
+        WHERE
         `+filter_indikator+`
         ekokrafpotensi.tolak_ukur LIKE '%`+cari+`%'
         LIMIT `+data_star+`,`+data_batas+`
@@ -96,7 +96,7 @@ router.post('/view', (req, res) => {
             `+req.body.ekokrafIndikator +`,
             '`+req.body.tolak_ukur+`',
             `+req.body.nilai+`,
-            '`+req.user._id+`', 
+            '`+req.user._id+`',
             NOW()
         )
     `
@@ -110,7 +110,7 @@ router.post('/view', (req, res) => {
         }
     })
 
-    
+
 
     // console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
     // res.send("ok")
@@ -146,7 +146,7 @@ router.post('/editData', (req,res)=>{
 router.post('/removeData', (req, res)=> {
 
     var query = `
-        DELETE FROM ekokrafpotensi WHERE id = `+req.body.id+`; 
+        DELETE FROM ekokrafpotensi WHERE id = `+req.body.id+`;
     `;
     db.query(query, (err, row)=>{
         if(err){
@@ -159,7 +159,7 @@ router.post('/removeData', (req, res)=> {
 })
 
 router.post('/list', (req, res)=> {
-    
+
 
     var query = `
         SELECT ekokrafpotensi.*,
@@ -188,24 +188,22 @@ router.post('/list1', (req, res)=> {
     console.log(req.body);
 
     var query = `
-    SELECT ekokrafpotensi.*
-       
+    SELECT ekokrafpotensi.*, ekokrafindikator.id
+
 
     FROM ekokrafpotensi
 
     LEFT JOIN ekokrafindikator
     ON ekokrafindikator.id = ekokrafpotensi.ekokrafIndikator
 
-    WHERE ekokrafpotensi.ekokrafIndikator  = `+req.body.id+`
+    WHERE ekokrafindikator.id =  `+req.body.data+`
     `;
-    db.query(query, (err, result)=>{
+
+    db.query(query, (err, row)=>{
         if(err){
             res.send(err);
         }else{
-            console.log(result);
-            res.json({
-                data : result
-            });
+            res.send(row);
         }
     });
 })

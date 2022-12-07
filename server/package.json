@@ -27,8 +27,9 @@
     "mysql": "^2.16.0",
     "node-mysql-nesting": "0.0.3",
     "nodemailer": "^6.7.1",
+    "nodemon": "^2.0.20",
     "openssl": "^1.1.0",
-    "sharp": "^0.29.3",
+    "sharp": "^0.31.2",
     "socket.io": "^2.4.1",
     "uniqid": "^5.0.3",
     "volleyball": "^1.5.1"
