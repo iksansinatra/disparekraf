@@ -10,6 +10,7 @@ const router = express.Router();
 
 
 router.post('/view', (req, res) => {
+    var createdBy = req.user._id;
     var data_batas = 0;
     if (req.body.page_limit == null || req.body.page_limit == undefined || req.body.page_limit == '') {
         data_batas = 8;
@@ -34,6 +35,8 @@ router.post('/view', (req, res) => {
         ekokrafpelaku.*,
         m_jenispariwisata.uraian as ekokrafjenis_uraian,
         master_des_kel.nama_des_kel as nama_des_kel,
+        users.nama as createBy,
+        users.menu_klp as menu_kelompok,
 
         (SELECT COUNT(ekokrafpelakuproduk.id) FROM ekokrafpelakuproduk
         WHERE ekokrafpelakuproduk.ekokrafPelaku = ekokrafpelaku.id) AS jmlProduk
@@ -46,8 +49,12 @@ router.post('/view', (req, res) => {
         LEFT JOIN ekokraf.master_des_kel master_des_kel
         ON master_des_kel.des_kel_id  = ekokrafpelaku.des_kel_id
 
+        LEFT JOIN ekokraf.users users
+        ON users.id  = ekokrafpelaku.createdBy
+
 
         WHERE 
+        ekokrafpelaku.createdBy = '`+createdBy+`' AND
         ekokrafpelaku.pelaku LIKE '%`+cari+`%'
         ORDER BY ekokrafpelaku.createdAt DESC
         LIMIT `+data_star+`,`+data_batas+`

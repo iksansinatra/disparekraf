@@ -697,10 +697,12 @@
           omset : '',
           profil : '',
           des_kel_id  : '',
+          createdBy : '',
 
           m_jenispariwisata_uraian : '',
 
           nama_des_kel  : '',
+          menu_klp : '',
         },
 
         produk : {
@@ -778,6 +780,7 @@
               authorization: "kikensbatara " + localStorage.token
             },
             body: JSON.stringify({
+                createdBy : this.createdBy,
                 data_ke: this.page_first,
                 cari_value: this.cari_value,
                 page_limit : this.page_limit,
@@ -1058,6 +1061,8 @@
 
     },
     mounted () {
+      var get_profile = JSON.parse(localStorage.profile);
+      // this.form.userId = get_profile.profile.userId;
       this.fetching();
       this.getView();
     },
