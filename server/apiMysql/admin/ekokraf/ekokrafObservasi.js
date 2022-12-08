@@ -7,7 +7,32 @@ const router = express.Router();
 
 
 
+router.post('/indikator', (req, res)=> {
 
+    var query = `
+    SELECT ekokrafindikator.* 
+    FROM ekokrafindikator
+    LEFT JOIN ekokrafkuisionerindikator
+    ON ekokrafkuisionerindikator.id = ekokrafkuisioner.ekokrafIndikator
+    WHERE 
+    ekokrafkuisioner.ekokrafIndikator = `+req.body.id+`
+    `;
+
+
+        // ========================
+        db.query(query, (err, result)=>{
+            if (err) {res.json(err)}
+            else{
+
+                res.json({
+                    data : result,
+                })
+            }
+        })
+        // ========================
+
+
+})
 
 router.post('/view', (req, res) => {
     var data_batas = 0;

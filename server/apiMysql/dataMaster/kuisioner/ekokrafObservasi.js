@@ -93,60 +93,69 @@ router.post('/view', (req, res) => {
         data_batas = parseInt(req.body.page_limit);
     }
     var data_star = (req.body.data_ke - 1)* data_batas;
-    var id_indikator = req.body.id_indikator;
+    var kabupaten = req.body.kabupaten_id;
+    var subSektor = req.body.ekokrafJenis;
     var halaman = 1; 
 
 
     let jml_data = `
-        SELECT 
-        form_ekosistem.id as id_ekosistem,
-        form_ekosistem.id_kuisioner as id_kuisioner,
+    SELECT 
+    ekokrafobservasi.id as id_observasi,
+    ekokrafobservasi.jenisEkokraf as id_jenis,
+    ekokrafobservasi.ekokrafIndikator as id_indikator,
+    ekokrafobservasi.ekokrafPotensi as id_potensi,
+    ekokrafindikator.indikator as indikator, ekokrafpotensi.tolak_ukur as tolak_ukur, 
+    ekokrafpotensi.nilai as nilai,
+    master_kabupaten.nama_kabupaten as kabupaten, m_jenispariwisata.uraian as jenisekokraf
 
+        FROM ekokrafobservasi
 
-        ekokrafkuisioner.uraian as nama_indikator,
-        ekokrafkuisionerbobot.pertanyaan as nama_tolak_ukur
+        LEFT JOIN ekokrafindikator
+        ON ekokrafobservasi.ekokrafIndikator = ekokrafindikator.id
 
+        LEFT JOIN ekokrafpotensi
+        ON ekokrafobservasi.ekokrafPotensi = ekokrafpotensi.id
 
-        FROM form_ekosistem
+        LEFT JOIN master_kabupaten
+        ON ekokrafobservasi.kabupaten_id = master_kabupaten.kabupaten_id
 
-        LEFT JOIN ekokrafkuisionerindikator
-        ON form_ekosistem.id_indikator = ekokrafkuisionerindikator.id
-
-        LEFT JOIN ekokrafkuisioner
-        ON form_ekosistem.id_kuisioner = ekokrafkuisioner.id
-
-        LEFT JOIN ekokrafkuisionerbobot
-        ON form_ekosistem.id_bobot = ekokrafkuisionerbobot.id
+        LEFT JOIN m_jenispariwisata
+        ON ekokrafobservasi.jenisEkokraf = m_jenispariwisata.id
 
         WHERE 
-        form_ekosistem.id_indikator = '`+id_indikator+`'
+        ekokrafobservasi.kabupaten_id = '`+kabupaten+`' AND
+        ekokrafobservasi.jenisEkokraf = '`+subSektor+`'
     `
 
     let view = `
-        SELECT 
-        form_ekosistem.id as id_ekosistem,
-        form_ekosistem.id_kuisioner as id_kuisioner,
+         SELECT 
+         ekokrafobservasi.id as id_observasi,
+         ekokrafobservasi.jenisEkokraf as id_jenis,
+         ekokrafobservasi.ekokrafIndikator as id_indikator,
+         ekokrafobservasi.ekokrafPotensi as id_potensi,
+         ekokrafindikator.indikator as indikator, ekokrafpotensi.tolak_ukur as tolak_ukur, 
+         ekokrafpotensi.nilai as nilai,
+         master_kabupaten.nama_kabupaten as kabupaten, m_jenispariwisata.uraian as jenisekokraf
 
+        FROM ekokrafobservasi
 
-        ekokrafkuisioner.uraian as nama_indikator,
-        ekokrafkuisionerbobot.pertanyaan as nama_tolak_ukur
+        LEFT JOIN ekokrafindikator
+        ON ekokrafobservasi.ekokrafIndikator = ekokrafindikator.id
 
+        LEFT JOIN ekokrafpotensi
+        ON ekokrafobservasi.ekokrafPotensi = ekokrafpotensi.id
 
-        FROM form_ekosistem
+        LEFT JOIN master_kabupaten
+        ON ekokrafobservasi.kabupaten_id = master_kabupaten.kabupaten_id
 
-        LEFT JOIN ekokrafkuisionerindikator
-        ON form_ekosistem.id_indikator = ekokrafkuisionerindikator.id
-
-        LEFT JOIN ekokrafkuisioner
-        ON form_ekosistem.id_kuisioner = ekokrafkuisioner.id
-
-        LEFT JOIN ekokrafkuisionerbobot
-        ON form_ekosistem.id_bobot = ekokrafkuisionerbobot.id
+        LEFT JOIN m_jenispariwisata
+        ON ekokrafobservasi.jenisEkokraf = m_jenispariwisata.id
 
         WHERE 
-        form_ekosistem.id_indikator = '`+id_indikator+`'
+        ekokrafobservasi.kabupaten_id = '`+kabupaten+`' AND
+        ekokrafobservasi.jenisEkokraf = '`+subSektor+`'
 
-        ORDER BY ekokrafkuisionerbobot.createdAt DESC
+        ORDER BY ekokrafobservasi.createdAt DESC
         LIMIT `+data_star+`,`+data_batas+`
     `
     db.query(jml_data, (err, row)=>{
@@ -172,6 +181,69 @@ router.post('/view', (req, res) => {
         }
     })
 });
+
+router.post('/addData', (req,res)=>{
+    let insert = `
+        INSERT INTO ekokrafobservasi (uniq, kabupaten_id, jenisEkokraf, ekokrafIndikator, ekokrafPotensi, createdBy, createdAt) VALUES (
+            '`+uniqid()+ `',
+            `+req.body.kabupaten_id+`,
+            `+req.body.ekokrafJenis+`,
+            `+req.body.ekokrafIndikator+`,
+            `+req.body.ekokrafPotensi+`,
+            '`+req.user._id+`', 
+            NOW()
+        )
+    `
+
+    db.query(insert, (err, row)=>{
+        if(err) {
+            console.log(err);
+            res.send(err);
+        }else{
+            res.send(row);
+        }
+    })
+});
+
+router.post('/editData', (req,res)=>{
+    console.log(req.body);
+    query = `
+        UPDATE ekokrafobservasi SET
+        ekokrafPotensi = `+req.body.ekokrafPotensi+`,
+        editedBy = '`+req.user._id+`',
+        editedAt = NOW()
+
+        WHERE id = '`+req.body.id+`'
+    `;
+    
+    db.query(query, (err, row)=>{
+        if(err) {
+            console.log(err);
+            console.log("gagal");
+            res.send(err);
+        }else{
+            res.send(row);
+            console.log("sukses");
+        }
+    })
+
+})
+
+router.post('/removeData', (req, res)=> {
+    console.log(req.body);
+
+    var query = `
+        DELETE FROM ekokrafobservasi WHERE id = '`+req.body.id+`'; 
+    `;
+    db.query(query, (err, row)=>{
+        if(err){
+            res.send(err);
+        }else{
+            res.send(row);
+            console.log("sukses");
+        }
+    });
+})
 
 
 

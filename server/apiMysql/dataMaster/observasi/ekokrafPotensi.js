@@ -151,6 +151,33 @@ router.post('/list', (req, res)=> {
     });
 })
 
+router.post('/potensi', (req, res)=> {
+
+    var query = `
+    SELECT ekokrafpotensi.* 
+    FROM ekokrafpotensi
+    LEFT JOIN ekokrafindikator
+    ON ekokrafpotensi.ekokrafIndikator = ekokrafindikator.id
+    WHERE 
+    ekokrafpotensi.ekokrafIndikator = `+req.body.id+`
+    `;
+
+
+        // ========================
+        db.query(query, (err, result)=>{
+            if (err) {res.json(err)}
+            else{
+
+                res.json({
+                    data : result,
+                })
+            }
+        })
+        // ========================
+
+
+})
+
 
 // router.post('/list', (req, res)=> {
 

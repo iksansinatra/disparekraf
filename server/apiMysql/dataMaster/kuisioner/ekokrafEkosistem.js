@@ -210,7 +210,7 @@ router.post('/editData', (req,res)=>{
         editedBy = '`+req.user._id+`',
         editedAt = NOW()
 
-        WHERE id = '`+req.body.id+`'
+        WHERE uniq = '`+req.body.id+`'
     `;
     
     db.query(query, (err, row)=>{

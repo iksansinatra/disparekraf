@@ -12,7 +12,7 @@
           <v-col cols="12" md="3" style="padding-right:2%">
 
                 <v-autocomplete
-                    v-model="form.kabupaten_id"
+                    v-model="kabupaten_id"
                     :items="list_kab"
                     :search-input.sync ="searchKab"
                     @keyup="eventKab()"
@@ -21,6 +21,7 @@
                     label="Pilih Kabupaten"
                     outlined
                     dense
+                    @change="getView()"
                   >
                      <template v-slot:item="data">
                         <div style="margin-top:5px; margin-bottom:5px">
@@ -37,13 +38,14 @@
                 
                     
                   <v-autocomplete
-                    v-model="form.ekokrafJenis"
+                    v-model="ekokrafJenis"
                     :items="list_jenis"
                     :item-text="'uraian'"
                     :item-value="'id'"
                     label="Pilih Jenis Ekokraf"
                     outlined
                     dense
+                    @change="getView()"
                   >
                   </v-autocomplete>
                
@@ -81,17 +83,15 @@
               <tr class="h_table_head">
                 <th class="text-center" style="width:5%">No</th>
                 <th class="text-center" style="width:20%">Indikator</th>
-                <th class="text-center" style="width:10%" v-for="(jenis) in list_jenis" :key="jenis.id">{{jenis.uraian}}</th>
+                <th class="text-center" style="width:20%">Tolak Ukur</th>
                 <th class="text-center" style="width:10%">Act</th>
               </tr>
             </thead>
             <tbody>
-              <tr class="h_table_body">
-                <td class="text-center"></td>
-                <td class="text-left">
-                </td>
-                <td class="text-left" v-for="(jenis) in list_jenis" :key="jenis.id">
-                </td>
+              <tr class="h_table_body" v-for="(data, index) in list_data" :key="data.id">
+                <td class="text-center">{{indexing(index+1)}}.</td>
+                <td class="text-center">{{data.indikator}}</td>
+                <td class="text-center">{{data.tolak_ukur}} ({{data.nilai}})</td>
                 <td class="text-center">
                   <v-btn-toggle mandatory>
 
@@ -106,7 +106,7 @@
 
                     <v-tooltip bottom>
                       <template v-slot:activator="{ on, attrs }">
-                        <v-btn color="red darken-4" fab small v-bind="attrs" v-on="on" @click="removeData(data)">
+                        <v-btn color="red darken-4" fab small v-bind="attrs" v-on="on" @click="removeData(data.id_observasi)">
                           <v-icon color="white">mdi-delete</v-icon>
                         </v-btn>
                       </template>
@@ -146,7 +146,7 @@
     <!-- ++++++++++++++++++++++++++++++++++++++ MODAL ++++++++++++++++++++++++++++++++++++++++++ -->
 
       <!-- =========================== ADD DATA ============================== -->
-        <v-dialog v-model="mdl_add" fullscreen hide-overlay transition="dialog-bottom-transition">
+        <v-dialog v-model="mdl_add" persistent max-width="500px">
 
           <v-card>
             <v-app-bar flat class="bg-primaryku">
@@ -162,77 +162,63 @@
 
                 <br><br>
                 <div class="divInput">
-                  <small>Kabupaten/Kota</small>
-                  <v-autocomplete
-                    v-model="form.kabupaten_id"
-                    :items="list_kab"
-                    :search-input.sync ="searchKab"
-                    @keyup="eventKab()"
-                    :item-text="'nama_kabupaten'"
-                    :item-value="'kabupaten_id'"
-                    outlined
-                    dense
-                  >
-                     <template v-slot:item="data">
-                        <div style="margin-top:5px; margin-bottom:5px">
-                          <span style="">{{ data.item.nama_kabupaten }}</span>
-                        </div>
-                    </template>
-
-                  </v-autocomplete>
-                </div>
-                <div class="divInput">
-                    <small>Jenis Sub Sektor Ekonomi Kreatif</small>
+                    <small>Indikator</small>
                     <v-autocomplete
-                    v-model="form.ekokrafJenis"
-                    :items="list_jenis"
-                    :item-text="'uraian'"
+                    v-model="ekokrafIndikator"
+                    :items="list_indikator"
+                    :item-text="'indikator'"
                     :item-value="'id'"
                     outlined
                     dense
                   >
                   </v-autocomplete>
                 </div>
-                    <v-simple-table style="width:100%">
-          <template v-slot:default>
-            <thead style="background:#5289E7">
-              <tr class="h_table_head">
-                <th class="text-center" style="width:20%">Indikator</th>
-                <th class="text-center" style="width:20%">Tolak Ukur</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="h_table_body" v-for="(data1, i) in list_indikator" :key="data1.id">
-                <td :item-value="data1.id">{{data1.indikator}}</td>
-
-
-                <td>
-                  <br>
-
-                  
-                    <v-autocomplete
-                     
-                      :items="getPotensiBobot1(data1.id)"
-                      :item-text="'tolak_ukur'"
-                      :item-value="'id'"
-                      outlined
-                      dense
-                    >
-                    </v-autocomplete>
-
-                  
-                </td>
-
-              </tr>
-            </tbody>
-          </template>
-        </v-simple-table>
 
 
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn color="red darken-1" text @click="mdl_add = false, close()">Close</v-btn>
+              <v-btn color="blue darken-1" @click="mdl_potensi = true, potensi(ekokrafIndikator)" text >Cek Tolak Ukur</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      <!-- =========================== ADD DATA ============================== -->
+
+      <!-- =========================== ADD DATA ============================== -->
+        <v-dialog v-model="mdl_potensi" persistent max-width="400px">
+
+          <v-card>
+            <v-app-bar flat class="bg-primaryku">
+              <v-toolbar-title class="title white--text pl-0">
+                Tambah Data
+              </v-toolbar-title>
+              <v-spacer></v-spacer>
+              <v-btn color="white" icon  @click="mdl_potensi = false, close()">
+                <v-icon>mdi-close</v-icon>
+              </v-btn>
+            </v-app-bar>
+            <v-card-text>
+
+                <br><br>
+                <div class="divInput">
+                    <small>Tolak Ukur</small>
+                    <v-autocomplete
+                    v-model="ekokrafPotensi"
+                    :items="list_potensi"
+                    :item-text="'tolak_ukur'"
+                    :item-value="'id'"
+                    outlined
+                    dense
+                  >
+                  </v-autocomplete>
+                </div>
+
+
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="red darken-1" text @click="mdl_potensi = false, close()">Close</v-btn>
               <v-btn color="blue darken-1" @click="addData()" text >Simpan</v-btn>
             </v-card-actions>
           </v-card>
@@ -240,7 +226,7 @@
       <!-- =========================== ADD DATA ============================== -->
 
       <!-- =========================== EDIT DATA ============================== -->
-        <v-dialog v-model="mdl_edit" fullscreen hide-overlay transition="dialog-bottom-transition">
+        <v-dialog v-model="mdl_edit" persistent max-width="600px">
 
           <v-card>
             <v-app-bar flat class="orange darken-1">
@@ -256,46 +242,25 @@
 
                 <br><br>
                 <div class="divInput">
-                  <small>Kabupaten/Kota</small>
+                    <small>Jenis Bobot</small>
                   <v-autocomplete
-                    v-model="form.kabupaten_id"
-                    :items="list_kab"
-                    :search-input.sync ="searchKab"
-                    @keyup="eventKab()"
-                    :item-text="'nama_kabupaten'"
-                    :item-value="'kabupaten_id'"
+                    v-model="form.ekokrafPotensi"
+                    :items="list_potensi"
+                    :item-text="'tolak_ukur'"
+                    :item-value="'id'"
                     outlined
                     dense
                   >
-                     <template v-slot:item="data">
-                        <div style="margin-top:5px; margin-bottom:5px">
-                          <span style="">{{ data.item.nama_kabupaten }}</span>
-                        </div>
-                    </template>
-
                   </v-autocomplete>
                 </div>
-                    <v-simple-table style="width:100%">
-          <template v-slot:default>
-            <thead style="background:#5289E7">
-              <tr class="h_table_head">
-                <th class="text-center" style="width:20%">Indikator</th>
-                <th class="text-center" style="width:10%" v-for="(jenis) in list_jenis" :key="jenis.id">{{jenis.uraian}}</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="h_table_body">
-              </tr>
-            </tbody>
-          </template>
-        </v-simple-table>
+                
 
 
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn color="red darken-1" text @click="mdl_edit = false, close()">Close</v-btn>
-              <v-btn color="blue darken-1" @click="addData()" text >Simpan</v-btn>
+              <v-btn color="blue darken-1" @click="editData()" text >Simpan</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -322,13 +287,17 @@
 
         form : {
           id : '',
-          uniq : '',
-          kabupaten_id  : '',
-          nama_kabupaten  : '',
+          id_indikator : '',
+          id_potensi : '',
         },
 
         searchKab : '',
         searchKabEdit : '',
+
+        kabupaten_id : '',
+        ekokrafJenis : '',
+        ekokrafIndikator : '',
+        ekokrafPotensi : '',
 
         list_data : [],
         list_kab : [],
@@ -342,6 +311,7 @@
         cari_value: "",
 
         mdl_add : false,
+        mdl_potensi : false,
         mdl_edit : false,
 
         UMUM : UMUM,
@@ -362,15 +332,70 @@
             },
             body: JSON.stringify({
                 data_ke: this.page_first,
-                cari_value: this.cari_value,
+                kabupaten_id: this.kabupaten_id,
+                ekokrafJenis: this.ekokrafJenis,
                 page_limit : this.page_limit,
             })
         })
             .then(res => res.json())
             .then(res_data => {
-              // console.log(res_data)
+              console.log(res_data)
               this.list_data = res_data.data;
               this.page_last = res_data.jml_data;
+        });
+      },
+
+      potensi : function(id){
+        // this.$store.commit("shoWLoading");
+        fetch(this.$store.state.url.URL_EKO_POTENSI + "potensi", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+              authorization: "kikensbatara " + localStorage.token
+            },
+            body: JSON.stringify({
+                id: id,
+                
+            })
+        })
+            .then(res => res.json())
+            .then(res_data => {
+              this.list_potensi = res_data.data;
+        });
+      },
+
+      addData : function() {
+        fetch(this.$store.state.url.URL_EKO_OBSERVASI_POTENSI + "addData", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+              authorization: "kikensbatara " + localStorage.token
+            },
+            body: JSON.stringify({
+              kabupaten_id: this.kabupaten_id,
+              ekokrafJenis: this.ekokrafJenis,
+              ekokrafIndikator: this.ekokrafIndikator,
+              ekokrafPotensi : this.ekokrafPotensi,
+            })
+        }).then(res_data => {
+            this.getView();
+            this.$store.commit('notifAdd', 'Menambah')
+        });
+      },
+
+      editData : function(){
+
+        fetch(this.$store.state.url.URL_EKO_OBSERVASI_POTENSI + "editData", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+              authorization: "kikensbatara " + localStorage.token
+            },
+            body: JSON.stringify(this.form)
+        }).then(res_data => {
+
+            this.getView();
+            this.$store.commit('notifAdd', 'Mengubah')
         });
       },
 
@@ -399,15 +424,55 @@
         });
       },
 
+      // indikator : function(id){
+      //   // this.$store.commit("shoWLoading");
+      //   fetch(this.$store.state.url.URL_EKO_OBSERVASI + "indikator", {
+      //       method: "POST",
+      //       headers: {
+      //         "content-type": "application/json",
+      //         authorization: "kikensbatara " + localStorage.token
+      //       },
+      //       body: JSON.stringify({
+      //           id: id,
+                
+      //       })
+      //   })
+      //       .then(res => res.json())
+      //       .then(res_data => {
+      //         this.list_indikator = res_data.data;
+      //   });
+      // },
+
+      removeData : async function(id){
+
+
+        await UMUM.notifDelete();
+        fetch(this.$store.state.url.URL_EKO_OBSERVASI_POTENSI + "removeData", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+              authorization: "kikensbatara " + localStorage.token
+            },
+            body: JSON.stringify({
+              id: id
+            })
+        }).then(res_data => {
+            this.getView();
+            this.mdl_remove = false;
+            this.$store.commit('notifAdd', 'Menghapus')
+        });
+      },
+
       selectData : async function(data){
         // console.log(data)
-          this.form.uniq = data.uniq;
-          this.form.tahun = data.tahun;
-          this.form.kabupaten_id = data.kabupaten_id;
-          this.form.nama_kabupaten = data.nama_kabupaten;
+          this.form.id = data.id_observasi;
+          this.form.id_indikator = data.id_indikator;
+          this.potensi(data.id_indikator)
 
           this.searchKabEdit = data.nama_kabupaten;
           this.list_kab =  await FETCHING.postKab(this.searchKabEdit);
+          this.list_jenis = await FETCHING.getJenisPariwisata();
+          this.list_indikator = await FETCHING.getPotensi()
       },
 
       // ====================================== PAGINATE ====================================
@@ -426,7 +491,7 @@
           this.list_jenis = await FETCHING.getJenisPariwisata();
           this.list_indikator = await FETCHING.getPotensi()
           // this.list_potensi = await FETCHING.getPotensiBobot1()
-          // console.log(this.list_potensi);
+          // console.log(this.list_indikator);
         },
 
         eventKab : async function(){
