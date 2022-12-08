@@ -11,7 +11,14 @@
 
           <v-col cols="12" md="4" style="padding-right:2%">
 
-                <v-autocomplete
+                
+          </v-col>
+
+
+          <v-col  cols="12" md="4" style="padding-right:20px">
+            <v-row no-gutters>
+              <v-col cols="10">
+                <v-autocomplete 
                     v-model="ekokrafKuisioner"
                     :items="list_kuisioner"
                     :item-text="'uraian'"
@@ -19,17 +26,9 @@
                     label="Pilih Jenis Indikator"
                     outlined
                     dense
+                    @change="getView()"
                   >
                   </v-autocomplete>
-          </v-col>
-
-          
-
-
-          <v-col cols="12" md="4" style="padding-right:20px">
-            <v-row no-gutters>
-              <v-col cols="10">
-                <v-text-field class="placeholerku" prepend-inner-icon="mdi-magnify" dense solo clear-icon="mdi-close-circle" v-model="cari_value" @input="getView()" clearable placeholder="Cari Data" type="text"></v-text-field>
               </v-col>
               <v-col cols="1">
                 <v-tooltip bottom>
@@ -63,15 +62,19 @@
             <thead style="background:#5289E7">
               <tr class="h_table_head">
                 <th class="text-center" style="width:5%">No</th>
-                <th class="text-center" style="width:10%" v-for="(indikator) in list_indikator" :key="indikator.id">{{indikator.uraian}}</th>
+                <th class="text-center" style="width:5%">Indikator</th>
+                <th class="text-center" style="width:5%">Tolak Ukur</th>
+                
                 <th class="text-center" style="width:10%">Act</th>
               </tr>
             </thead>
             <tbody>
-              <tr class="h_table_body">
-                <td class="text-center"></td>
-                <td class="text-left" v-for="(indikator) in list_indikator" :key="indikator.id">
-                </td>
+              <tr class="h_table_body" v-for="(data, index) in list_data" :key="data.id">
+                
+                <td class="text-center">{{indexing(index+1)}}.</td>
+                <td class="text-center">{{data.nama_indikator}}</td>
+                <td class="text-center">{{data.nama_tolak_ukur}}</td>
+                
                 <td class="text-center">
                   <v-btn-toggle mandatory>
 
@@ -86,7 +89,7 @@
 
                     <v-tooltip bottom>
                       <template v-slot:activator="{ on, attrs }">
-                        <v-btn color="red darken-4" fab small v-bind="attrs" v-on="on" @click="removeData(data)">
+                        <v-btn color="red darken-4" fab small v-bind="attrs" v-on="on" @click="removeData(data.id_ekosistem)">
                           <v-icon color="white">mdi-delete</v-icon>
                         </v-btn>
                       </template>
@@ -228,22 +231,10 @@
 
                 <br><br>
                 <div class="divInput">
-                    <small>Jenis Indikator</small>
+                    <small>Jenis Bobot</small>
                   <v-autocomplete
-                    v-model="ekokrafKuisioner"
-                    :items="list_kuisioner"
-                    :item-text="'uraian'"
-                    :item-value="'id'"
-                    outlined
-                    dense
-                  >
-                  </v-autocomplete>
-                </div>
-                <div class="divInput" v-for="(indikator) in list_indikator" :key="indikator.id">
-                    <small>{{indikator.uraian}}</small>
-                  <v-autocomplete
-                    v-model="ekokrafbobot"
-                    :items="list_bobot"
+                    v-model="form.id_bobot"
+                    :items="list_tes_bobot"
                     :item-text="'pertanyaan'"
                     :item-value="'id'"
                     outlined
@@ -251,6 +242,7 @@
                   >
                   </v-autocomplete>
                 </div>
+                
 
 
             </v-card-text>
@@ -285,7 +277,8 @@
         form : {
           id : '',
           uniq : '',
-          
+          id_kuisioner: '',
+          id_bobot: ''
 
         },
 
@@ -325,6 +318,8 @@
 
       getView : function(){
         // this.$store.commit("shoWLoading");
+
+
         fetch(this.$store.state.url.URL_EKO_EKOSISTEM + "view", {
             method: "POST",
             headers: {
@@ -333,7 +328,7 @@
             },
             body: JSON.stringify({
                 data_ke: this.page_first,
-                cari_value: this.cari_value,
+                id_indikator: this.ekokrafKuisioner,
                 page_limit : this.page_limit,
             })
         })
@@ -341,6 +336,7 @@
             .then(res_data => {
               this.list_data = res_data.data;
               this.page_last = res_data.jml_data;
+
         });
       },
 
@@ -399,8 +395,6 @@
       },
 
       addData : function() {
-
-
         fetch(this.$store.state.url.URL_EKO_EKOSISTEM + "addData", {
             method: "POST",
             headers: {
@@ -419,7 +413,50 @@
         });
       },
 
+      editData : function(){
+
+        fetch(this.$store.state.url.URL_EKO_EKOSISTEM + "editData", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+              authorization: "kikensbatara " + localStorage.token
+            },
+            body: JSON.stringify(this.form)
+        }).then(res_data => {
+
+            this.getView();
+            this.$store.commit('notifAdd', 'Mengubah')
+        });
+      },
+
+      removeData : async function(id){
+
+
+        await UMUM.notifDelete();
+        fetch(this.$store.state.url.URL_EKO_EKOSISTEM + "removeData", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+              authorization: "kikensbatara " + localStorage.token
+            },
+            body: JSON.stringify({
+              id: id
+            })
+        }).then(res_data => {
+            this.getView();
+            this.mdl_remove = false;
+            this.$store.commit('notifAdd', 'Menghapus')
+        });
+      },
+
       selectData : async function(data){
+
+          this.form.id = data.id_ekosistem;
+          this.form.id_kuisioner = data.id_kuisioner;
+
+          this.bobot(data.id_kuisioner);
+
+
           this.list_jenis = await FETCHING.getJenisPariwisata()
           this.list_kuisioner = await FETCHING.getKuisioner()
           this.list_indikator = await FETCHING.getIndikator()
@@ -439,7 +476,7 @@
         fetching : async function(){
           this.list_jenis = await FETCHING.getJenisPariwisata()
           this.list_kuisioner = await FETCHING.getKuisioner()
-          this.list_indikator = await FETCHING.getIndikator()
+          // this.list_indikator = await FETCHING.getIndikator()
           this.list_bobot = await FETCHING.getKuisionerBobot()
         },
 

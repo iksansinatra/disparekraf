@@ -34,7 +34,19 @@
           <v-col cols="12" md="4" style="padding-right:20px">
             <v-row no-gutters>
               <v-col cols="10">
-                <v-text-field class="placeholerku" prepend-inner-icon="mdi-magnify" dense solo clear-icon="mdi-close-circle" v-model="cari_value" @input="getView()" clearable placeholder="Cari Data" type="text"></v-text-field>
+                
+                    
+                  <v-autocomplete
+                    v-model="form.ekokrafJenis"
+                    :items="list_jenis"
+                    :item-text="'uraian'"
+                    :item-value="'id'"
+                    label="Pilih Jenis Ekokraf"
+                    outlined
+                    dense
+                  >
+                  </v-autocomplete>
+               
               </v-col>
               <v-col cols="1">
                 <v-tooltip bottom>
@@ -342,7 +354,7 @@
 
       getView : function(){
         // this.$store.commit("shoWLoading");
-        fetch(this.$store.state.url.URL_OBSERVASI + "view", {
+        fetch(this.$store.state.url.URL_EKO_OBSERVASI_POTENSI + "view", {
             method: "POST",
             headers: {
               "content-type": "application/json",
@@ -384,55 +396,6 @@
               
               return res_data;
 
-        });
-      },
-
-
-      addData : function() {
-
-        fetch(this.$store.state.url.URL_OBSERVASI + "addData", {
-            method: "POST",
-            headers: {
-              "content-type": "application/json",
-              authorization: "kikensbatara " + localStorage.token
-            },
-            body: JSON.stringify(this.form)
-        }).then(res_data => {
-            console.log(res_data);
-            this.getView();
-            this.$store.commit('notifAdd', 'Menambah')
-        });
-      },
-
-      editData : function(){
-        fetch(this.$store.state.url.URL_OBSERVASI + "editData", {
-            method: "POST",
-            headers: {
-              "content-type": "application/json",
-              authorization: "kikensbatara " + localStorage.token
-            },
-            body: JSON.stringify(this.form)
-        }).then(res_data => {
-
-            this.getView();
-            this.$store.commit('notifAdd', 'Mengubah')
-        });
-      },
-
-      removeData : async function(data){
-
-        await UMUM.notifDelete();
-        fetch(this.$store.state.url.URL_OBSERVASI + "removeData", {
-            method: "POST",
-            headers: {
-              "content-type": "application/json",
-              authorization: "kikensbatara " + localStorage.token
-            },
-            body: JSON.stringify(data)
-        }).then(res_data => {
-            this.getView();
-            this.mdl_remove = false;
-            this.$store.commit('notifAdd', 'Menghapus')
         });
       },
 
