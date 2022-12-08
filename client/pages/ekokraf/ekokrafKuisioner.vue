@@ -12,7 +12,7 @@
           <v-col cols="12" md="4" style="padding-right:2%">
 
                 <v-autocomplete
-                    v-model="form.ekokrafKuisioner"
+                    v-model="ekokrafKuisioner"
                     :items="list_kuisioner"
                     :item-text="'uraian'"
                     :item-value="'id'"
@@ -23,6 +23,9 @@
                   </v-autocomplete>
           </v-col>
 
+          
+
+
           <v-col cols="12" md="4" style="padding-right:20px">
             <v-row no-gutters>
               <v-col cols="10">
@@ -31,7 +34,7 @@
               <v-col cols="1">
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on, attrs }">
-                    <v-btn tile height="37.5px" elevation="2" color="primary" v-bind="attrs" v-on="on" @click="mdl_add = true">
+                    <v-btn tile height="37.5px" elevation="2" color="primary" v-bind="attrs" v-on="on" @click="mdl_tolak_ukur = true, tolak_ukur(ekokrafKuisioner)">
                       <v-icon color="white">mdi-plus</v-icon>
                     </v-btn>
                   </template>
@@ -122,57 +125,91 @@
 
     <!-- ++++++++++++++++++++++++++++++++++++++ MODAL ++++++++++++++++++++++++++++++++++++++++++ -->
 
-      <!-- =========================== ADD DATA ============================== -->
-        <v-dialog v-model="mdl_add" persistent max-width="600px">
+      <!-- =========================== TOLAK UKUR DATA ============================== -->
+      <v-dialog v-model="mdl_tolak_ukur" persistent max-width="500px">
 
-          <v-card>
-            <v-app-bar flat class="bg-primaryku">
-              <v-toolbar-title class="title white--text pl-0">
-                Tambah Data
-              </v-toolbar-title>
-              <v-spacer></v-spacer>
-              <v-btn color="white" icon  @click="mdl_add = false, close()">
-                <v-icon>mdi-close</v-icon>
-              </v-btn>
-            </v-app-bar>
-            <v-card-text>
+            <v-card>
+              <v-app-bar flat class="bg-warning">
+                <v-toolbar-title class="title white--text pl-0">
+                  Tambah Tolak Ukur
+                </v-toolbar-title>
+                <v-spacer></v-spacer>
+                <v-btn color="white" icon  @click="mdl_tolak_ukur = false, close()">
+                  <v-icon>mdi-close</v-icon>
+                </v-btn>
+              </v-app-bar>
+              <v-card-text>
 
-                <br><br>
-                <div class="divInput">
-                    <small>Jenis Indikator</small>
-                  <v-autocomplete
-                    v-model="form.ekokrafKuisioner"
-                    :items="list_kuisioner"
-                    :item-text="'uraian'"
-                    :item-value="'id'"
-                    outlined
-                    dense
-                  >
-                  </v-autocomplete>
-                </div>
-                <div class="divInput" v-for="(indikator) in list_indikator" :key="indikator.id">
-                    <small>{{indikator.uraian}}</small>
-                  <v-autocomplete
-                    v-model="form.ekokrafKuisionerBobot"
-                    :items="list_bobot"
-                    :item-text="'pertanyaan'"
-                    :item-value="'id'"
-                    outlined
-                    dense
-                  >
-                  </v-autocomplete>
-                </div>
+                  <br><br>
+                  <div class="divInput">
+                      <small>Jenis Tolak Ukur</small>
+                    <v-autocomplete
+                      v-model="ekokraftolakukur"
+                      :items="list_tolak_ukur"
+                      :item-text="'uraian'"
+                      :item-value="'id'"
+                      outlined
+                      dense
+                      
+                    >
+                    </v-autocomplete>
+                  </div>
+
+                 
 
 
-            </v-card-text>
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="red darken-1" text @click="mdl_add = false, close()">Close</v-btn>
-              <v-btn color="blue darken-1" @click="addData()" text >Simpan</v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
-      <!-- =========================== ADD DATA ============================== -->
+              </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="red darken-1" text @click=" mdl_tolak_ukur = false, close()">Close</v-btn>
+                <v-btn color="blue darken-1" @click="mdl_bobot=true, bobot(ekokraftolakukur)" text >Cek Bobot</v-btn>
+              </v-card-actions>
+            </v-card>
+      </v-dialog>
+<!-- =========================== TOLAK UKUR DATA ============================== -->
+
+<!-- =========================== BOBOT DATA ============================== -->
+<v-dialog v-model="mdl_bobot" persistent max-width="400px">
+
+<v-card>
+  <v-app-bar flat class="bg-red">
+    <v-toolbar-title class="title white--text pl-0">
+      Tambah Bobot 
+    </v-toolbar-title>
+    <v-spacer></v-spacer>
+    <v-btn color="white" icon  @click="mdl_bobot = false, close()">
+      <v-icon>mdi-close</v-icon>
+    </v-btn>
+  </v-app-bar>
+  <v-card-text>
+
+      <br><br>
+      <div class="divInput">
+          <small>Jenis Bobot</small>
+        <v-autocomplete
+          v-model="ekokrafbobot"
+          :items="list_tes_bobot"
+          :item-text="'pertanyaan'"
+          :item-value="'id'"
+          outlined
+          dense
+          
+        >
+        </v-autocomplete>
+      </div>
+
+     
+
+
+  </v-card-text>
+  <v-card-actions>
+    <v-spacer></v-spacer>
+    <v-btn color="red darken-1" text @click=" mdl_bobot = false, close()">Close</v-btn>
+    <v-btn color="blue darken-1" @click="addData()" text >Simpan</v-btn>
+  </v-card-actions>
+</v-card>
+</v-dialog>
+<!-- =========================== BOBOT DATA ============================== -->
 
       <!-- =========================== EDIT DATA ============================== -->
         <v-dialog v-model="mdl_edit" persistent max-width="600px">
@@ -193,7 +230,7 @@
                 <div class="divInput">
                     <small>Jenis Indikator</small>
                   <v-autocomplete
-                    v-model="form.ekokrafKuisioner"
+                    v-model="ekokrafKuisioner"
                     :items="list_kuisioner"
                     :item-text="'uraian'"
                     :item-value="'id'"
@@ -205,7 +242,7 @@
                 <div class="divInput" v-for="(indikator) in list_indikator" :key="indikator.id">
                     <small>{{indikator.uraian}}</small>
                   <v-autocomplete
-                    v-model="form.ekokrafKuisionerBobot"
+                    v-model="ekokrafbobot"
                     :items="list_bobot"
                     :item-text="'pertanyaan'"
                     :item-value="'id'"
@@ -248,6 +285,8 @@
         form : {
           id : '',
           uniq : '',
+          
+
         },
 
         list_data : [],
@@ -255,6 +294,16 @@
         list_indikator : [],
         list_jenis : [],
         list_bobot : [],
+        list_tolak_ukur : [],
+        list_tes_bobot: [],
+        list_pelaku: [],
+
+
+        ekokrafKuisioner: '',
+        ekokraftolakukur: '',
+        ekokrafbobot: '',
+        ekokrafPelaku: '',
+
 
         page_first: 1,
         page_last: 0,
@@ -263,6 +312,8 @@
 
         mdl_add : false,
         mdl_edit : false,
+        mdl_tolak_ukur: false,
+        mdl_bobot: false,
 
         UMUM : UMUM,
         FETCHING : FETCHING,
@@ -274,7 +325,7 @@
 
       getView : function(){
         // this.$store.commit("shoWLoading");
-        fetch(this.$store.state.url.URL_KUISIONER + "view", {
+        fetch(this.$store.state.url.URL_EKO_KUISIONER + "view", {
             method: "POST",
             headers: {
               "content-type": "application/json",
@@ -290,6 +341,81 @@
             .then(res_data => {
               this.list_data = res_data.data;
               this.page_last = res_data.jml_data;
+        });
+      },
+
+      getPelakuId : function(){
+        // this.$store.commit("shoWLoading");
+        fetch(this.$store.state.url.URL_EKO_KUISIONER + "getID", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+              authorization: "kikensbatara " + localStorage.token
+            },
+        })
+            .then(res => res.json())
+            .then(res_data => {
+              this.ekokrafPelaku = res_data.data[0].id;
+              
+        });
+      },
+
+      tolak_ukur : function(id){
+        // this.$store.commit("shoWLoading");
+        fetch(this.$store.state.url.URL_EKO_KUISIONER + "cek_tolak_ukur", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+              authorization: "kikensbatara " + localStorage.token
+            },
+            body: JSON.stringify({
+                id: id,
+                
+            })
+        })
+            .then(res => res.json())
+            .then(res_data => {
+              this.list_tolak_ukur = res_data.data;
+        });
+      },
+
+      bobot : function(id){
+        // this.$store.commit("shoWLoading");
+        fetch(this.$store.state.url.URL_EKO_KUISIONER + "cek_bobot", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+              authorization: "kikensbatara " + localStorage.token
+            },
+            body: JSON.stringify({
+                id: id,
+                
+            })
+        })
+            .then(res => res.json())
+            .then(res_data => {
+              this.list_tes_bobot = res_data.data;
+        });
+      },
+
+      addData : function() {
+
+
+        fetch(this.$store.state.url.URL_EKO_KUISIONER + "addData", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+              authorization: "kikensbatara " + localStorage.token
+            },
+            body: JSON.stringify({
+              id_indikator: this.ekokrafKuisioner,
+              id_kuisioner: this.ekokraftolakukur,
+              id_bobot: this.ekokrafbobot,
+              id_pelakuEkoraf : this.ekokrafPelaku,
+            })
+        }).then(res_data => {
+            this.getView();
+            this.$store.commit('notifAdd', 'Menambah')
         });
       },
 
@@ -329,6 +455,7 @@
     mounted () {
       this.fetching();
       this.getView();
+      this.getPelakuId();
     },
   }
 </script>

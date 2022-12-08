@@ -190,20 +190,26 @@
               </tr>
             </thead>
             <tbody>
-              <tr class="h_table_body" v-for="(data1) in list_indikator" :key="data1.id">
+              <tr class="h_table_body" v-for="(data1, i) in list_indikator" :key="data1.id">
                 <td :item-value="data1.id">{{data1.indikator}}</td>
 
 
-                <td v-if="data1.id">
-                  <br><v-autocomplete
-                    v-model="form.ekokrafPotensi"
-                    :items="getPotensiBobot1(data1.id)"
-                    :item-text="'tolak_ukur'"
-                    :item-value="'id'"
-                    outlined
-                    dense
-                  >
-                  </v-autocomplete></td>
+                <td>
+                  <br>
+
+                  
+                    <v-autocomplete
+                     
+                      :items="getPotensiBobot1(data1.id)"
+                      :item-text="'tolak_ukur'"
+                      :item-value="'id'"
+                      outlined
+                      dense
+                    >
+                    </v-autocomplete>
+
+                  
+                </td>
 
               </tr>
             </tbody>
@@ -372,10 +378,11 @@
             .then(res_data => {
 
               this.list_potensi = res_data;
-
-              console.log("tes ", this.list_potensi);
-              return this.list_potensi;
-
+              var tes = [];
+              tes = res_data;
+              console.log("tes ", tes);
+              
+              return res_data;
 
         });
       },
@@ -481,6 +488,8 @@
       this.fetching();
       this.getView();
     },
+
+
   }
 </script>
 

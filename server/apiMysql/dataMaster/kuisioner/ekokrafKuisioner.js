@@ -77,11 +77,12 @@ router.post('/view', (req, res) => {
 
 router.post('/addData', (req,res)=>{
     let insert = `
-        INSERT INTO ekokrafkuisioner (uniq, ekokrafIndikator, uraian, keterangan, createdBy, createdAt) VALUES (
+        INSERT INTO form_ekosistem (id, id_pelakuEkoraf, id_indikator, id_kuisioner, id_bobot, createdBy, createdAt) VALUES (
             '`+uniqid()+ `',
-            `+req.body.ekokrafIndikator+`,
-            '`+req.body.uraian+`',
-            '`+req.body.keterangan+`',
+            `+req.body.id_pelakuEkoraf+`,
+            '`+req.body.id_indikator+`',
+            '`+req.body.id_kuisioner+`',
+            '`+req.body.id_bobot+`',
             '`+req.user._id+`', 
             NOW()
         )
@@ -95,9 +96,7 @@ router.post('/addData', (req,res)=>{
             res.send(row);
         }
     })
-    // console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-    // console.log(req.body);
-    // res.send("OK")
+    
 });
 
 router.post('/editData', (req,res)=>{
@@ -160,7 +159,90 @@ router.post('/list', (req, res)=> {
 })
 
 
+router.post('/cek_tolak_ukur', (req, res)=> {
 
+    var query = `
+    SELECT ekokrafkuisioner.* 
+    FROM ekokrafkuisioner
+
+    LEFT JOIN ekokrafkuisionerindikator
+    ON ekokrafkuisionerindikator.id = ekokrafkuisioner.ekokrafIndikator
+
+
+    WHERE 
+    ekokrafkuisioner.ekokrafIndikator = `+req.body.id+`
+    `;
+       
+
+        // ========================
+        db.query(query, (err, result)=>{
+            if (err) {res.json(err)}
+            else{
+                
+                res.json({
+                    data : result,
+                })
+            }
+        })
+        // ========================
+
+    
+})
+
+router.post('/cek_bobot', (req, res)=> {
+
+    var query = `
+    SELECT ekokrafkuisionerbobot.* 
+    FROM ekokrafkuisionerbobot
+
+    LEFT JOIN ekokrafkuisioner
+    ON ekokrafkuisionerbobot.ekokrafKuisioner = ekokrafkuisioner.id
+
+
+    WHERE 
+    ekokrafkuisioner.id = `+req.body.id+`
+    `;
+       
+
+        // ========================
+        db.query(query, (err, result)=>{
+            if (err) {res.json(err)}
+            else{
+                
+                res.json({
+                    data : result,
+                })
+            }
+        })
+        // ========================
+
+    
+})
+
+router.post('/getID', (req, res)=> {
+    var query = `
+    SELECT id 
+    FROM ekokrafpelaku
+
+    WHERE 
+    ekokrafpelaku.createdBy = '`+req.user._id+`'
+    `;
+       
+
+        // ========================
+        db.query(query, (err, result)=>{
+            if (err) {res.json(err)}
+            else{
+                
+                res.json({
+                    data : result,
+                })
+            }
+        })
+        // ========================
+
+    
+})
 
 
 
