@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 04, 2022 at 02:36 PM
+-- Generation Time: Dec 08, 2022 at 05:33 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -86,7 +86,8 @@ CREATE TABLE `ekokrafindikator` (
 INSERT INTO `ekokrafindikator` (`id`, `uniq`, `indikator`, `bobot`, `createdBy`, `editedBy`, `createdAt`, `editedAt`) VALUES
 (1, 'a0claifafpw', 'Jumlah Ekraf Setiap Sub Sektor', 10, 'i33wt9dwkkv6gxft', '', '2022-11-15 16:22:21', '2022-11-15 16:22:21'),
 (2, 'a0claifc0xc', 'Jumlah Jenis Setiap Sub Sektor', 5, 'i33wt9dwkkv6gxft', '', '2022-11-15 16:23:35', '2022-11-15 16:23:35'),
-(3, 'a0claifgjpn', 'Jumlah Komunitas Setiap Sub Sektor', 5, 'i33wt9dwkkv6gxft', '', '2022-11-15 16:27:06', '2022-11-15 16:27:06');
+(3, 'a0claifgjpn', 'Jumlah Komunitas Setiap Sub Sektor', 5, 'i33wt9dwkkv6gxft', '', '2022-11-15 16:27:06', '2022-11-15 16:27:06'),
+(5, 'fzk6bq4lb9g77tt', 'Arah Kebijakan dan Ketersediaan Anggara Daerah Terhadap Pengembangan Ekraf Setiap Sub Sektor', 10, 'i33wt9dwkkv6gxft', '', '2022-12-04 14:17:37', '2022-12-04 14:17:37');
 
 -- --------------------------------------------------------
 
@@ -141,7 +142,9 @@ CREATE TABLE `ekokrafkuisioner` (
 
 INSERT INTO `ekokrafkuisioner` (`id`, `uniq`, `ekokrafIndikator`, `uraian`, `keterangan`, `createdBy`, `editedBy`, `createdAt`, `editedAt`) VALUES
 (2, 'fzk69swla9wpyv1', '3', 'Skala Usaha & Produksi', '<p>Keterangan</p>', 'i33wt9dwkkv6gxft', '', '2022-11-09 17:20:24', '2022-11-09 17:20:24'),
-(3, '7jwlasbg1wf', '2', 'Inisiatif Usaha', '<p><br></p>', 'i33wt9dwkkv6gxft', '', '2022-11-22 14:32:27', '2022-11-22 14:32:27');
+(3, '7jwlasbg1wf', '2', 'Inisiatif Usaha', '<p><br></p>', 'i33wt9dwkkv6gxft', '', '2022-11-22 14:32:27', '2022-11-22 14:32:27'),
+(4, 'fzk64xclbf332t0', '2', 'Kreasi', '<p>Kreasi	</p>', 'i33wt9dwkkv6gxft', '', '2022-12-08 12:57:06', '2022-12-08 12:57:06'),
+(5, 'fzk6cvclbf4cdzj', '2', 'Kepemilikan Sertifikat', '<p>Kepemilikan Sertifikat</p>', 'i33wt9dwkkv6gxft', '', '2022-12-08 13:32:20', '2022-12-08 13:32:20');
 
 -- --------------------------------------------------------
 
@@ -167,7 +170,8 @@ CREATE TABLE `ekokrafkuisionerbobot` (
 
 INSERT INTO `ekokrafkuisionerbobot` (`id`, `uniq`, `ekokrafKuisioner`, `pertanyaan`, `bobot`, `createdBy`, `editedBy`, `createdAt`, `editedAt`) VALUES
 (3, '7jwlasbcidf', 2, 'Kegiatan usaha lahir dari program pemerintah ', 5, 'i33wt9dwkkv6gxft', '', '2022-11-22 14:29:41', '2022-11-22 14:29:41'),
-(4, '7jwlasbgjnx', 3, 'Kegiatan Usaha Lahir Dari Pemerintah', 5, 'i33wt9dwkkv6gxft', '', '2022-11-22 14:32:50', '2022-11-22 14:32:50');
+(4, '7jwlasbgjnx', 3, 'Kegiatan Usaha Lahir Dari Pemerintah', 5, 'i33wt9dwkkv6gxft', '', '2022-11-22 14:32:50', '2022-11-22 14:32:50'),
+(5, 'fzk64xclbf39rav', 4, 'Pertanyaan', 4, 'i33wt9dwkkv6gxft', '', '2022-12-08 13:02:18', '2022-12-08 13:02:18');
 
 -- --------------------------------------------------------
 
@@ -255,7 +259,8 @@ CREATE TABLE `ekokrafpelaku` (
 
 INSERT INTO `ekokrafpelaku` (`id`, `uniq`, `ekokrafJenis`, `des_kel_id`, `brand`, `pelaku`, `nik`, `badan_usaha`, `alamat`, `email`, `hp`, `tahun`, `tenaga`, `omset`, `profil`, `createdBy`, `editedBy`, `createdAt`, `editedAt`) VALUES
 (8, '6x0laiclv19', 1, 67940, 'Nama Brand', 'Pemilik', '24242412', 'Badan Usaha', 'kjfsdbfk', 'dsfb#fsfb', '234234', '2012', 0, 'kbsdfjs', '<p>dfgfh</p>', 'i33wt9dwkkv6gxft', '', '2022-11-15 15:07:15', '2022-11-15 15:07:15'),
-(9, 'deklas8s68q', 2, 67940, 'sdjbskj', 'nama', '243423', 'sabd', 'cm c', 'dsbfmsb', '343', '2022', 13, '23', '<p><strong><span class=\"ql-cursor\">?</span></strong></p>', 'i33wt9dwkkv6gxft', '', '2022-11-22 13:17:53', '2022-11-22 13:17:53');
+(9, 'deklas8s68q', 2, 67940, 'sdjbskj', 'nama', '243423', 'sabd', 'cm c', 'dsbfmsb', '343', '2022', 13, '23', '<p><strong><span class=\"ql-cursor\">?</span></strong></p>', 'i33wt9dwkkv6gxft', '', '2022-11-22 13:17:53', '2022-11-22 13:17:53'),
+(10, 'fks0z3m0lbdb1ynz', 2, 67940, 'Nama brand', 'nama pemilik', '873423648', 'badan usaha', 'kajafbjabfj', 'idanuzan@gmail.com', '82346823648', '2023', 35, '32500000', '<p>profil pelaku umkm</p>', 'fzk64rolbc47k4h', '', '2022-12-07 07:04:39', '2022-12-07 07:04:39');
 
 -- --------------------------------------------------------
 
@@ -284,7 +289,8 @@ CREATE TABLE `ekokrafpelakuproduk` (
 --
 
 INSERT INTO `ekokrafpelakuproduk` (`id`, `uniq`, `m_jenisPariwisata`, `ekokrafPelaku`, `brand`, `harga`, `stock`, `keterangan`, `file`, `createdBy`, `editedBy`, `createdAt`, `editedAt`) VALUES
-(15, '5golajwwnmu', 2, 8, 'dsads', 200000, 233, 'asds', '1668619397703.png', 'i33wt9dwkkv6gxft', 'i33wt9dwkkv6gxft', '2022-11-16 17:27:36', '2022-11-16 17:27:36');
+(15, '5golajwwnmu', 2, 8, 'dsads', 200000, 233, 'asds', '1668619397703.png', 'i33wt9dwkkv6gxft', 'i33wt9dwkkv6gxft', '2022-11-16 17:27:36', '2022-11-16 17:27:36'),
+(16, 'fks0z3m0lbdb2q5e', 2, 10, 'brand', 234234, 123, 'keterangan', '1670396713171.png', 'fzk64rolbc47k4h', NULL, '2022-12-07 07:05:14', NULL);
 
 -- --------------------------------------------------------
 
@@ -311,7 +317,9 @@ CREATE TABLE `ekokrafpotensi` (
 INSERT INTO `ekokrafpotensi` (`id`, `uniq`, `ekokrafIndikator`, `tolak_ukur`, `nilai`, `createdBy`, `editedBy`, `createdAt`, `editedAt`) VALUES
 (5, 'fzk69vslb3iceei', 3, 'Tolak Ukur', 5, 'i33wt9dwkkv6gxft', '', '2022-11-30 10:31:01', '2022-11-30 10:31:01'),
 (6, 'fzk69vslb3id260', 2, 'ahdvsah', 7, 'i33wt9dwkkv6gxft', '', '2022-11-30 10:31:32', '2022-11-30 10:31:32'),
-(7, 'fzk69vslb3k6t75', 1, 'sjadbasj', 3, 'i33wt9dwkkv6gxft', '', '2022-11-30 11:22:40', '2022-11-30 11:22:40');
+(7, 'fzk69vslb3k6t75', 1, 'sjadbasj', 3, 'i33wt9dwkkv6gxft', '', '2022-11-30 11:22:40', '2022-11-30 11:22:40'),
+(8, 'fzk6bq4lb9g7paj', 5, 'Rank 1', 5, 'i33wt9dwkkv6gxft', '', '2022-12-04 14:18:00', '2022-12-04 14:18:00'),
+(9, 'fzk686glb9h1hnu', 5, 'Rank 2', 4, 'i33wt9dwkkv6gxft', '', '2022-12-04 14:41:10', '2022-12-04 14:41:10');
 
 -- --------------------------------------------------------
 
@@ -88989,7 +88997,15 @@ INSERT INTO `menu_klp_list` (`id`, `menu_id`, `menu_klp_id`, `readx`, `updatex`,
 (172, 47, 17, 1, 1, 1, 1),
 (173, 48, 17, 1, 1, 1, 1),
 (174, 49, 17, 1, 1, 1, 1),
-(175, 50, 17, 1, 1, 1, 1);
+(175, 50, 17, 1, 1, 1, 1),
+(176, 49, 19, 0, 0, 0, 0),
+(177, 50, 19, 0, 0, 0, 0),
+(178, 48, 19, 1, 1, 1, 1),
+(179, 39, 19, 0, 0, 0, 0),
+(180, 42, 19, 0, 0, 0, 0),
+(181, 40, 19, 0, 0, 0, 0),
+(182, 43, 19, 0, 0, 0, 0),
+(183, 45, 19, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -89123,6 +89139,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `username`, `nama`, `hp`, `email`, `password`, `menu_klp`) VALUES
 ('2bm7ulekp7bl077d38p', 'irfan86', 'Irfantri', '082298880678', 'irfankonsel2016@gmail.com', '$2a$12$/VpMcYullZvVN95hHo052ur9xjuuwjiQRW1R72WO5s2xGQdXRhYgO', 17),
 ('9pcl9hbi3r4', 'tenyasha', 'Iksan Sinatra', '082290374843', 'idzanuliksan@gmail.com', '$2a$12$PSCE6Tf2YL9qSR.rZh4IAeLV.99P.JuLyj187r5AeMBoSOr/ySSVG', 19),
+('fzk64rolbc47k4h', 'indrafrans', 'Indra Fransiskus', '082293197391', 'indrafrans', '$2a$12$bodHKpBPyr9U06h/KiAjcOsRqHnZR42YS0o8lfkmWajft8IFrOrsm', 19),
+('fzk65s0lbd25jor', 'hidayat', 'Hidayat Darmawan', '12345678912', 'hidayat@gmail.com', '$2a$12$VXn9TGtkTKA1HlTxHyooSeR/doWm0vG1rVgWugJ8PDRJf5/nZ2T2i', 19),
 ('i33wt9dwkkv6gxft', 'kikensbatara', 'Kiken SUkma Batara', '+628', 'kikensbatara@gmail.com', '$2a$12$c8vO5VyEOt0Whhkh7hIMh.dWvPQkFrPVDUYvDtkSlSr3zahDXjN1q', 17);
 
 -- --------------------------------------------------------
@@ -89451,7 +89469,7 @@ ALTER TABLE `ekokrafanggota`
 -- AUTO_INCREMENT for table `ekokrafindikator`
 --
 ALTER TABLE `ekokrafindikator`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `ekokrafkelompok`
@@ -89469,13 +89487,13 @@ ALTER TABLE `ekokrafkelompokjenis`
 -- AUTO_INCREMENT for table `ekokrafkuisioner`
 --
 ALTER TABLE `ekokrafkuisioner`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `ekokrafkuisionerbobot`
 --
 ALTER TABLE `ekokrafkuisionerbobot`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `ekokrafkuisionerindikator`
@@ -89493,19 +89511,19 @@ ALTER TABLE `ekokrafobservasi`
 -- AUTO_INCREMENT for table `ekokrafpelaku`
 --
 ALTER TABLE `ekokrafpelaku`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `ekokrafpelakuproduk`
 --
 ALTER TABLE `ekokrafpelakuproduk`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `ekokrafpotensi`
 --
 ALTER TABLE `ekokrafpotensi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `foto`
@@ -89559,7 +89577,7 @@ ALTER TABLE `menu_klp`
 -- AUTO_INCREMENT for table `menu_klp_list`
 --
 ALTER TABLE `menu_klp_list`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=176;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=184;
 
 --
 -- AUTO_INCREMENT for table `m_bidangpariwisata`
