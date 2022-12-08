@@ -190,17 +190,27 @@
               </tr>
             </thead>
             <tbody>
-              <tr class="h_table_body" v-for="(data1) in list_indikator" :key="data1.id">
+              <tr class="h_table_body" v-for="(data1, i) in list_indikator" :key="data1.id">
                 <td :item-value="data1.id">{{data1.indikator}}</td>
-                <td><br><v-autocomplete
-                    v-model="form.ekokrafPotensi"
-                    :items="getPotensiBobot1(data1.id)"
-                    :item-text="'tolak_ukur'"
-                    :item-value="'id'"
-                    outlined
-                    dense
-                  >
-                  </v-autocomplete></td>
+
+
+                <td>
+                  <br>
+
+                  
+                    <v-autocomplete
+                     
+                      :items="getPotensiBobot1(data1.id)"
+                      :item-text="'tolak_ukur'"
+                      :item-value="'id'"
+                      outlined
+                      dense
+                    >
+                    </v-autocomplete>
+
+                  
+                </td>
+
               </tr>
             </tbody>
           </template>
@@ -366,10 +376,14 @@
         })
             .then(res => res.json())
             .then(res_data => {
-              // console.log(res_data)
-              this.list_potensi = res_data.data;
-              console.log("babi ngepet "+this.list_potensi);
-              return this.list_potensi;
+
+              this.list_potensi = res_data;
+              var tes = [];
+              tes = res_data;
+              console.log("tes ", tes);
+              
+              return res_data;
+
         });
       },
 
@@ -449,7 +463,7 @@
           this.list_jenis = await FETCHING.getJenisPariwisata();
           this.list_indikator = await FETCHING.getPotensi()
           // this.list_potensi = await FETCHING.getPotensiBobot1()
-          console.log(this.list_potensi);
+          // console.log(this.list_potensi);
         },
 
         eventKab : async function(){
@@ -474,6 +488,8 @@
       this.fetching();
       this.getView();
     },
+
+
   }
 </script>
 
