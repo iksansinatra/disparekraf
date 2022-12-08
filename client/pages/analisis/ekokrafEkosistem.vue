@@ -173,18 +173,7 @@
                   >
                   </v-autocomplete>
                 </div>
-                <div class="divInput">
-                    <small>Jenis Ekonomi Kreatif</small>
-                    <v-autocomplete
-                    v-model="form.ekokrafJenis"
-                    :items="list_jenis"
-                    :item-text="'uraian'"
-                    :item-value="'id'"
-                    outlined
-                    dense
-                  >
-                  </v-autocomplete>
-                </div>
+               
                     <v-simple-table style="width:100%">
           <template v-slot:default>
             <thead style="background:#5289E7">

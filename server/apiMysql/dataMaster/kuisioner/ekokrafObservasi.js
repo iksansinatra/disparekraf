@@ -174,70 +174,6 @@ router.post('/view', (req, res) => {
 });
 
 
-// router.post('/addData', (req,res)=>{
-
-router.post('/addData', (req,res)=>{
-    let insert = `
-        INSERT INTO form_ekosistem (id, id_pelakuEkoraf, id_indikator, id_kuisioner, id_bobot, createdBy, createdAt) VALUES (
-            '`+uniqid()+ `',
-        `+req.body.id_pelakuEkoraf+`,
-        '`+req.body.id_indikator+`',
-        '`+req.body.id_kuisioner+`',
-        '`+req.body.id_bobot+`',
-        
-        '`+req.user._id+`', 
-        NOW()
-        )
-    `
-
-    db.query(insert, (err, row)=>{
-        if(err) {
-            console.log(err);
-            res.send(err);
-        }else{
-            res.send(row);
-        }
-    })
-    // console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
-    // console.log(req.body);
-    // res.send("OK")
-});
-
-router.post('/editData', (req,res)=>{
-    query = `
-        UPDATE form_ekosistem SET
-        id_bobot = `+req.body.id_bobot+`,
-        editedBy = '`+req.user._id+`',
-        editedAt = NOW()
-
-        WHERE id = '`+req.body.id+`'
-    `;
-    
-    db.query(query, (err, row)=>{
-        if(err) {
-            console.log(err);
-            res.send(err);
-        }else{
-            res.send(row);
-        }
-    })
-
-})
-
-
-router.post('/removeData', (req, res)=> {
-
-    var query = `
-        DELETE FROM form_ekosistem WHERE id = '`+req.body.id+`'; 
-    `;
-    db.query(query, (err, row)=>{
-        if(err){
-            res.send(err);
-        }else{
-            res.send(row);
-        }
-    });
-})
 
 
 router.post('/list', (req, res)=> {
@@ -253,8 +189,6 @@ router.post('/list', (req, res)=> {
         }
     });
 })
-
-
 
 
 
