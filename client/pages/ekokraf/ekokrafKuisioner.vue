@@ -325,7 +325,7 @@
 
       getView : function(){
         // this.$store.commit("shoWLoading");
-        fetch(this.$store.state.url.URL_EKO_KUISIONER + "view", {
+        fetch(this.$store.state.url.URL_EKO_EKOSISTEM + "view", {
             method: "POST",
             headers: {
               "content-type": "application/json",
@@ -346,7 +346,7 @@
 
       getPelakuId : function(){
         // this.$store.commit("shoWLoading");
-        fetch(this.$store.state.url.URL_EKO_KUISIONER + "getID", {
+        fetch(this.$store.state.url.URL_EKO_EKOSISTEM + "getID", {
             method: "POST",
             headers: {
               "content-type": "application/json",
@@ -362,7 +362,7 @@
 
       tolak_ukur : function(id){
         // this.$store.commit("shoWLoading");
-        fetch(this.$store.state.url.URL_EKO_KUISIONER + "cek_tolak_ukur", {
+        fetch(this.$store.state.url.URL_EKO_EKOSISTEM + "cek_tolak_ukur", {
             method: "POST",
             headers: {
               "content-type": "application/json",
@@ -381,7 +381,7 @@
 
       bobot : function(id){
         // this.$store.commit("shoWLoading");
-        fetch(this.$store.state.url.URL_EKO_KUISIONER + "cek_bobot", {
+        fetch(this.$store.state.url.URL_EKO_EKOSISTEM + "cek_bobot", {
             method: "POST",
             headers: {
               "content-type": "application/json",
@@ -401,7 +401,7 @@
       addData : function() {
 
 
-        fetch(this.$store.state.url.URL_EKO_KUISIONER + "addData", {
+        fetch(this.$store.state.url.URL_EKO_EKOSISTEM + "addData", {
             method: "POST",
             headers: {
               "content-type": "application/json",
