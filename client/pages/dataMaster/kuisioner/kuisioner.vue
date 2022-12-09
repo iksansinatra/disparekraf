@@ -50,8 +50,8 @@
             <thead style="background:#5289E7">
               <tr class="h_table_head">
                 <th class="text-center" style="width:5%">No</th>
-                <th class="text-center" style="width:15%">Kuisioner</th>
-                <th class="text-center" style="width:25%">Keterangan</th>
+                <th class="text-center" style="width:20%">Kuisioner</th>
+                <th class="text-center" style="width:20%">Keterangan</th>
                 <th class="text-center" style="width:10%">Tolak Ukur</th>
                 <th class="text-center" style="width:10%">Act</th>
               </tr>
@@ -63,7 +63,7 @@
                   {{data.uraian}} <br>
                   <span class="h_subtitle">{{data.ekokrafindikator_uraian}}</span>
                 </td>
-                <div class="ql-editor" v-html="UMUM.replaceEscapeString(data.keterangan)"></div>
+                <td class="ql-editor" v-html="UMUM.replaceEscapeString(data.keterangan)"></td>
                 <td class="text-center">
                   <v-btn :color="UMUM.checkZero(data.jmlPertanyaan)" small rounded @click="openPertanyaan(data), mdl_list_bobot = true">
                     <v-icon left>mdi-file-document-edit</v-icon>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 08, 2022 at 05:33 PM
+-- Generation Time: Dec 09, 2022 at 01:37 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -84,10 +84,16 @@ CREATE TABLE `ekokrafindikator` (
 --
 
 INSERT INTO `ekokrafindikator` (`id`, `uniq`, `indikator`, `bobot`, `createdBy`, `editedBy`, `createdAt`, `editedAt`) VALUES
-(1, 'a0claifafpw', 'Jumlah Ekraf Setiap Sub Sektor', 10, 'i33wt9dwkkv6gxft', '', '2022-11-15 16:22:21', '2022-11-15 16:22:21'),
-(2, 'a0claifc0xc', 'Jumlah Jenis Setiap Sub Sektor', 5, 'i33wt9dwkkv6gxft', '', '2022-11-15 16:23:35', '2022-11-15 16:23:35'),
-(3, 'a0claifgjpn', 'Jumlah Komunitas Setiap Sub Sektor', 5, 'i33wt9dwkkv6gxft', '', '2022-11-15 16:27:06', '2022-11-15 16:27:06'),
-(5, 'fzk6bq4lb9g77tt', 'Arah Kebijakan dan Ketersediaan Anggara Daerah Terhadap Pengembangan Ekraf Setiap Sub Sektor', 10, 'i33wt9dwkkv6gxft', '', '2022-12-04 14:17:37', '2022-12-04 14:17:37');
+(5, '98slbg4zgos', 'Kemapanan Sub Sektor', 20, 'i33wt9dwkkv6gxft', 'i33wt9dwkkv6gxft', '2022-12-09 06:38:03', '2022-12-09 06:44:37'),
+(6, '98slbg4zr9v', 'Ketersediaan Sarpras Di Daerah (Lokasi Even, Ruang Studio/Inkubasi, Ruang Riset, Geleri, Ruang Produksi, Marketplace dll)', 10, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:38:17', '2022-12-09 06:38:17'),
+(7, '98slbg504g7', 'Keragaman Pelaku Setiap Sub Sektor (Umur, Pendidikan, Status Sosial, Ekonomi dll)', 5, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:38:34', '2022-12-09 06:38:34'),
+(8, '98slbg50ksg', 'Keaslian dan Keunikan Setiap Sub Sektor', 10, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:38:55', '2022-12-09 06:38:55'),
+(9, '98slbg50ucu', 'Potensi Berbasis Budaya/Lokalotas Setiap Sub Sektor', 10, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:39:07', '2022-12-09 06:39:07'),
+(10, '98slbg511om', 'Dukungan dan Kolaborasi Stakeholder Hexahelix', 15, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:39:17', '2022-12-09 06:39:17'),
+(11, '98slbg51beo', 'Arah Kebijakan dan Ketersediaan Anggara Daerah Terhadap Pengembangan Ekraf Setiap Sub Sektor', 10, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:39:30', '2022-12-09 06:39:30'),
+(12, '98slbg51ob5', 'Jumlah Komunitas Setiap Sub Sektor', 5, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:39:46', '2022-12-09 06:39:46'),
+(13, '98slbg51zes', 'Jumlah Jenis Setiap Sub Sektor', 5, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:40:01', '2022-12-09 06:40:01'),
+(14, '98slbg52bfy', 'Jumlah Ekraf Setiap Sub Sektor', 10, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:40:16', '2022-12-09 06:40:16');
 
 -- --------------------------------------------------------
 
@@ -142,9 +148,7 @@ CREATE TABLE `ekokrafkuisioner` (
 
 INSERT INTO `ekokrafkuisioner` (`id`, `uniq`, `ekokrafIndikator`, `uraian`, `keterangan`, `createdBy`, `editedBy`, `createdAt`, `editedAt`) VALUES
 (2, 'fzk69swla9wpyv1', '3', 'Skala Usaha & Produksi', '<p>Keterangan</p>', 'i33wt9dwkkv6gxft', '', '2022-11-09 17:20:24', '2022-11-09 17:20:24'),
-(3, '7jwlasbg1wf', '2', 'Inisiatif Usaha', '<p><br></p>', 'i33wt9dwkkv6gxft', '', '2022-11-22 14:32:27', '2022-11-22 14:32:27'),
-(4, 'fzk64xclbf332t0', '2', 'Kreasi', '<p>Kreasi	</p>', 'i33wt9dwkkv6gxft', '', '2022-12-08 12:57:06', '2022-12-08 12:57:06'),
-(5, 'fzk6cvclbf4cdzj', '2', 'Kepemilikan Sertifikat', '<p>Kepemilikan Sertifikat</p>', 'i33wt9dwkkv6gxft', '', '2022-12-08 13:32:20', '2022-12-08 13:32:20');
+(4, '5qj65le8clbf49obw', '2', 'Ruang Kreasi', '<p>Ruang Kreasi</p>', 'i33wt9dwkkv6gxft', '', '2022-12-08 13:30:14', '2022-12-08 13:30:14');
 
 -- --------------------------------------------------------
 
@@ -171,7 +175,8 @@ CREATE TABLE `ekokrafkuisionerbobot` (
 INSERT INTO `ekokrafkuisionerbobot` (`id`, `uniq`, `ekokrafKuisioner`, `pertanyaan`, `bobot`, `createdBy`, `editedBy`, `createdAt`, `editedAt`) VALUES
 (3, '7jwlasbcidf', 2, 'Kegiatan usaha lahir dari program pemerintah ', 5, 'i33wt9dwkkv6gxft', '', '2022-11-22 14:29:41', '2022-11-22 14:29:41'),
 (4, '7jwlasbgjnx', 3, 'Kegiatan Usaha Lahir Dari Pemerintah', 5, 'i33wt9dwkkv6gxft', '', '2022-11-22 14:32:50', '2022-11-22 14:32:50'),
-(5, 'fzk64xclbf39rav', 4, 'Pertanyaan', 4, 'i33wt9dwkkv6gxft', '', '2022-12-08 13:02:18', '2022-12-08 13:02:18');
+(5, '5qj65lcxolbf6u1tj', 4, 'idjfisd', 5, 'i33wt9dwkkv6gxft', '', '2022-12-08 14:42:04', '2022-12-08 14:42:04'),
+(6, '5qj65lm5wlbf7lwby', 4, 'xxxx', 1, 'i33wt9dwkkv6gxft', '', '2022-12-08 15:03:43', '2022-12-08 15:03:43');
 
 -- --------------------------------------------------------
 
@@ -222,8 +227,16 @@ CREATE TABLE `ekokrafobservasi` (
 --
 
 INSERT INTO `ekokrafobservasi` (`id`, `uniq`, `kabupaten_id`, `jenisEkokraf`, `ekokrafIndikator`, `ekokrafPotensi`, `createdBy`, `editedBy`, `createdAt`, `editedAt`) VALUES
-(1, 'fzk66jglajny27h', 7471, 2022, 1, 0, 'i33wt9dwkkv6gxft', 'i33wt9dwkkv6gxft', '2022-11-16 13:12:27', '2022-11-16 14:40:56'),
-(8, '5golajwap7b', 7402, 2022, 2, 0, 'i33wt9dwkkv6gxft', '', '2022-11-16 17:06:13', '2022-11-16 17:06:13');
+(15, 'fzk69tglbg608sp', 7402, 2, 14, 57, 'i33wt9dwkkv6gxft', '', '2022-12-09 07:06:39', '2022-12-09 07:06:39'),
+(16, 'fzk69tglbg61seg', 7402, 2, 13, 52, 'i33wt9dwkkv6gxft', '', '2022-12-09 07:07:51', '2022-12-09 07:07:51'),
+(17, 'fzk69tglbg638jj', 7402, 2, 12, 48, 'i33wt9dwkkv6gxft', '', '2022-12-09 07:08:59', '2022-12-09 07:08:59'),
+(18, 'fzk69tglbg640vf', 7402, 2, 11, 42, 'i33wt9dwkkv6gxft', '', '2022-12-09 07:09:35', '2022-12-09 07:09:35'),
+(19, 'fzk69tglbg648eu', 7402, 2, 10, 38, 'i33wt9dwkkv6gxft', '', '2022-12-09 07:09:45', '2022-12-09 07:09:45'),
+(20, 'fzk69tglbg64ih9', 7402, 2, 9, 32, 'i33wt9dwkkv6gxft', '', '2022-12-09 07:09:58', '2022-12-09 07:09:58'),
+(21, 'fzk69tglbg64pw2', 7402, 2, 8, 29, 'i33wt9dwkkv6gxft', '', '2022-12-09 07:10:08', '2022-12-09 07:10:08'),
+(22, 'fzk69tglbg64zam', 7402, 2, 7, 23, 'i33wt9dwkkv6gxft', '', '2022-12-09 07:10:20', '2022-12-09 07:10:20'),
+(23, 'fzk69tglbg655w7', 7402, 2, 6, 18, 'i33wt9dwkkv6gxft', '', '2022-12-09 07:10:29', '2022-12-09 07:10:29'),
+(24, 'fzk69tglbg65e6o', 7402, 2, 5, 12, 'i33wt9dwkkv6gxft', '', '2022-12-09 07:10:39', '2022-12-09 07:10:39');
 
 -- --------------------------------------------------------
 
@@ -260,7 +273,7 @@ CREATE TABLE `ekokrafpelaku` (
 INSERT INTO `ekokrafpelaku` (`id`, `uniq`, `ekokrafJenis`, `des_kel_id`, `brand`, `pelaku`, `nik`, `badan_usaha`, `alamat`, `email`, `hp`, `tahun`, `tenaga`, `omset`, `profil`, `createdBy`, `editedBy`, `createdAt`, `editedAt`) VALUES
 (8, '6x0laiclv19', 1, 67940, 'Nama Brand', 'Pemilik', '24242412', 'Badan Usaha', 'kjfsdbfk', 'dsfb#fsfb', '234234', '2012', 0, 'kbsdfjs', '<p>dfgfh</p>', 'i33wt9dwkkv6gxft', '', '2022-11-15 15:07:15', '2022-11-15 15:07:15'),
 (9, 'deklas8s68q', 2, 67940, 'sdjbskj', 'nama', '243423', 'sabd', 'cm c', 'dsbfmsb', '343', '2022', 13, '23', '<p><strong><span class=\"ql-cursor\">?</span></strong></p>', 'i33wt9dwkkv6gxft', '', '2022-11-22 13:17:53', '2022-11-22 13:17:53'),
-(10, 'fks0z3m0lbdb1ynz', 2, 67940, 'Nama brand', 'nama pemilik', '873423648', 'badan usaha', 'kajafbjabfj', 'idanuzan@gmail.com', '82346823648', '2023', 35, '32500000', '<p>profil pelaku umkm</p>', 'fzk64rolbc47k4h', '', '2022-12-07 07:04:39', '2022-12-07 07:04:39');
+(10, '5qj65lrewlbf8z62c', 1, 67941, 'OyToast', 'Indra Frans', '23432532', 'CV Sapurata', 'Alamat', 'idzan@gmail.com', '42353', '2002', 34, '355353', '<p>Deskripsi</p>', 'i33wt9dwkkv6gxft', '', '2022-12-08 15:42:02', '2022-12-08 15:42:02');
 
 -- --------------------------------------------------------
 
@@ -289,8 +302,7 @@ CREATE TABLE `ekokrafpelakuproduk` (
 --
 
 INSERT INTO `ekokrafpelakuproduk` (`id`, `uniq`, `m_jenisPariwisata`, `ekokrafPelaku`, `brand`, `harga`, `stock`, `keterangan`, `file`, `createdBy`, `editedBy`, `createdAt`, `editedAt`) VALUES
-(15, '5golajwwnmu', 2, 8, 'dsads', 200000, 233, 'asds', '1668619397703.png', 'i33wt9dwkkv6gxft', 'i33wt9dwkkv6gxft', '2022-11-16 17:27:36', '2022-11-16 17:27:36'),
-(16, 'fks0z3m0lbdb2q5e', 2, 10, 'brand', 234234, 123, 'keterangan', '1670396713171.png', 'fzk64rolbc47k4h', NULL, '2022-12-07 07:05:14', NULL);
+(15, '5golajwwnmu', 2, 8, 'dsads', 200000, 233, 'asds', '1668619397703.png', 'i33wt9dwkkv6gxft', 'i33wt9dwkkv6gxft', '2022-11-16 17:27:36', '2022-11-16 17:27:36');
 
 -- --------------------------------------------------------
 
@@ -315,11 +327,82 @@ CREATE TABLE `ekokrafpotensi` (
 --
 
 INSERT INTO `ekokrafpotensi` (`id`, `uniq`, `ekokrafIndikator`, `tolak_ukur`, `nilai`, `createdBy`, `editedBy`, `createdAt`, `editedAt`) VALUES
-(5, 'fzk69vslb3iceei', 3, 'Tolak Ukur', 5, 'i33wt9dwkkv6gxft', '', '2022-11-30 10:31:01', '2022-11-30 10:31:01'),
-(6, 'fzk69vslb3id260', 2, 'ahdvsah', 7, 'i33wt9dwkkv6gxft', '', '2022-11-30 10:31:32', '2022-11-30 10:31:32'),
-(7, 'fzk69vslb3k6t75', 1, 'sjadbasj', 3, 'i33wt9dwkkv6gxft', '', '2022-11-30 11:22:40', '2022-11-30 11:22:40'),
-(8, 'fzk6bq4lb9g7paj', 5, 'Rank 1', 5, 'i33wt9dwkkv6gxft', '', '2022-12-04 14:18:00', '2022-12-04 14:18:00'),
-(9, 'fzk686glb9h1hnu', 5, 'Rank 2', 4, 'i33wt9dwkkv6gxft', '', '2022-12-04 14:41:10', '2022-12-04 14:41:10');
+(11, 'fzk68i0lbg5993k', 5, '81-100%', 5, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:45:40', '2022-12-09 06:45:40'),
+(12, 'fzk68i0lbg59kad', 5, '61-80%', 4, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:45:54', '2022-12-09 06:45:54'),
+(13, 'fzk68i0lbg5a4ye', 5, '41-60%', 3, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:46:21', '2022-12-09 06:46:21'),
+(14, 'fzk68i0lbg5aaa3', 5, '21-40%', 2, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:46:28', '2022-12-09 06:46:28'),
+(15, 'fzk68i0lbg5ag7a', 5, '0-20%', 1, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:46:36', '2022-12-09 06:46:36'),
+(16, 'fzk68i0lbg5b0iu', 6, '> 5 Sarpras', 5, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:47:02', '2022-12-09 06:47:02'),
+(17, 'fzk68i0lbg5b9v5', 6, '4 - 5 Sarpras', 4, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:47:14', '2022-12-09 06:47:14'),
+(18, 'fzk68i0lbg5bl1n', 6, '2 - 3 Sarpras', 3, 'i33wt9dwkkv6gxft', 'i33wt9dwkkv6gxft', '2022-12-09 06:47:29', '2022-12-09 06:48:00'),
+(19, 'fzk68i0lbg5cfjs', 6, '1 Sarpras', 2, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:48:08', '2022-12-09 06:48:08'),
+(20, 'fzk68i0lbg5cnqr', 6, 'Tidak Ada Sarpras', 1, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:48:19', '2022-12-09 06:48:19'),
+(21, 'fzk68i0lbg5d4eb', 7, 'Sangat Beragam', 5, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:48:40', '2022-12-09 06:48:40'),
+(22, 'fzk68i0lbg5d955', 7, 'Beragam', 4, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:48:46', '2022-12-09 06:48:46'),
+(23, 'fzk68i0lbg5dd9c', 7, 'Cukup Beragam', 3, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:48:52', '2022-12-09 06:48:52'),
+(24, 'fzk68i0lbg5dij5', 7, 'Kurang Beragam', 2, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:48:59', '2022-12-09 06:48:59'),
+(25, 'fzk68i0lbg5dmdw', 7, 'Tidak Beragam', 1, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:49:04', '2022-12-09 06:49:04'),
+(26, 'fzk68i0lbg5e5so', 8, '81-100% Produk Memiliki Kelayakan Intelektual', 5, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:49:29', '2022-12-09 06:49:29'),
+(27, 'fzk68i0lbg5efk8', 8, '61-80 %  Produk Memiliki Kelayakan Intelektual', 4, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:49:41', '2022-12-09 06:49:41'),
+(28, 'fzk68i0lbg5enh4', 8, '41-60 %  Produk Memiliki Kelayakan Intelektual', 3, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:49:52', '2022-12-09 06:49:52'),
+(29, 'fzk68i0lbg5eu9a', 8, '21-40 %  Produk Memiliki Kelayakan Intelektual', 2, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:50:01', '2022-12-09 06:50:01'),
+(30, 'fzk68i0lbg5f13c', 8, '0-20 %  Produk Memiliki Kelayakan Intelektual', 1, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:50:09', '2022-12-09 06:50:09'),
+(31, 'fzk68i0lbg5fowr', 9, '81-100% Produk Berbasis Budaya', 5, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:50:40', '2022-12-09 06:50:40'),
+(32, 'fzk68i0lbg5fuci', 9, '61-80% Produk Berbasis Budaya', 4, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:50:47', '2022-12-09 06:50:47'),
+(33, 'fzk68i0lbg5g11y', 9, '41-60% Produk Berbasis Budaya', 3, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:50:56', '2022-12-09 06:50:56'),
+(34, 'fzk68i0lbg5g7nd', 9, '21-40% Produk Berbasis Budaya', 2, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:51:05', '2022-12-09 06:51:05'),
+(35, 'fzk68i0lbg5gdrj', 9, '0-20% Produk Berbasis Budaya', 1, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:51:12', '2022-12-09 06:51:12'),
+(36, 'fzk68i0lbg5gudn', 10, 'Kolaborasi 6 Stakeholder', 5, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:51:34', '2022-12-09 06:51:34'),
+(37, 'fzk68i0lbg5gzku', 10, 'Kolaborasi 5 Stakeholder', 4, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:51:41', '2022-12-09 06:51:41'),
+(38, 'fzk68i0lbg5h3r6', 10, 'Kolaborasi 4 Stakeholder', 3, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:51:46', '2022-12-09 06:51:46'),
+(39, 'fzk68i0lbg5h74y', 10, 'Kolaborasi 3 Stakeholder', 2, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:51:51', '2022-12-09 06:51:51'),
+(40, 'fzk68i0lbg5h9vh', 10, 'Kolaborasi 2 Stakeholder', 1, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:51:54', '2022-12-09 06:51:54'),
+(41, 'fzk68i0lbg5hp4q', 11, 'Rank 1', 5, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:52:14', '2022-12-09 06:52:14'),
+(42, 'fzk68i0lbg5hs3y', 11, 'Rank 2', 4, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:52:18', '2022-12-09 06:52:18'),
+(43, 'fzk68i0lbg5hvmi', 11, 'Rank 3', 3, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:52:22', '2022-12-09 06:52:22'),
+(44, 'fzk68i0lbg5hyqr', 11, 'Rank 4', 2, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:52:26', '2022-12-09 06:52:26'),
+(45, 'fzk68i0lbg5i5ho', 11, 'Rank 5 - 17', 1, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:52:35', '2022-12-09 06:52:35'),
+(46, 'fzk68i0lbg5ij4j', 12, 'Rank 1', 5, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:52:53', '2022-12-09 06:52:53'),
+(47, 'fzk68i0lbg5imwv', 12, 'Rank 2', 4, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:52:58', '2022-12-09 06:52:58'),
+(48, 'fzk68i0lbg5ipo0', 12, 'Rank 3', 3, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:53:01', '2022-12-09 06:53:01'),
+(49, 'fzk68i0lbg5isil', 12, 'Rank 4', 2, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:53:05', '2022-12-09 06:53:05'),
+(50, 'fzk68i0lbg5iy82', 12, 'Rank 5 - 17', 1, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:53:12', '2022-12-09 06:53:12'),
+(51, 'fzk68i0lbg5jhb4', 13, 'Sangat Beragam (> 7 Jenis)', 5, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:53:37', '2022-12-09 06:53:37'),
+(52, 'fzk68i0lbg5jpbe', 13, 'Beragam (5 - 6 Jenis)', 4, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:53:47', '2022-12-09 06:53:47'),
+(53, 'fzk68i0lbg5jz99', 13, 'Cukup Beragam (3 - 4 Jenis)', 3, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:54:00', '2022-12-09 06:54:00'),
+(54, 'fzk68i0lbg5kcnk', 13, 'Kurang Beragam (2 Jenis)', 2, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:54:18', '2022-12-09 06:54:18'),
+(55, 'fzk68i0lbg5kkbu', 13, 'Tidak Beragam (1 Jenis)', 1, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:54:28', '2022-12-09 06:54:28'),
+(56, 'fzk68i0lbg5kvtc', 14, 'Rank 1', 5, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:54:42', '2022-12-09 06:54:42'),
+(57, 'fzk68i0lbg5kyps', 14, 'Rank 2', 4, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:54:46', '2022-12-09 06:54:46'),
+(58, 'fzk68i0lbg5l1op', 14, 'Rank 3', 3, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:54:50', '2022-12-09 06:54:50'),
+(59, 'fzk68i0lbg5l59r', 14, 'Rank 4', 2, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:54:55', '2022-12-09 06:54:55'),
+(60, 'fzk68i0lbg5l8zw', 14, 'Rank 5 - 17', 1, 'i33wt9dwkkv6gxft', '', '2022-12-09 06:55:00', '2022-12-09 06:55:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `form_ekosistem`
+--
+
+CREATE TABLE `form_ekosistem` (
+  `id` varchar(25) NOT NULL,
+  `id_pelakuEkoraf` int(11) NOT NULL,
+  `id_indikator` int(11) NOT NULL,
+  `id_kuisioner` int(11) NOT NULL,
+  `id_bobot` int(11) NOT NULL,
+  `createdBy` varchar(255) NOT NULL,
+  `editedBy` varchar(255) NOT NULL,
+  `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
+  `editedAt` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `form_ekosistem`
+--
+
+INSERT INTO `form_ekosistem` (`id`, `id_pelakuEkoraf`, `id_indikator`, `id_kuisioner`, `id_bobot`, `createdBy`, `editedBy`, `createdAt`, `editedAt`) VALUES
+('5qj65lrewlbf8kzuw', 8, 2, 3, 4, 'i33wt9dwkkv6gxft', '', '2022-12-08 15:31:00', '2022-12-08 15:31:00'),
+('5qj65lrewlbf8m13c', 8, 2, 4, 6, 'i33wt9dwkkv6gxft', '', '2022-12-08 15:31:49', '2022-12-08 15:31:49');
 
 -- --------------------------------------------------------
 
@@ -88997,15 +89080,7 @@ INSERT INTO `menu_klp_list` (`id`, `menu_id`, `menu_klp_id`, `readx`, `updatex`,
 (172, 47, 17, 1, 1, 1, 1),
 (173, 48, 17, 1, 1, 1, 1),
 (174, 49, 17, 1, 1, 1, 1),
-(175, 50, 17, 1, 1, 1, 1),
-(176, 49, 19, 0, 0, 0, 0),
-(177, 50, 19, 0, 0, 0, 0),
-(178, 48, 19, 1, 1, 1, 1),
-(179, 39, 19, 0, 0, 0, 0),
-(180, 42, 19, 0, 0, 0, 0),
-(181, 40, 19, 0, 0, 0, 0),
-(182, 43, 19, 0, 0, 0, 0),
-(183, 45, 19, 0, 0, 0, 0);
+(175, 50, 17, 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -89046,27 +89121,22 @@ CREATE TABLE `m_jenispariwisata` (
 --
 
 INSERT INTO `m_jenispariwisata` (`id`, `m_kategoriPariwisata`, `uraian`, `kode`, `keterangan`) VALUES
-(1, 1, 'Pengembang Permainan', '01', 'Sub sektor kekinian yang didorong masuk ke dalam dunia pendidikan, serta diperkuat dengan kebijakan proteksi untuk membangun ekosistem yang sehat dan berkontribusi dalam ekonomi kreatif.'),
 (2, 2, 'Kriya', '02', 'Seni kriya merupakan salah satu sub sektor yang menjadi ciri khas Bangsa Indonesia dan sangat dekat dengan industri pariwisata dan ekonomi kreatif.'),
 (3, 1, 'Desain Interior', '03', 'Dalam dua dekade terakhir perkembangan sub sektor ini menunjukkan kemajuan yang sangat pesat yang ditandai meningkatnya apresiasi masyarakat terhadap jasa desainer interior.'),
 (4, 2, 'Musik', '04', 'Musik merupakan industri cukup menjanjikan dalam dunia showbiz. Besarnya minat dan antusiasme para musisi muda untuk terjun ke dalam bidang ini menunjukkan bahwa musik punya potensi menjadi industri yang lebih besar.'),
 (5, 2, 'Seni Rupa', '05', 'Indonesia memiliki potensi seni rupa terbesar di Asia Tenggara baik secara kualitas, kuantitas, pelaku kreatif, produktivitas, serta potensi pasar.'),
 (6, 3, 'Desain Produk', '06', 'Desain produk merupakan proses kreasi sebuah produk yang menggabungkan unsur fungsi dengan estetika sehingga bermanfaat dan memiliki nilai tambah bagi masyarakat.'),
-(7, 2, 'Fesyen', '07', 'Sub sektor industri kreatif ini berjalan sangat dinamis karena tren fashionbermunculan setiap tahun yang diiringi peningkatan daya saing signifikan di tingkat global.'),
+(7, 2, 'Fashion', '07', 'Sub sektor industri kreatif ini berjalan sangat dinamis karena tren fashionbermunculan setiap tahun yang diiringi peningkatan daya saing signifikan di tingkat global.'),
 (8, 5, 'Kuliner', '08', 'Sub sektor ini berkontribusi besar dalam pendapatan pariwisata dan ekonomi kreatif, juga berpotensi besar mempromosikan Indonesia yang beraneka ragam ke dunia internasional.'),
 (9, 3, 'Film, Animasi dan Video', '09', 'Sub sektor ini memiliki potensi menjadi lebih besar dengan peraturan hak karya intelektual, investasi dan permodalan, serta akses penonton yang lebih luas.'),
 (10, 3, 'Fotografi', '11', 'Perkembangan sub sektor ini didukung oleh meningkatnya minat anak muda terhadap fotografi, seiring perkembangan media sosial dan peralatan yang makin terjangkau.'),
-(11, 3, 'Desain Komunikasi Visual', '12', 'Desain grafis berperan mendukung pertumbuhan bisnis hingga bahkan kelancaran program-program Pemerintah, yang dibarengi pertumbuhan praktisi lokal kompeten.'),
-(12, 3, 'Televisi dan Radio', '13', 'Di tengah arus informasi digital yang masif, peranan kedua industri ini cukup besar terhadap Produk Domestik Bruto (PDB) dan dalam penyerapan tenaga kerja.'),
+(11, 3, 'Desain Grafis', '12', 'Desain grafis berperan mendukung pertumbuhan bisnis hingga bahkan kelancaran program-program Pemerintah, yang dibarengi pertumbuhan praktisi lokal kompeten.'),
+(12, 3, 'Radio & TV', '13', 'Di tengah arus informasi digital yang masif, peranan kedua industri ini cukup besar terhadap Produk Domestik Bruto (PDB) dan dalam penyerapan tenaga kerja.'),
 (13, 1, 'Arsitektur', '14', 'Sub sektor ekonomi kreatif yang memiliki peranan yang penting dalam menampilkan karakter budaya bangsa, serta berperan dalam pembangunan sebuah kota.'),
 (14, 6, 'Periklanan', '15', 'Periklanan adalah sub sektor ekonomi kreatif yang karyanya memiliki daya sebar paling tinggi. Hal ini tak lepas dari peran sinergi para pemilik modal yang ingin memasarkan produk dan jasa mereka dengan media yang dimanfaatkan.'),
 (15, 2, 'Seni Pertunjukan', '16', 'Indonesia memiliki kekayaan dan keanekaragaman seni dan tradisi pertunjukan, seperti wayang, teater, tari, dan lain sebagainya yang telah diakui dan mendapatkan apresiasi dunia internasional.'),
 (16, 1, 'Penerbitan', '17', 'Sub sektor Penerbitan berperan dalam membangun kekuatan intelektual bangsa dan terus berupaya untuk menyesuaikan dengan perkembangan zaman.'),
-(17, 6, 'Aplikasi', '18', 'Seiring dengan semakin meningkatnya penetrasi smartphone, industri pengembangan aplikasi semakin meningkat dan menjadi sub sektor yang berpotensi besar ke depannya.'),
-(18, 7, 'Wisata Pantai (Marine Tourism)', '01', 'Meliputi kegiatan berenang, memancing,\nmenyelam, dan olahraga air lainnya, yang didukung dengan sarana dan\nprasarana termasuk akomodasi, makan dan minum'),
-(19, 7, 'Wisata Etnik (Etnik Tourism)', '02', 'Perjalanan dengan tujuan untuk\nmengamati kebudayaan dan gaya hidup masyarakat yang dianggp\nmenarik.'),
-(20, 7, 'Wisata Cagar Alam (Ecotourism)', '03', 'Merupakan wisata untuk menikmati\nkeindahan alam, pegunungan, margasatwa serta tumbuh-tumbuhan yang\njarang terdapat di tempat-tempat lain'),
-(22, 7, 'Wisata Agro', '04', 'Merupakan jenis wisata yang dapat dilakukan secara\nrombongan untuk mengadakan kunjungan dan peninjauan ke proyekproyek pertanian, perkembunan dan ladang pembibitan dengan tujuan studi maupun menikmati segarnya tanaman di sekitarnya.');
+(17, 6, 'Aplikasi', '18', 'Seiring dengan semakin meningkatnya penetrasi smartphone, industri pengembangan aplikasi semakin meningkat dan menjadi sub sektor yang berpotensi besar ke depannya.');
 
 -- --------------------------------------------------------
 
@@ -89139,8 +89209,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `username`, `nama`, `hp`, `email`, `password`, `menu_klp`) VALUES
 ('2bm7ulekp7bl077d38p', 'irfan86', 'Irfantri', '082298880678', 'irfankonsel2016@gmail.com', '$2a$12$/VpMcYullZvVN95hHo052ur9xjuuwjiQRW1R72WO5s2xGQdXRhYgO', 17),
 ('9pcl9hbi3r4', 'tenyasha', 'Iksan Sinatra', '082290374843', 'idzanuliksan@gmail.com', '$2a$12$PSCE6Tf2YL9qSR.rZh4IAeLV.99P.JuLyj187r5AeMBoSOr/ySSVG', 19),
-('fzk64rolbc47k4h', 'indrafrans', 'Indra Fransiskus', '082293197391', 'indrafrans', '$2a$12$bodHKpBPyr9U06h/KiAjcOsRqHnZR42YS0o8lfkmWajft8IFrOrsm', 19),
-('fzk65s0lbd25jor', 'hidayat', 'Hidayat Darmawan', '12345678912', 'hidayat@gmail.com', '$2a$12$VXn9TGtkTKA1HlTxHyooSeR/doWm0vG1rVgWugJ8PDRJf5/nZ2T2i', 19),
+('fzk63o4lbfb5dwi', 'indrafrans', 'Indra Fransiskus', '92462864', 'idzanul@gmail.com', '$2a$12$arY9H2jVcVKcpaUQk845WOTgn/FTOl0MSqDxVh3sT81phl/N3PUmW', 19),
 ('i33wt9dwkkv6gxft', 'kikensbatara', 'Kiken SUkma Batara', '+628', 'kikensbatara@gmail.com', '$2a$12$c8vO5VyEOt0Whhkh7hIMh.dWvPQkFrPVDUYvDtkSlSr3zahDXjN1q', 17);
 
 -- --------------------------------------------------------
@@ -89323,6 +89392,12 @@ ALTER TABLE `ekokrafpotensi`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `form_ekosistem`
+--
+ALTER TABLE `form_ekosistem`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `foto`
 --
 ALTER TABLE `foto`
@@ -89469,7 +89544,7 @@ ALTER TABLE `ekokrafanggota`
 -- AUTO_INCREMENT for table `ekokrafindikator`
 --
 ALTER TABLE `ekokrafindikator`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `ekokrafkelompok`
@@ -89487,13 +89562,13 @@ ALTER TABLE `ekokrafkelompokjenis`
 -- AUTO_INCREMENT for table `ekokrafkuisioner`
 --
 ALTER TABLE `ekokrafkuisioner`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `ekokrafkuisionerbobot`
 --
 ALTER TABLE `ekokrafkuisionerbobot`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `ekokrafkuisionerindikator`
@@ -89505,7 +89580,7 @@ ALTER TABLE `ekokrafkuisionerindikator`
 -- AUTO_INCREMENT for table `ekokrafobservasi`
 --
 ALTER TABLE `ekokrafobservasi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `ekokrafpelaku`
@@ -89517,13 +89592,13 @@ ALTER TABLE `ekokrafpelaku`
 -- AUTO_INCREMENT for table `ekokrafpelakuproduk`
 --
 ALTER TABLE `ekokrafpelakuproduk`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `ekokrafpotensi`
 --
 ALTER TABLE `ekokrafpotensi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT for table `foto`
@@ -89577,7 +89652,7 @@ ALTER TABLE `menu_klp`
 -- AUTO_INCREMENT for table `menu_klp_list`
 --
 ALTER TABLE `menu_klp_list`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=184;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=176;
 
 --
 -- AUTO_INCREMENT for table `m_bidangpariwisata`

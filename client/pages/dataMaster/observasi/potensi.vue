@@ -383,7 +383,7 @@
 
         page_first: 1,
         page_last: 0,
-        page_limit : 8,
+        page_limit : 10,
         cari_value: "",
 
         mdl_add : false,

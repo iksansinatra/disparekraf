@@ -82,16 +82,16 @@
             <thead style="background:#5289E7">
               <tr class="h_table_head">
                 <th class="text-center" style="width:5%">No</th>
-                <th class="text-center" style="width:20%">Indikator</th>
-                <th class="text-center" style="width:20%">Tolak Ukur</th>
-                <th class="text-center" style="width:10%">Act</th>
+                <th class="text-center" style="width:30%">Indikator</th>
+                <th class="text-center" style="width:15%">Tolak Ukur</th>
+                <th class="text-center" style="width:5%">Act</th>
               </tr>
             </thead>
             <tbody>
               <tr class="h_table_body" v-for="(data, index) in list_data" :key="data.id">
                 <td class="text-center">{{indexing(index+1)}}.</td>
-                <td class="text-center">{{data.indikator}}</td>
-                <td class="text-center">{{data.tolak_ukur}} ({{data.nilai}})</td>
+                <td class="">{{data.indikator}}</td>
+                <td class="">{{data.tolak_ukur}} ({{data.nilai}})</td>
                 <td class="text-center">
                   <v-btn-toggle mandatory>
 
@@ -219,7 +219,7 @@
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn color="red darken-1" text @click="mdl_potensi = false, close()">Close</v-btn>
-              <v-btn color="blue darken-1" @click="addData()" text >Simpan</v-btn>
+              <v-btn color="blue darken-1" @click="addData(), mdl_potensi = false, close()" text >Simpan</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -307,7 +307,7 @@
 
         page_first: 1,
         page_last: 0,
-        page_limit : 8,
+        page_limit : 10,
         cari_value: "",
 
         mdl_add : false,

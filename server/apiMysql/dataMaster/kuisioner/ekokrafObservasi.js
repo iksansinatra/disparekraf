@@ -155,7 +155,7 @@ router.post('/view', (req, res) => {
         ekokrafobservasi.kabupaten_id = '`+kabupaten+`' AND
         ekokrafobservasi.jenisEkokraf = '`+subSektor+`'
 
-        ORDER BY ekokrafobservasi.createdAt DESC
+        ORDER BY ekokrafobservasi.createdAt ASC
         LIMIT `+data_star+`,`+data_batas+`
     `
     db.query(jml_data, (err, row)=>{

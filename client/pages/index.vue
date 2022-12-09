@@ -52,7 +52,7 @@
                 <v-icon style="color:white; font-size:45px">mdi-chart-bar</v-icon>
               </v-col>
               <v-col cols="9" class="roundRight" style="background:#5289E7">
-                <span class="HomeBarTitle">Jumlah Kelompok</span>
+                <span class="HomeBarTitle">Komunitas Ekokraf</span>
                 <br />
                 <span class="HomeBarSubTitle">54</span>
               </v-col>
@@ -67,7 +67,7 @@
                 <v-icon style="color:white; font-size:45px">mdi-account</v-icon>
               </v-col>
               <v-col cols="9" class="roundRight" style="background:#E752D3">
-                <span class="HomeBarTitle">Jumlah Pelaku</span>
+                <span class="HomeBarTitle">Pelaku Ekokraf</span>
                 <br />
                 <span class="HomeBarSubTitle">54</span>
               </v-col>
@@ -82,7 +82,7 @@
                 <v-icon style="color:white; font-size:45px">mdi-alert-circle</v-icon>
               </v-col>
               <v-col cols="9" class="roundRight" style="background:#E7B052">
-                <span class="HomeBarTitle">Jumlah Produk</span>
+                <span class="HomeBarTitle">Produk Ekokraf</span>
                 <br />
                 <span class="HomeBarSubTitle">54</span>
               </v-col>
@@ -97,7 +97,7 @@
                 <v-icon style="color:white; font-size:45px">mdi-clipboard-alert</v-icon>
               </v-col>
               <v-col cols="9" class="roundRight" style="background:#7FCD65">
-                <span class="HomeBarTitle">Jenis Ekokraf</span>
+                <span class="HomeBarTitle">Tenaga Kerja</span>
                 <br />
                 <span class="HomeBarSubTitle">54</span>
               </v-col>
@@ -263,7 +263,7 @@ export default {
               borderWidth: 2,
           },
           title: {
-              text: 'Keunggulan Sub Sektor Ekonomi Kreatif'
+              text: 'Keunggulan Sub Sektor Kota Kreatif'
           },
           subtitle: {
               text: ''

@@ -24,7 +24,7 @@ router.post('/view', (req, res) => {
 
     var data_batas = 0;
     if (req.body.page_limit == null || req.body.page_limit == undefined || req.body.page_limit == '') {
-        data_batas = 8;
+        data_batas = 10;
     } else {
         data_batas = parseInt(req.body.page_limit);
     }
