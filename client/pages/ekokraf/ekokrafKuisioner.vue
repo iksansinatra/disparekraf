@@ -278,7 +278,8 @@
           id : '',
           uniq : '',
           id_kuisioner: '',
-          id_bobot: ''
+          id_bobot: '',
+          createdBy: ''
 
         },
 
@@ -327,6 +328,7 @@
               authorization: "kikensbatara " + localStorage.token
             },
             body: JSON.stringify({
+                createdBy: this.createdBy,
                 data_ke: this.page_first,
                 id_indikator: this.ekokrafKuisioner,
                 page_limit : this.page_limit,

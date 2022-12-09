@@ -84,8 +84,8 @@ router.post('/getID', (req, res)=> {
 
 })
 
-router.post('/view', (req, res) => {
-
+router.post('/view', (req, res) => {        
+    var createdBy = req.user._id;
     var data_batas = 0;
     if (req.body.page_limit == null || req.body.page_limit == undefined || req.body.page_limit == '') {
         data_batas = 8;
@@ -144,7 +144,8 @@ router.post('/view', (req, res) => {
         ON form_ekosistem.id_bobot = ekokrafkuisionerbobot.id
 
         WHERE 
-        form_ekosistem.id_indikator = '`+id_indikator+`'
+        form_ekosistem.id_indikator = '`+id_indikator+`' AND
+        form_ekosistem.createdBy = '`+createdBy+`'
 
         ORDER BY ekokrafkuisionerbobot.createdAt DESC
         LIMIT `+data_star+`,`+data_batas+`
