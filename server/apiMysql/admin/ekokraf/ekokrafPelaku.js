@@ -11,6 +11,7 @@ const router = express.Router();
 
 router.post('/view', (req, res) => {
     var createdBy = req.user._id;
+
     var data_batas = 0;
     if (req.body.page_limit == null || req.body.page_limit == undefined || req.body.page_limit == '') {
         data_batas = 8;

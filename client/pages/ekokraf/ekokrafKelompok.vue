@@ -532,6 +532,7 @@
               authorization: "kikensbatara " + localStorage.token
             },
             body: JSON.stringify({
+              createdBy : this.createdBy,
                 data_ke: this.page_first,
                 cari_value: this.cari_value,
                 page_limit : this.page_limit,

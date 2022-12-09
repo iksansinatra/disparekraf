@@ -208,7 +208,7 @@
   <v-card-actions>
     <v-spacer></v-spacer>
     <v-btn color="red darken-1" text @click=" mdl_bobot = false, close()">Close</v-btn>
-    <v-btn color="blue darken-1" @click="addData()" text >Simpan</v-btn>
+    <v-btn color="blue darken-1" @click="addData(), mdl_bobot = false, close()" text >Simpan</v-btn>
   </v-card-actions>
 </v-card>
 </v-dialog>

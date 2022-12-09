@@ -103,6 +103,8 @@ router.get('/1', (req, res)=> {
 
 
 router.post('/view', (req, res) => {
+    
+
     var data_batas = 0;
     if (req.body.page_limit == null || req.body.page_limit == undefined || req.body.page_limit == '') {
         data_batas = 8;
@@ -126,7 +128,13 @@ router.post('/view', (req, res) => {
         SELECT * FROM ekokrafkelompok
         LEFT JOIN ekokrafkelompokjenis
         ON ekokrafkelompokjenis.ekokrafKelompok = ekokrafkelompok.id 
+
+        LEFT JOIN ekokraf.users users
+        ON users.id  = ekokrafkelompok.createdBy
+
         WHERE 
+        ekokrafkelompok.createdBy = '`+createdBy+`' AND
+
         ekokrafkelompok.uraian LIKE '%`+cari+`%'
         ORDER BY ekokrafkelompok.createdAt ASC
         LIMIT `+data_star+`,`+data_batas+`
@@ -194,6 +202,8 @@ const main1 = async(req, res) =>{
 
 const getMain1 = async (req, res) =>{
 
+    var createdBy = req.user._id;
+
 
     var data_batas = 0;
     if (req.body.page_limit == null || req.body.page_limit == undefined || req.body.page_limit == '') {
@@ -207,9 +217,22 @@ const getMain1 = async (req, res) =>{
 
     return new Promise(resolve =>{
         var jml_data = `
-            SELECT * FROM ekokrafkelompok
-            WHERE
-            ekokrafkelompok.uraian LIKE '%`+cari+`%'
+        SELECT
+        ekokrafkelompok.*,
+
+        (SELECT COUNT(ekokrafanggota.id) FROM ekokrafanggota
+        WHERE ekokrafanggota.ekokrafKelompok = ekokrafkelompok.id) AS jmlAnggota
+
+        FROM ekokrafkelompok
+
+        LEFT JOIN ekokraf.users users
+        ON users.id  = ekokrafkelompok.createdBy
+        
+        WHERE
+        ekokrafkelompok.createdBy = '`+createdBy+`' AND
+
+        ekokrafkelompok.uraian LIKE '%`+cari+`%'
+        ORDER BY ekokrafkelompok.createdAt DESC
         `;
 
         var view = `
@@ -220,8 +243,11 @@ const getMain1 = async (req, res) =>{
             WHERE ekokrafanggota.ekokrafKelompok = ekokrafkelompok.id) AS jmlAnggota
 
             FROM ekokrafkelompok
+
             
             WHERE
+            ekokrafkelompok.createdBy = '`+createdBy+`' AND
+
             ekokrafkelompok.uraian LIKE '%`+cari+`%'
             ORDER BY ekokrafkelompok.createdAt DESC
             LIMIT `+data_star+`,`+data_batas+`
@@ -264,6 +290,7 @@ router.post('/addData', (req,res)=>{
     // console.log(req.body);
 
     var id = uniqid();
+
 
     let insert = `
         INSERT INTO ekokrafkelompok (id, uniq, uraian, alamat, createdBy, createdAt) VALUES (
@@ -319,7 +346,7 @@ router.post('/editData', (req,res)=>{
 router.post('/removeData', (req, res)=> {
 
     var query = `
-        DELETE FROM ekokrafkelompok WHERE id = `+req.body.id+`; 
+        DELETE FROM ekokrafkelompok WHERE id = '`+req.body.id+`'; 
     `;
     db.query(query, (err, row)=>{
         if(err){
