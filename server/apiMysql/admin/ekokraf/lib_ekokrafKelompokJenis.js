@@ -2,15 +2,13 @@
 var db = require('../../../db/MySql/dbutama');
 
 
-
-
 const addData = (data, id)=>{
-    
+
     data.forEach((element, index) => {
 
         let insert = `
-            INSERT INTO ekokrafkelompokjenis (m_jenisPariwisata , ekokrafKelompok) VALUES (
-                `+element+`, `+id+`
+            INSERT INTO ekokrafkelompokjenis ( m_jenisPariwisata , ekokrafKelompok) VALUES (
+                `+element+`, '`+id+`'
             )
         `
 
@@ -33,7 +31,7 @@ const removeData = (id)=>{
 
 
         var query = `
-            DELETE FROM ekokrafkelompokjenis WHERE ekokrafKelompok = `+id+`; 
+            DELETE FROM ekokrafkelompokjenis WHERE ekokrafKelompok = '`+id+`'; 
         `;
         db.query(query, (err, row)=>{
             if(err){

@@ -1,7 +1,7 @@
 const express = require('express');
 var db = require('../../../db/MySql/dbutama');
 var func = require('node-mysql-nesting');
-
+var uniqid = require('uniqid')
 
 const router = express.Router();
 
@@ -59,7 +59,7 @@ async function getRelasi(id){
 
 
 
-            WHERE ekokrafkelompokjenis.ekokrafKelompok = `+id+`
+            WHERE ekokrafkelompokjenis.ekokrafKelompok = '`+id+`'
         `;
         db.query(query, (err, rows)=>{
             if(err){
@@ -261,10 +261,13 @@ const getMain1 = async (req, res) =>{
 // router.post('/addData', (req,res)=>{
 
 router.post('/addData', (req,res)=>{
-    console.log(req.body);
+    // console.log(req.body);
+
+    var id = uniqid();
+
     let insert = `
-        INSERT INTO ekokrafkelompok (uniq, uraian, alamat, createdBy, createdAt) VALUES (
-            '`+uniqid()+ `', '`+req.body.uraian+`', '`+req.body.alamat+`','`+req.user._id+`', NOW()
+        INSERT INTO ekokrafkelompok (id, uniq, uraian, alamat, createdBy, createdAt) VALUES (
+            '`+id+ `', '`+id+ `', '`+req.body.uraian+`', '`+req.body.alamat+`','`+req.user._id+`', NOW()
         )
     `
 
@@ -274,8 +277,8 @@ router.post('/addData', (req,res)=>{
             res.send(err);
         }else{
         console.log(row.insertId)
-            // console.log(row.insertId)
-            LIB.addData(req.body.jenisPariwisata, row.insertId)
+            console.log(id)
+            LIB.addData(req.body.jenisPariwisata, id)
             res.send(row);
         }
     })
@@ -291,7 +294,7 @@ router.post('/editData', (req,res)=>{
         editedBy = '`+req.user._id+`',
         editedAt = NOW()
 
-        WHERE id = `+req.body.id+`
+        WHERE id = '`+req.body.id+`'
     `;
     
     db.query(query, (err, row)=>{
