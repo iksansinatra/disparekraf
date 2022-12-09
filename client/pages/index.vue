@@ -32,10 +32,11 @@
 
           <v-col cols="12" md="3" style="padding-right:2%">
             <v-autocomplete
-                    :items="list_jenis"
+                    v-model="indikator"
+                    :items="list_indikator"
                     :item-text="'uraian'"
                     :item-value="'id'"
-                    label="Pilih Jenis Ekokraf"
+                    label="Pilih Indikator"
                     outlined
                     dense
                     @change="getPelakuJenis()"
@@ -205,7 +206,7 @@ export default {
   data() {
     return {
       list_kab : [],
-      list_jenis : [],
+      list_indikator : [],
       searchKab : '',
       jumlah_pelaku : '',
       jumlah_produk : '',
@@ -213,11 +214,32 @@ export default {
       jumlah_tenaga : '',
       UMUM : UMUM,
       FETCHING : FETCHING,
+      indikator: '',
 
     }
   },
 
   methods: {
+
+    getKemapanan : function(){
+        fetch(this.$store.state.url.URL_INDEX + "kemapanan", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+              authorization: "kikensbatara " + localStorage.token
+            },
+            body: JSON.stringify({
+                id_indikator : this.indikator,
+                
+            })
+        })
+            .then(res => res.json())
+            .then(res_data => {
+              console.log(res_data);
+              // this.jumlah_pelaku = res_data.data[0].jumlah_pelaku;
+              // console.log(jumlah_pelaku);
+        });
+      },
 
     getJumlahPelaku : function(){
         fetch(this.$store.state.url.URL_INDEX + "pelaku", {
@@ -285,8 +307,9 @@ export default {
 
     fetching : async function(){
           this.list_kab =  await FETCHING.postKab();
-          this.list_jenis = await FETCHING.getJenisPariwisata();
-          // this.list_indikator = await FETCHING.getPotensi()
+          // this.list_jenis = await FETCHING.getJenisPariwisata();
+          this.list_indikator = await FETCHING.getKuisioner()
+          console.log("indikaotr: ",this.list_indikator);
         },
 
     eventKab : async function(){
@@ -357,67 +380,36 @@ export default {
 
     },
 
-    kemapanan(data){
-      Highcharts.chart(data, {
-    chart: {
-        type: 'column',
-        borderColor: '#efefef',
+    kemapanan(chartku) {
+      const chart = Highcharts.chart(chartku, {
+          chart: {
+              borderColor: '#efefef',
               borderWidth: 2,
-    },
-    title: {
-        text: 'Kemapanan Sub Sektor Ekonomi Kreatif'
-    },
-    subtitle: {
-        text: ''
-    },
-    xAxis: {
-        categories: [
-            'Kuliner', 'Fashion', 'Musik', 'Film, Animasi dan Video', 'Televisi dan Radio', 'Fotografi', 'Arsitektur', 'Kriya', 'Aplikasi dan Game', 'Seni Pertunjukan', 'Seni Rupa', 'Desain Grafis', 'Desain Interior', 'Desain Produk', 'Periklanan', 'Penerbitan', 'Pengembangan Permainan'
-        ],
-        crosshair: true
-    },
-    yAxis: {
+          },
+          title: {
+              text: 'Kemapanan Sub Sektor Kota Kreatif'
+          },
+          subtitle: {
+              text: ''
+          },
+          xAxis: {
+              categories: ['Kuliner', 'Fesyen', 'Musik', 'Film, Animasi dan Video', 'Televisi dan Radio', 'Fotografi', 'Arsitektur', 'Kriya', 'Aplikasi dan Game', 'Seni Pertunjukan', 'Seni Rupa', 'Desain Grafis', 'Desain Interior', 'Desain Produk', 'Periklanan', 'Penerbitan', 'Pengembangan Permainan' ]
+          },
+          yAxis: {
         title: {
             useHTML: true,
             text: 'Persentasi'
         }
     },
-    tooltip: {
-        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-            '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
-        footerFormat: '</table>',
-        shared: true,
-        useHTML: true
-    },
-    plotOptions: {
-        column: {
-            pointPadding: 0.2,
-            borderWidth: 0
-        }
-    },
-    series: [{ 
-        name: 'SDM',
-        data: [13.93, 13.63, 13.73, 13.67, 14.37, 14.89, 14.56,
-            14.32, 14.13, 13.93, 13.21, 12.16, 13.21, 12.16, 11.96, 13.21, 12.16]
+          series: [{
+              type: 'column',
+              colorByPoint: true,
+              data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4, 148.5, 216.4, 194.1, 95.6, 54.4],
+              showInLegend: false
+          }]
+      });
 
-    }, {
-        name: 'Karya',
-        data: [12.24, 12.24, 11.95, 12.02, 11.65, 11.96, 11.59,
-            11.94, 11.96, 11.59, 11.42, 11.76, 13.21, 12.16, 11.96, 13.21, 12.16]
 
-    }, {
-        name: 'Pemasaran',
-        data: [10.00, 9.93, 9.97, 10.01, 10.23, 10.26, 10.00,
-            9.12, 9.36, 8.72, 8.38, 8.69, 13.21, 11.96, 12.16, 13.21, 12.16]
-
-    }, {
-        name: 'R & D',
-        data: [4.35, 4.32, 4.34, 4.39, 4.46, 4.52, 4.58, 4.55,
-            4.53, 4.51, 4.49, 4.57, 13.21, 12.16, 13.21, 11.96, 12.16]
-
-    }]
-});
     },
 
     pieChart1(datax){

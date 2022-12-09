@@ -5,6 +5,32 @@ var uniqid = require('uniqid');
 const router = express.Router();
 
 
+router.post('/kemapanan', (req, res) => {
+    var id_indikator = req.body.id_indikator;
+
+
+    let query = `
+    SELECT COUNT(id) as pelaku_jenis
+
+    FROM ekokrafPelaku
+
+    WHERE
+    ekokrafpelaku.jenisEkokraf = '`+subSektor+`'
+    `
+
+
+    db.query(query, (err, result)=>{
+        if (err) {res.json(err)}
+        else{
+            res.json({
+                data : result,
+
+            })
+        }
+    })
+});
+
+
 
 
 router.post('/pelaku', (req, res)=> {
