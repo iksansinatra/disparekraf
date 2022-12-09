@@ -11,7 +11,7 @@ const lolow = {
   URLX : URL,
     url: {
       URL_APP: URL,
-      URL_DASHBOARD : URL + 'api/v1/dashboard/',
+      URL_INDEX : URL + 'api/v1/indexEkokraf/',
       URL_DM_MENU : URL + 'api/v1/menuList/',
       URL_DM_KLP_USERS : URL + 'api/v1/kelompokUsers/',
       URL_DM_REGISTRASI : URL + 'api/v1/registrasi/',

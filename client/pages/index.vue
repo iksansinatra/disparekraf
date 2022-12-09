@@ -38,6 +38,7 @@
                     label="Pilih Jenis Ekokraf"
                     outlined
                     dense
+                    @change="getPelakuJenis()"
                   >
                   </v-autocomplete>
           </v-col>
@@ -54,7 +55,7 @@
               <v-col cols="9" class="roundRight" style="background:#5289E7">
                 <span class="HomeBarTitle">Komunitas Ekokraf</span>
                 <br />
-                <span class="HomeBarSubTitle">54</span>
+                <span class="HomeBarSubTitle">{{jumlah_komunitas}}</span>
               </v-col>
             </v-row>
           </div>
@@ -69,7 +70,7 @@
               <v-col cols="9" class="roundRight" style="background:#E752D3">
                 <span class="HomeBarTitle">Pelaku Ekokraf</span>
                 <br />
-                <span class="HomeBarSubTitle">54</span>
+                <span class="HomeBarSubTitle">{{jumlah_pelaku}}</span>
               </v-col>
             </v-row>
           </div>
@@ -79,12 +80,12 @@
           <div>
             <v-row class="rowContent elevation-1">
               <v-col cols="3" class="roundLeft vertical-center" style="background:#E19C25">
-                <v-icon style="color:white; font-size:45px">mdi-alert-circle</v-icon>
+                <v-icon style="color:white; font-size:45px">mdi-shopping</v-icon>
               </v-col>
               <v-col cols="9" class="roundRight" style="background:#E7B052">
                 <span class="HomeBarTitle">Produk Ekokraf</span>
                 <br />
-                <span class="HomeBarSubTitle">54</span>
+                <span class="HomeBarSubTitle">{{jumlah_produk}}</span>
               </v-col>
             </v-row>
           </div>
@@ -94,12 +95,12 @@
           <div>
             <v-row class="rowContent elevation-1">
               <v-col cols="3" class="roundLeft vertical-center" style="background:#5FC13E">
-                <v-icon style="color:white; font-size:45px">mdi-clipboard-alert</v-icon>
+                <v-icon style="color:white; font-size:45px">mdi-account-box</v-icon>
               </v-col>
               <v-col cols="9" class="roundRight" style="background:#7FCD65">
                 <span class="HomeBarTitle">Tenaga Kerja</span>
                 <br />
-                <span class="HomeBarSubTitle">54</span>
+                <span class="HomeBarSubTitle">{{jumlah_tenaga}}</span>
               </v-col>
             </v-row>
           </div>
@@ -206,6 +207,10 @@ export default {
       list_kab : [],
       list_jenis : [],
       searchKab : '',
+      jumlah_pelaku : '',
+      jumlah_produk : '',
+      jumlah_komunitas : '',
+      jumlah_tenaga : '',
       UMUM : UMUM,
       FETCHING : FETCHING,
 
@@ -213,6 +218,70 @@ export default {
   },
 
   methods: {
+
+    getJumlahPelaku : function(){
+        fetch(this.$store.state.url.URL_INDEX + "pelaku", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+              authorization: "kikensbatara " + localStorage.token
+            },
+        })
+            .then(res => res.json())
+            .then(res_data => {
+              console.log(res_data);
+              this.jumlah_pelaku = res_data.data[0].jumlah_pelaku;
+              // console.log(jumlah_pelaku);
+        });
+      },
+
+      getJumlahProduk : function(){
+        fetch(this.$store.state.url.URL_INDEX + "produk", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+              authorization: "kikensbatara " + localStorage.token
+            },
+        })
+            .then(res => res.json())
+            .then(res_data => {
+              console.log(res_data);
+              this.jumlah_produk = res_data.data[0].jumlah_produk;
+              // console.log(jumlah_pelaku);
+        });
+      },
+
+      getJumlahKomunitas : function(){
+        fetch(this.$store.state.url.URL_INDEX + "komunitas", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+              authorization: "kikensbatara " + localStorage.token
+            },
+        })
+            .then(res => res.json())
+            .then(res_data => {
+              console.log(res_data);
+              this.jumlah_komunitas = res_data.data[0].jumlah_komunitas;
+              // console.log(jumlah_pelaku);
+        });
+      },
+
+      getJumlahTenaga : function(){
+        fetch(this.$store.state.url.URL_INDEX + "tenaga", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+              authorization: "kikensbatara " + localStorage.token
+            },
+        })
+            .then(res => res.json())
+            .then(res_data => {
+              console.log(res_data);
+              this.jumlah_tenaga = res_data.data[0].jumlah_tenaga;
+              // console.log(jumlah_pelaku);
+        });
+      },
 
     fetching : async function(){
           this.list_kab =  await FETCHING.postKab();
@@ -303,7 +372,7 @@ export default {
     },
     xAxis: {
         categories: [
-            'Kuliner', 'Fesyen', 'Musik', 'Film, Animasi dan Video', 'Televisi dan Radio', 'Fotografi', 'Arsitektur', 'Kriya', 'Aplikasi dan Game', 'Seni Pertunjukan', 'Seni Rupa', 'Desain Grafis', 'Desain Interior', 'Desain Produk', 'Periklanan', 'Penerbitan', 'Pengembangan Permainan'
+            'Kuliner', 'Fashion', 'Musik', 'Film, Animasi dan Video', 'Televisi dan Radio', 'Fotografi', 'Arsitektur', 'Kriya', 'Aplikasi dan Game', 'Seni Pertunjukan', 'Seni Rupa', 'Desain Grafis', 'Desain Interior', 'Desain Produk', 'Periklanan', 'Penerbitan', 'Pengembangan Permainan'
         ],
         crosshair: true
     },
@@ -416,6 +485,10 @@ export default {
     this.subSektor('subSektor');
     this.kemapanan('kemapanan');
     this.fetching();
+    this.getJumlahPelaku();
+    this.getJumlahProduk();
+    this.getJumlahKomunitas();
+    this.getJumlahTenaga();
   },
 }
 </script>

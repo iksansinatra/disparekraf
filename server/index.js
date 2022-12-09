@@ -50,6 +50,8 @@ app.use('/checkAuth', middleware.isLoggedIn, checkAuth);
     const menuList = require('./apiMysql/dataMaster/authorization/menuList');
     app.use('/api/v1/menuList', middleware.isLoggedIn, menuList);
 
+    const indexEkokraf = require('./apiMysql/admin/indexEkokraf');
+    app.use('/api/v1/indexEkokraf', middleware.isLoggedIn, indexEkokraf);
 
     const kelompokUsers = require('./apiMysql/dataMaster/authorization/kelompokUsers');
     app.use('/api/v1/kelompokUsers', middleware.isLoggedIn, kelompokUsers);
