@@ -36,7 +36,7 @@ router.post('/kemapanan', (req, res) => {
 router.post('/pelaku', (req, res)=> {
 
     var query = `
-    SELECT COUNT(id) as jumlah_pelaku FROM ekokrafPelaku
+    SELECT COUNT(id) as jumlah_pelaku FROM ekokrafpelaku
     `;
 
 
@@ -57,7 +57,7 @@ router.post('/pelaku', (req, res)=> {
 router.post('/produk', (req, res)=> {
 
     var query = `
-    SELECT COUNT(id) as jumlah_produk FROM ekokrafPelakuProduk
+    SELECT COUNT(id) as jumlah_produk FROM ekokrafpelakuproduk
     `;
 
 
@@ -165,9 +165,9 @@ router.post('/view', (req, res) => {
         ekokrafobservasi.*,
         master_kabupaten.nama_kabupaten as nama_kabupaten
 
-        FROM ekokraf.ekokrafobservasi ekokrafobservasi
+        FROM siekraf.ekokrafobservasi ekokrafobservasi
 
-        LEFT JOIN ekokraf.master_kabupaten master_kabupaten
+        LEFT JOIN siekraf.master_kabupaten master_kabupaten
         ON master_kabupaten.kabupaten_id  = ekokrafobservasi.kabupaten_id
 
         WHERE 

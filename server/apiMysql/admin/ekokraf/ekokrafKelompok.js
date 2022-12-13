@@ -51,11 +51,11 @@ async function getRelasi(id){
 
         var query = `
             SELECT ekokrafkelompokjenis.*,
-            m_jenisPariwisata.uraian as m_jenisPariwisata_uraian
+            m_jenispariwisata.uraian as m_jenisPariwisata_uraian
             
             FROM ekokrafkelompokjenis
-            LEFT JOIN m_jenisPariwisata
-            ON m_jenisPariwisata.id = ekokrafkelompokjenis.m_jenisPariwisata 
+            LEFT JOIN m_jenispariwisata
+            ON m_jenispariwisata.id = ekokrafkelompokjenis.m_jenisPariwisata 
 
 
 

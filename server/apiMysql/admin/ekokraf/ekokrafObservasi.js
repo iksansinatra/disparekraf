@@ -57,9 +57,9 @@ router.post('/view', (req, res) => {
         ekokrafobservasi.*,
         master_kabupaten.nama_kabupaten as nama_kabupaten
 
-        FROM ekokraf.ekokrafobservasi ekokrafobservasi
+        FROM siekraf.ekokrafobservasi ekokrafobservasi
 
-        LEFT JOIN ekokraf.master_kabupaten master_kabupaten
+        LEFT JOIN siekraf.master_kabupaten master_kabupaten
         ON master_kabupaten.kabupaten_id  = ekokrafobservasi.kabupaten_id
 
         WHERE 

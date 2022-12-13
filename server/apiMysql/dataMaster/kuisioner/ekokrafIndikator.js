@@ -33,7 +33,7 @@ router.post('/view', (req, res) => {
         SELECT 
         ekokrafkuisionerindikator.*
 
-        FROM ekokraf.ekokrafkuisionerindikator ekokrafkuisionerindikator
+        FROM siekraf.ekokrafkuisionerindikator ekokrafkuisionerindikator
 
         WHERE 
         ekokrafkuisionerindikator.uraian LIKE '%`+cari+`%'

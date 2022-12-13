@@ -42,15 +42,15 @@ router.post('/view', (req, res) => {
         (SELECT COUNT(ekokrafpelakuproduk.id) FROM ekokrafpelakuproduk
         WHERE ekokrafpelakuproduk.ekokrafPelaku = ekokrafpelaku.id) AS jmlProduk
 
-        FROM ekokraf.ekokrafpelaku ekokrafpelaku
+        FROM siekraf.ekokrafpelaku ekokrafpelaku
 
-        LEFT JOIN ekokraf.m_jenispariwisata m_jenispariwisata
+        LEFT JOIN siekraf.m_jenispariwisata m_jenispariwisata
         ON m_jenispariwisata.id = ekokrafpelaku.ekokrafJenis
 
-        LEFT JOIN ekokraf.master_des_kel master_des_kel
+        LEFT JOIN siekraf.master_des_kel master_des_kel
         ON master_des_kel.des_kel_id  = ekokrafpelaku.des_kel_id
 
-        LEFT JOIN ekokraf.users users
+        LEFT JOIN siekraf.users users
         ON users.id  = ekokrafpelaku.createdBy
 
 

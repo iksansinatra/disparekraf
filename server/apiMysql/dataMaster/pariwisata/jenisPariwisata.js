@@ -19,15 +19,15 @@ router.post('/view', (req, res) => {
     let jml_data = `
         SELECT 
         m_jenispariwisata.*,
-        m_kategoriPariwisata.uraian as m_kategoriPariwisata_uraian
+        m_kategoripariwisata.uraian as m_kategoriPariwisata_uraian
 
         FROM m_jenispariwisata
 
-        LEFT JOIN m_kategoriPariwisata 
-        ON m_kategoriPariwisata.id = m_jenispariwisata.m_kategoriPariwisata
+        LEFT JOIN m_kategoripariwisata 
+        ON m_kategoripariwisata.id = m_jenispariwisata.m_kategoriPariwisata
 
         LEFT JOIN m_bidangpariwisata
-        ON m_bidangpariwisata.id = m_kategoriPariwisata.m_bidangpariwisata
+        ON m_bidangpariwisata.id = m_kategoripariwisata.m_bidangpariwisata
 
         WHERE 
         m_jenispariwisata.uraian LIKE '%`+cari+`%'
@@ -36,18 +36,18 @@ router.post('/view', (req, res) => {
     let view = `
         SELECT 
         m_jenispariwisata.*,
-        m_kategoriPariwisata.kode as m_kategoriPariwisata_kode,
-        m_kategoriPariwisata.uraian as m_kategoriPariwisata_uraian,
+        m_kategoripariwisata.kode as m_kategoriPariwisata_kode,
+        m_kategoripariwisata.uraian as m_kategoriPariwisata_uraian,
         m_bidangpariwisata.kode as m_bidangpariwisata_kode,
         m_bidangpariwisata.uraian as m_bidangpariwisata_uraian
 
         FROM m_jenispariwisata
 
-        LEFT JOIN m_kategoriPariwisata 
-        ON m_kategoriPariwisata.id = m_jenispariwisata.m_kategoriPariwisata
+        LEFT JOIN m_kategoripariwisata 
+        ON m_kategoripariwisata.id = m_jenispariwisata.m_kategoriPariwisata
 
         LEFT JOIN m_bidangpariwisata
-        ON m_bidangpariwisata.id = m_kategoriPariwisata.m_bidangpariwisata
+        ON m_bidangpariwisata.id = m_kategoripariwisata.m_bidangpariwisata
 
         WHERE 
         m_jenispariwisata.uraian LIKE '%`+cari+`%'

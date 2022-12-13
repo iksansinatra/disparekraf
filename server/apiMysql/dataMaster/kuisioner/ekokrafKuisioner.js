@@ -37,9 +37,9 @@ router.post('/view', (req, res) => {
         (SELECT COUNT(ekokrafkuisionerbobot.id) FROM ekokrafkuisionerbobot
         WHERE ekokrafkuisionerbobot.ekokrafKuisioner = ekokrafkuisioner.id) AS jmlPertanyaan
 
-        FROM ekokraf.ekokrafkuisioner ekokrafkuisioner
+        FROM siekraf.ekokrafkuisioner ekokrafkuisioner
 
-        LEFT JOIN ekokraf.ekokrafkuisionerindikator ekokrafkuisionerindikator
+        LEFT JOIN siekraf.ekokrafkuisionerindikator ekokrafkuisionerindikator
         ON ekokrafkuisionerindikator.id = ekokrafkuisioner.ekokrafIndikator
 
 

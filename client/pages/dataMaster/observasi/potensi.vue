@@ -425,8 +425,9 @@
         })
             .then(res => res.json())
             .then(res_data => {
-              // console.log(res_data)
+              console.log(res_data);
               this.list_data = res_data.data;
+              console.log(this.list_data);
               this.page_last = res_data.jml_data;
         });
       },

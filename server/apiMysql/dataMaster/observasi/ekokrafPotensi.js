@@ -36,7 +36,7 @@ router.post('/view', (req, res) => {
         (SELECT COUNT(ekokrafpotensi.id) FROM ekokrafpotensi
         WHERE ekokrafpotensi.ekokrafIndikator = ekokrafindikator.id) AS jmlPilihan
 
-        FROM ekokraf.ekokrafindikator ekokrafindikator
+        FROM siekraf.ekokrafindikator ekokrafindikator
 
         WHERE 
         ekokrafindikator.indikator LIKE '%`+cari+`%'
@@ -193,7 +193,7 @@ router.post('/potensi', (req, res)=> {
 //         SELECT 
 //         ekokrafindikator.*
 
-//         FROM ekokraf.ekokrafindikator ekokrafindikator
+//         FROM siekraf.ekokrafindikator ekokrafindikator
                 
 //         WHERE ekokrafindikator.indikator LIKE '%`+cari+`%'
 //         LIMIT 8 

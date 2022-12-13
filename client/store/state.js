@@ -1,6 +1,6 @@
-var URL = 'http://localhost:5014/';
+// var URL = 'http://localhost:5014/';
 
-// var URL = 'https://server.visit-konsel.konaweselatankab.go.id/';
+var URL = 'http://server-ekokraf.konaweselatankab.go.id/';
 
 
 
