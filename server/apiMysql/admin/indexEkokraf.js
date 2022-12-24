@@ -31,12 +31,32 @@ router.post('/kemapanan', (req, res) => {
 });
 
 
-
-
 router.post('/pelaku', (req, res)=> {
 
     var query = `
-    SELECT COUNT(id) as jumlah_pelaku FROM ekokrafpelaku
+    SELECT 
+        jumlah_kabupaten.nama_kabupaten as nama,
+
+            (SELECT COUNT(ekokrafpelaku.id) 
+
+                from ekokrafpelaku
+                
+                LEFT JOIN master_des_kel
+                ON master_des_kel.des_kel_id = ekokrafpelaku.des_kel_id
+            
+            LEFT JOIN master_kecamatan
+                ON master_kecamatan.kecamatan_id = master_des_kel.kecamatan_id
+            
+            LEFT JOIN master_kabupaten
+                ON master_kabupaten.kabupaten_id = master_kecamatan.kabupaten_id
+
+            WHERE jumlah_kabupaten.kabupaten_id = master_kabupaten.kabupaten_id
+            
+            ) as jumlah
+
+        from master_kabupaten jumlah_kabupaten
+
+        WHERE jumlah_kabupaten.provinsi_id = 74;
     `;
 
 
@@ -44,10 +64,10 @@ router.post('/pelaku', (req, res)=> {
         db.query(query, (err, result)=>{
             if (err) {res.json(err)}
             else{
-                console.log(result);
-
+                // console.log(result.length);
                 res.json({
                     data : result,
+                    panjang : result.length
                 })
             }
         })
@@ -65,7 +85,7 @@ router.post('/produk', (req, res)=> {
         db.query(query, (err, result)=>{
             if (err) {res.json(err)}
             else{
-                console.log(result);
+                // console.log(result);
 
                 res.json({
                     data : result,
@@ -86,7 +106,7 @@ router.post('/komunitas', (req, res)=> {
         db.query(query, (err, result)=>{
             if (err) {res.json(err)}
             else{
-                console.log(result);
+                // console.log(result);
 
                 res.json({
                     data : result,

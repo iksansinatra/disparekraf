@@ -235,7 +235,7 @@ export default {
         })
             .then(res => res.json())
             .then(res_data => {
-              console.log(res_data);
+              // console.log(res_data);
               // this.jumlah_pelaku = res_data.data[0].jumlah_pelaku;
               // console.log(jumlah_pelaku);
         });
@@ -251,7 +251,7 @@ export default {
         })
             .then(res => res.json())
             .then(res_data => {
-              console.log(res_data);
+              // console.log(res_data);
               this.jumlah_pelaku = res_data.data[0].jumlah_pelaku;
               // console.log(jumlah_pelaku);
         });
@@ -267,7 +267,7 @@ export default {
         })
             .then(res => res.json())
             .then(res_data => {
-              console.log(res_data);
+              // console.log(res_data);
               this.jumlah_produk = res_data.data[0].jumlah_produk;
               // console.log(jumlah_pelaku);
         });
@@ -283,7 +283,7 @@ export default {
         })
             .then(res => res.json())
             .then(res_data => {
-              console.log(res_data);
+              // console.log(res_data);
               this.jumlah_komunitas = res_data.data[0].jumlah_komunitas;
               // console.log(jumlah_pelaku);
         });
@@ -299,7 +299,7 @@ export default {
         })
             .then(res => res.json())
             .then(res_data => {
-              console.log(res_data);
+              // console.log(res_data);
               this.jumlah_tenaga = res_data.data[0].jumlah_tenaga;
               // console.log(jumlah_pelaku);
         });
@@ -309,15 +309,45 @@ export default {
           this.list_kab =  await FETCHING.postKab();
           // this.list_jenis = await FETCHING.getJenisPariwisata();
           this.list_indikator = await FETCHING.getKuisioner()
-          console.log("indikaotr: ",this.list_indikator);
+          // console.log("indikaotr: ",this.list_indikator);
         },
 
     eventKab : async function(){
           this.list_kab =  await FETCHING.postKab(this.searchKab);
         },
 
-    chart1(chartku) {
-      const chart = Highcharts.chart(chartku, {
+
+    getPelaku : function(){
+      fetch(this.$store.state.url.URL_INDEX + "pelaku", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+            authorization: "kikensbatara " + localStorage.token
+          },
+      })
+          .then(res => res.json())
+          .then(res_data => {
+
+            var arr_kabupaten = [];
+            var arr_pelaku = [];
+
+            for(var i = 0; i<res_data.panjang; i++){
+              arr_kabupaten.push(res_data.data[i].nama);
+            }
+
+            for(var i = 0; i<res_data.panjang; i++){
+              arr_pelaku.push(res_data.data[i].jumlah);
+            }
+
+            this.chart1(arr_kabupaten, arr_pelaku);
+
+
+      });
+    },    
+
+    // chart1(chartku) {
+    chart1(arr_kabupaten, arr_pelaku) {
+      const chart = Highcharts.chart('chart1', {
           chart: {
               borderColor: '#efefef',
               borderWidth: 2,
@@ -329,8 +359,9 @@ export default {
               text: ''
           },
           xAxis: {
-              categories: ['Kendari', 'Bau-Bau', 'Buton', 'Buton Utara', 'Buton Tengah', 'Buton Selatan', 'Konawe', 'Konawe Kepulauan', 'Konawe Selatan', 'Konawe Utara', 'Kolaka', 'Kolaka Utara', 'Kolaka Timur', 'Bombana', 'Muna', 'Muna Barat', 'Wakatobi' ]
-          },
+              // categories: ['Kendari', 'Bau-Bau', 'Buton', 'Buton Utara', 'Buton Tengah', 'Buton Selatan', 'Konawe', 'Konawe Kepulauan', 'Konawe Selatan', 'Konawe Utara', 'Kolaka', 'Kolaka Utara', 'Kolaka Timur', 'Bombana', 'Muna', 'Muna Barat', 'Wakatobi' ]
+              categories: arr_kabupaten
+            },
           yAxis: {
         title: {
             useHTML: true,
@@ -340,7 +371,8 @@ export default {
           series: [{
               type: 'column',
               colorByPoint: true,
-              data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4, 148.5, 216.4, 194.1, 95.6, 54.4],
+              // data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4, 148.5, 216.4, 194.1, 95.6, 54.4],
+                data: arr_pelaku,
               showInLegend: false
           }]
       });
@@ -472,7 +504,8 @@ export default {
   },
 
   mounted () {
-    this.chart1('chart1');
+    this.getPelaku();
+    // this.chart1('chart1');
     this.pieChart1('pieChart1');
     this.subSektor('subSektor');
     this.kemapanan('kemapanan');
