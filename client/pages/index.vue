@@ -12,9 +12,11 @@
           <v-col cols="12" md="3" style="padding-right:2%">
 
                 <v-autocomplete
+                    v-model="id_kabupaten"
                     :items="list_kab"
                     :search-input.sync ="searchKab"
                     @keyup="eventKab()"
+                    @change="getKeunggulan()"
                     :item-text="'nama_kabupaten'"
                     :item-value="'kabupaten_id'"
                     label="Pilih Kabupaten"
@@ -215,6 +217,7 @@ export default {
       UMUM : UMUM,
       FETCHING : FETCHING,
       indikator: '',
+      id_kabupaten: '',
 
     }
   },
@@ -380,31 +383,65 @@ export default {
 
     },
 
-    subSektor(chartku) {
-      const chart = Highcharts.chart(chartku, {
+    getKeunggulan : function(){
+      fetch(this.$store.state.url.URL_INDEX + "keunggulan", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+            authorization: "kikensbatara " + localStorage.token
+          },
+          body: JSON.stringify({
+              id_kabupaten : this.id_kabupaten,
+                
+          })
+      })
+          .then(res => res.json())
+          .then(res_data => {
+
+            var arr_jenis = [];
+            var arr_keunggulan = [];
+
+            for(var i = 0; i<res_data.panjang; i++){
+              arr_jenis.push(res_data.data[i].uraian);
+            }
+
+            for(var i = 0; i<res_data.panjang; i++){
+              arr_keunggulan.push(res_data.data[i].persen);
+            }
+
+            this.subSektor(arr_jenis, arr_keunggulan);
+
+
+      });
+    },    
+
+    subSektor(arr_jenis, arr_keunggulan) {
+      const chart = Highcharts.chart('subSektor', {
           chart: {
               borderColor: '#efefef',
               borderWidth: 2,
           },
           title: {
-              text: 'Keunggulan Sub Sektor Kota Kreatif'
+              text: 'Pelaku Ekokraf Kabupaten / Kota'
           },
           subtitle: {
               text: ''
           },
           xAxis: {
-              categories: ['Kuliner', 'Fesyen', 'Musik', 'Film, Animasi dan Video', 'Televisi dan Radio', 'Fotografi', 'Arsitektur', 'Kriya', 'Aplikasi dan Game', 'Seni Pertunjukan', 'Seni Rupa', 'Desain Grafis', 'Desain Interior', 'Desain Produk', 'Periklanan', 'Penerbitan', 'Pengembangan Permainan' ]
-          },
+              // categories: ['Kendari', 'Bau-Bau', 'Buton', 'Buton Utara', 'Buton Tengah', 'Buton Selatan', 'Konawe', 'Konawe Kepulauan', 'Konawe Selatan', 'Konawe Utara', 'Kolaka', 'Kolaka Utara', 'Kolaka Timur', 'Bombana', 'Muna', 'Muna Barat', 'Wakatobi' ]
+              categories: arr_jenis
+            },
           yAxis: {
         title: {
             useHTML: true,
-            text: 'Persentasi'
+            text: 'Jumlah'
         }
     },
           series: [{
               type: 'column',
               colorByPoint: true,
-              data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4, 148.5, 216.4, 194.1, 95.6, 54.4],
+              // data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4, 148.5, 216.4, 194.1, 95.6, 54.4],
+                data: arr_keunggulan,
               showInLegend: false
           }]
       });
@@ -505,9 +542,11 @@ export default {
 
   mounted () {
     this.getPelaku();
+    this.getKeunggulan();
     // this.chart1('chart1');
     this.pieChart1('pieChart1');
-    this.subSektor('subSektor');
+    // this.subSektor('subSektor');
+
     this.kemapanan('kemapanan');
     this.fetching();
     this.getJumlahPelaku();

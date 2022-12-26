@@ -31,6 +31,54 @@ router.post('/kemapanan', (req, res) => {
 });
 
 
+router.post('/keunggulan', (req, res)=> {
+
+    var id_kabupaten = req.body.id_kabupaten;
+
+
+    var query = `
+    SELECT jumlah_pariwisata.uraian, 
+    (
+        SELECT SUM(ekokrafindikator.bobot*ekokrafpotensi.nilai)
+        
+        FROM ekokrafindikator 
+        Left join ekokrafobservasi ON ekokrafobservasi.ekokrafIndikator = ekokrafindikator.id
+        LEFT JOIN ekokrafpotensi ON ekokrafobservasi.ekokrafPotensi = ekokrafpotensi.id
+
+        where ekokrafobservasi.kabupaten_id = '`+id_kabupaten+`' AND ekokrafobservasi.jenisEkokraf = jumlah_pariwisata.id
+
+    ) as total, 
+
+    (
+        SELECT (SUM(ekokrafindikator.bobot*ekokrafpotensi.nilai))*100/500
+        
+        FROM ekokrafindikator 
+        Left join ekokrafobservasi ON ekokrafobservasi.ekokrafIndikator = ekokrafindikator.id
+        LEFT JOIN ekokrafpotensi ON ekokrafobservasi.ekokrafPotensi = ekokrafpotensi.id
+
+        where ekokrafobservasi.kabupaten_id = '`+id_kabupaten+`' AND ekokrafobservasi.jenisEkokraf = jumlah_pariwisata.id
+
+    ) as persen
+
+    FROM m_jenispariwisata jumlah_pariwisata
+    `;
+
+
+        // ========================
+        db.query(query, (err, result)=>{
+            if (err) {res.json(err)}
+            else{
+                // console.log(result.length);
+                res.json({
+                    data : result,
+                    panjang : result.length
+                })
+            }
+        })
+        // ========================
+})
+
+
 router.post('/pelaku', (req, res)=> {
 
     var query = `
@@ -73,6 +121,8 @@ router.post('/pelaku', (req, res)=> {
         })
         // ========================
 })
+
+
 
 router.post('/produk', (req, res)=> {
 
